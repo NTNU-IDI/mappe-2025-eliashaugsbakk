@@ -1,5 +1,12 @@
 # Compiled class files
-bin/
+out/
 
-# VS Code settings
-.vscode/
+# InteliJ
+.idea
+
+# LibreOffice project plan
+projectPlan.odt
+
+# Data created by user
+data/entries
+
