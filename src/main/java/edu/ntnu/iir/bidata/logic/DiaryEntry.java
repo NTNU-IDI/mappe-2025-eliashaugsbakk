@@ -1,6 +1,6 @@
 
 package edu.ntnu.iir.bidata.logic;
-import main.java.edu.ntnu.iir.bidata.UI.Output;
+import edu.ntnu.iir.bidata.UI.Output;
 
 import java.time.LocalDateTime;
 import java.util.Scanner;
