@@ -1,4 +1,4 @@
-package main.java.edu.ntnu.iir.bidata.UI;
+package edu.ntnu.iir.bidata.UI;
 
 public class Output {
     public void clear() {
@@ -14,9 +14,6 @@ public class Output {
     }
 
     public static final String ANSI_RESET = "\u001B[0m";
-    public void reset() {
-        System.out.print(ANSI_RESET);
-    }
     public static final String ANSI_RED = "\u001B[31m";
     public void red(String text) {
         System.out.println(ANSI_RED
