@@ -1,37 +1,44 @@
 package edu.ntnu.iir.bidata;
 
-import com.google.gson.Gson;
-import edu.ntnu.iir.bidata.database.JsonReaderWriter;
-import edu.ntnu.iir.bidata.logic.DiaryEntry;
+import com.google.gson.stream.JsonReader;
 import edu.ntnu.iir.bidata.UI.Menu;
+import edu.ntnu.iir.bidata.database.DiaryDatabase;
+import edu.ntnu.iir.bidata.database.JsonReaderWriter;
+
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class Main {
-    public static void main(String[] args) {
-        //Checking if data.json is present, if not, it is created.
-        File file = new File("database/data.json");
-        if (!file.exists()) {
-            System.out.println("No database file found, starting fresh.");
-            file.getParentFile().mkdirs();
-            try (FileWriter writer = new FileWriter(file)) {
-                writer.write("[]");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        // readerWriter to handle Output and Intput to and from the JSON file
-        JsonReaderWriter readerWriter = new JsonReaderWriter("database/data.json");
+    public static void main(String[] args) throws IOException {
 
-        // Initiating a list with all the diferent diary entries
-        List<DiaryEntry> diaryEntries = readerWriter.readObjects();
-        if (diaryEntries == null) {
-            diaryEntries = new ArrayList<>();
+        File file = new File("database/data.json");
+        try {
+            String content = "";
+            if (file.exists()) { // does the data.json file exist?
+                try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                    content = reader.lines().reduce("", (acc, line) -> acc + line).trim();
+                }
+            }
+            // checks to see if file is empty or if contents are "null"
+            if (content.isEmpty() || content.equals("null")) {
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                    writer.write("[]");
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        // The menu loop is started
+
+        System.out.println("Travel Diary, to document and rate all of your travels!");
+        JsonReaderWriter readerWriter = new JsonReaderWriter("database/data.json");
+        System.out.println("new readerWriter");
+        readerWriter.loadDiaryEntries();
+        System.out.println("Diary entries loaded");
         Menu menu = new Menu();
-        menu.menu();
-        diaryEntries.add(new DiaryEntry());
-    }
+		// The menu loop begins
+		while (true) {
+			menu.menu();
+		}
+	}
 }

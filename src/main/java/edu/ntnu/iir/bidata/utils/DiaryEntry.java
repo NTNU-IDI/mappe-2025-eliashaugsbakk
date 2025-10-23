@@ -1,5 +1,5 @@
+package edu.ntnu.iir.bidata.utils;
 
-package edu.ntnu.iir.bidata.logic;
 import edu.ntnu.iir.bidata.UI.Output;
 
 import java.time.LocalDateTime;
@@ -17,8 +17,8 @@ public class DiaryEntry {
     int rating;
     String text;
 
-    public DiaryEntry() {
-        Scanner scanner = new Scanner(System.in);
+    public DiaryEntry() {} // Empty for Gson to load from data.json
+    public DiaryEntry(Scanner scanner) {
         int id = 0;
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -58,7 +58,6 @@ public class DiaryEntry {
             text += "\n" + inputext;
         }
         System.out.println(line - 1 + " lines are saved.");
-        input.close();
         return text;
     }
 }

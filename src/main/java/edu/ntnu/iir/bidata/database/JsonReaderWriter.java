@@ -1,39 +1,62 @@
 package edu.ntnu.iir.bidata.database;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import edu.ntnu.iir.bidata.logic.DiaryEntry;
+import edu.ntnu.iir.bidata.utils.DiaryEntry;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.*;
 import java.lang.reflect.Type;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class JsonReaderWriter {
-    private final String filePath;
-    private final Gson gson;
 
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    public JsonReaderWriter(String filePath) {
-        this.filePath = filePath;
-        this.gson = new Gson();
+    String fileName;
+    public JsonReaderWriter(String fileName) {
+        this.fileName = fileName;
     }
-    public void writeObjects(List<DiaryEntry> diaryEntries) {
-        try (FileWriter fw = new FileWriter(filePath)) {
-            gson.toJson(diaryEntries, fw);
-        } catch (IOException e) {
-            e.printStackTrace();
+    public String jsonToString() throws IOException {
+        File file = new File(this.fileName);
+        String data = "";
+        if (file.exists()) {
+
+            try (Scanner reader = new Scanner(file)) {
+                while (reader.hasNextLine()) {
+                    data = reader.nextLine();
+                }
+            } catch (FileNotFoundException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
+            }
+        }
+        if (data.isEmpty()) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                writer.write("[]");
+            }
+        }
+            return data;
+    }
+
+    public void loadDiaryEntries() throws IOException {
+        try (FileReader reader = new FileReader(this.fileName)) {
+            Type listType = new TypeToken<ArrayList<DiaryEntry>>() {}.getType();
+            DiaryDatabase.diaryEntries = gson.fromJson(reader, listType);
+            System.out.println("Privios entries loaded");
         }
     }
 
-    public List<DiaryEntry> readObjects() {
-        Type listType = new TypeToken<List<DiaryEntry>>(){}.getType();
-        try (FileReader fr = new FileReader(filePath)) {
-            return gson.fromJson(fr, listType);
-        }  catch (IOException e) {
+    public void writeToFile() throws IOException {
+
+        try (FileWriter writer = new FileWriter(this.fileName)) {
+            gson.toJson(DiaryDatabase.diaryEntries, writer);
+            System.out.println("Diary entries are saved");
+        }
+        catch (IOException e) {
             e.printStackTrace();
-            return null;
         }
     }
 }
