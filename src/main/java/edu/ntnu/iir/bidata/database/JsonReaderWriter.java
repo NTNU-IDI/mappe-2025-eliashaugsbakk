@@ -9,51 +9,24 @@ import com.google.gson.reflect.TypeToken;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class JsonReaderWriter {
 
-    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    String fileName;
-    public JsonReaderWriter(String fileName) {
-        this.fileName = fileName;
-    }
-    public String jsonToString() throws IOException {
-        File file = new File(this.fileName);
-        String data = "";
-        if (file.exists()) {
+    private static String fileName = "register/data.json";
 
-            try (Scanner reader = new Scanner(file)) {
-                while (reader.hasNextLine()) {
-                    data = reader.nextLine();
-                }
-            } catch (FileNotFoundException e) {
-                System.out.println("An error occurred.");
-                e.printStackTrace();
-            }
-        }
-        if (data.isEmpty()) {
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-                writer.write("[]");
-            }
-        }
-            return data;
-    }
-
-    public void loadDiaryEntries() throws IOException {
-        try (FileReader reader = new FileReader(this.fileName)) {
+    public static void loadDiaryEntries() throws IOException {
+        try (FileReader reader = new FileReader(fileName)) {
             Type listType = new TypeToken<ArrayList<DiaryEntry>>() {}.getType();
             DiaryDatabase.diaryEntries = gson.fromJson(reader, listType);
-            System.out.println("Privios entries loaded");
         }
     }
 
-    public void writeToFile() throws IOException {
+    public static void writeToFile() {
 
-        try (FileWriter writer = new FileWriter(this.fileName)) {
+        try (FileWriter writer = new FileWriter(fileName)) {
             gson.toJson(DiaryDatabase.diaryEntries, writer);
-            System.out.println("Diary entries are saved");
         }
         catch (IOException e) {
             e.printStackTrace();
