@@ -7,6 +7,7 @@ import edu.ntnu.iir.bidata.database.JsonReaderWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class DiaryEntry {
@@ -20,9 +21,10 @@ public class DiaryEntry {
     private int rating;
     private String text;
 
-    public DiaryEntry() {
-    } // Empty for Gson to load from data.json
+    // Empty for Gson to load from data.json
+    public DiaryEntry() {}
 
+    // Constructor for creating new entries
     public DiaryEntry(Scanner scanner) {
         this.id = DiaryDatabase.diaryEntries.size();
 
@@ -31,29 +33,52 @@ public class DiaryEntry {
         this.TimeEdited = dtf.format(LocalDateTime.now());
 
         this.author = setAuthor();
+
         System.out.print("\nEnter Trip Destination: ");
-        this.trip = scanner.nextLine();
+        trip = scanner.nextLine();
+
         System.out.print("Enter Title: ");
         this.title = scanner.nextLine();
+
         this.category = setCategory();
-        System.out.print("Enter Rating: ");
-        this.rating = scanner.nextInt();
+
+        this.rating = setRating(scanner);
 
         this.text = textInput();
-        JsonReaderWriter readerWriter = new JsonReaderWriter();
-        readerWriter.writeToFile();
+        JsonReaderWriter.writeToFile();
     }
 
+
+    // getters
+    public String getTitle() {
+        return title;
+    }
+    public int getRating() {
+        return rating;
+    }
+    public String getTime() {
+        return timeWritten;
+    }
+    public String getAuthor() {
+        return author;
+    }
+    public String getCategory() {
+        return category;
+    }
+
+
+    // create a new author, or select from list
     private String setAuthor() {
+        Output.clear();
         Output.line();
-        Output.redln("Select a previous author, or create a new one!");
+        Output.redln("Select a previous author, or create a new one by typing your name!");
 
         ArrayList<String> authors = new ArrayList<>();
         for (int i = 0; i < DiaryDatabase.diaryEntries.size(); i++) {
             authors.add(DiaryDatabase.diaryEntries.get(i).author);
         }
         for (int i = 0; i < authors.size(); i++) {
-            System.out.println(authors.get(i) + ": " + i);
+            System.out.println(i + " : " + authors.get(i) );
         }
         Scanner scanner = new Scanner(System.in);
         System.out.print("-> ");
@@ -69,15 +94,34 @@ public class DiaryEntry {
         return author;
     }
 
+    private int setRating(Scanner scanner) {
+        System.out.print("Enter Rating (0 to 100): ");
+        try {
+            rating = scanner.nextInt();
+        } catch (InputMismatchException e) {
+            Output.redln("Invalid input! Rating must be a number");
+            scanner.nextLine();
+            setRating(scanner);
+        }
+        if (rating < 0 || rating > 100) {
+            Output.redln("Invalid input! Rating must be between 0 and 100");
+            scanner.nextLine();
+            setRating(scanner);
+        }
+        return rating;
+    }
+
+    // create a new category, or select from list
     private String setCategory() {
-        Output out = new Output();
-        out.redln("Select a previous category, or create a new one!");
+        Output.clear();
+        Output.line();
+        Output.redln("Select a previous category, or create a new one by typing in the name of the category.");
         ArrayList<String> categories = new ArrayList<>();
         for (int i = 0; i < DiaryDatabase.diaryEntries.size(); i++) {
             categories.add(DiaryDatabase.diaryEntries.get(i).category);
         }
         for (int i = 0; i < categories.size(); i++) {
-            System.out.println(categories.get(i) + ": " + i);
+            System.out.println(i + " : " + categories.get(i));
         }
         Scanner scanner = new Scanner(System.in);
         System.out.print("-> ");
@@ -93,40 +137,28 @@ public class DiaryEntry {
         return category;
     }
 
+    // input for the diary entry text
+    // while loop to get multiple line input
     private String textInput() {
         Scanner input = new Scanner(System.in);
-        Output output = new Output();
         StringBuilder text = new StringBuilder();
         Output.clear();
         System.out.println("Write your entry, type \"bye\"  to quit:");
-        output.line();
+        Output.line();
         int line = 0;
         while (true) {
             System.out.print(String.format("%3d", line) + "  ");
             line++;
-            String inputext = input.nextLine();
-            if (inputext.equals("bye")) {
+            String inputText = input.nextLine();
+            if (inputText.equals("bye")) {
                 break;
             }
-            text.append("\n").append(inputext);
+            text.append("\n").append(inputText);
         }
-        JsonReaderWriter readerWriter = new JsonReaderWriter();
-        readerWriter.writeToFile();
+        JsonReaderWriter.writeToFile();
         System.out.println(line - 1 + " lines are saved.");
         Scanner scanner = new Scanner(System.in);
         scanner.nextLine();
         return text.toString();
-    }
-    public String getTitle() {
-        return title;
-    }
-    public int getRating() {
-        return rating;
-    }
-    public String getTime() {
-        return timeWritten;
-    }
-    public String getAuthor() {
-        return author;
     }
 }
