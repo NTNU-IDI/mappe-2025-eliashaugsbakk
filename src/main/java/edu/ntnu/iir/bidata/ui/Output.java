@@ -1,4 +1,4 @@
-package edu.ntnu.iir.bidata.UI;
+package edu.ntnu.iir.bidata.ui;
 
 public class Output {
   public static final String ANSI_RESET = "\u001B[0m";
