@@ -13,6 +13,10 @@ public class Diary {
     entries.add(diaryEntry);
   }
 
+  public void addEntries(ArrayList<DiaryEntry> diaryEntries) {
+    entries.addAll(diaryEntries);
+  }
+
   public DiaryEntry getEntry(int index) {
     if (index >= 0 || index <= entries.size()) {
       return entries.get(index);
@@ -29,5 +33,9 @@ public class Diary {
   public ArrayList<DiaryEntry> getEntries() {
     ArrayList<DiaryEntry> entriesCopy = new ArrayList<>(entries);
     return entriesCopy;
+  }
+
+  public void replaceEntry(DiaryEntry replaceFrom, DiaryEntry replaceWith) {
+    entries.set(entries.indexOf(replaceFrom), replaceWith);
   }
 }

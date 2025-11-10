@@ -28,6 +28,10 @@ public class DiaryEntry {
     this.text = text;
   }
 
+  public int getId() {
+    return id;
+  }
+
   public String getTimeWritten() {
     return timeWritten;
   }
@@ -52,6 +56,10 @@ public class DiaryEntry {
     this.author = author;
   }
 
+  public String getTrip() {
+    return trip;
+  }
+
   public String getTitle() {
     return title;
   }
@@ -60,11 +68,19 @@ public class DiaryEntry {
     this.title = title;
   }
 
+  public String getCategory() {
+    return category;
+  }
+
   public int getRating() {
     return rating;
   }
 
   public void setRating(int rating) {
     this.rating = rating;
+  }
+
+  public String getText() {
+    return text;
   }
 }

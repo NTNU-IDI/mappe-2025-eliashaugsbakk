@@ -15,19 +15,17 @@ public class Menu {
   public int menu(Scanner sc) throws InterruptedException {
     Output output = new Output();
     output.clear();
-    output.line();
+    output.line(35);
     try {
-      int choice = Integer.parseInt(output.prompt(sc, """
-           Choose your next action:
-          
+      int choice = Integer.parseInt(output.choicePrompt(sc, "Choose your next action: ", """
            \t1. New Diary Entry
            \t2. Edit Diary Entry
            \t3. List entries by..
            \t4. Read Diary Entry
            \t0. Save and exit
           """));
-      if (choice < 0 || EXIT < choice) {
-        output.prompt(sc, "Invalid choice");
+      if (choice < 0 || READ_ENTRY < choice) {
+        output.message(sc, "Invalid choice");
         menu(sc);
       }
       return choice;

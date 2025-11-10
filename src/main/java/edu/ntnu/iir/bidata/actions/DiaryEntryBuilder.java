@@ -40,24 +40,24 @@ public class DiaryEntryBuilder {
   private String createAuthor(Scanner sc, ArrayList<DiaryEntry> diaryEntries) {
     String author;
 
-    output.prompt(sc, "Select a previous author, or create a new one by typing your name:");
 
     ArrayList<String> authors = new ArrayList<>();
     for (DiaryEntry diaryEntry : diaryEntries) {
       authors.add(diaryEntry.getAuthor());
     }
+    String authorsString = "";
     for (int i = 0; i < authors.size(); i++) {
-      System.out.println(i + " : " + authors.get(i));
+      authorsString += (i + " : " + authors.get(i) + "\n");
     }
-    System.out.print("-> ");
-    String input = sc.nextLine();
+    String input = output.choicePrompt(sc,
+        "Select a previous author, or create a new one by typing your name:", authorsString);
     try {
       int inputInt = Integer.parseInt(input);
       author = authors.get(inputInt);
     } catch (NumberFormatException ex) {
       author = input;
     }
-    output.println("Welcome " + author);
+    output.message(sc, "Welcome " + author);
     return author;
   }
 
@@ -72,7 +72,7 @@ public class DiaryEntryBuilder {
   private String createCategory(Scanner sc, ArrayList<DiaryEntry> diaryEntries) {
     String category;
 
-    output.prompt(sc, "Select a previous category, or create a new one by typing your name:");
+    output.prompt(sc, "Select a previous category, or create a new one by typing your name.");
 
     ArrayList<String> categories = new ArrayList<>();
     for (DiaryEntry diaryEntry : diaryEntries) {
@@ -89,7 +89,7 @@ public class DiaryEntryBuilder {
     } catch (NumberFormatException ex) {
       category = input;
     }
-    output.println("Category: " + category);
+    output.message(sc, "Category: " + category);
     return category;
   }
 
@@ -110,8 +110,11 @@ public class DiaryEntryBuilder {
   private String createText(Scanner sc) {
 
     StringBuilder text = new StringBuilder();
-    output.prompt(sc, "Write your entry, type \"bye\"  to quit:");
+    output.message(sc, "Write your entry, type \"bye\"  to quit:");
+    int line = 0;
     while (true) {
+      System.out.print(String.format("%3d", line) + "  ");
+      line++;
       String inputText = sc.nextLine();
       if (inputText.equals("bye")) {
         break;

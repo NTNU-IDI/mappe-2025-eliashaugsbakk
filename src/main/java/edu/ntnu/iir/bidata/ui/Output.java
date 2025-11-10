@@ -11,8 +11,11 @@ public class Output {
     }
   }
 
-  public void line() {
-    redln("--------------------------------------------------------------");
+  public void line(int length) {
+    for (int i = 0; i < length - 1; i++) {
+      red("-");
+    }
+    redln("-");
   }
 
   public void redln(String text) {
@@ -25,9 +28,18 @@ public class Output {
 
   public String prompt(Scanner sc, String prompt) {
     clear();
-    line();
+    line(prompt.length());
     redln(prompt);
     System.out.print("> ");
+    return sc.nextLine();
+  }
+
+  public String choicePrompt(Scanner sc, String message, String choices) {
+    clear();
+    line(message.length());
+    redln(message);
+    print(choices);
+    red("> ");
     return sc.nextLine();
   }
 
@@ -40,7 +52,18 @@ public class Output {
   }
 
   public void message(Scanner sc, String message) {
-    red(message);
+    clear();
+    line(message.length() + 10);
+    println("\t" + message);
+    line(message.length() + 10);
+    sc.nextLine();
+  }
+
+  public void warning(Scanner sc, String message) {
+    clear();
+    line(message.length() + 10);
+    redln("\t" + message);
+    line(message.length() + 10);
     sc.nextLine();
   }
 
