@@ -1,6 +1,5 @@
 package edu.ntnu.iir.bidata.database;
 
-import edu.ntnu.iir.bidata.utils.DiaryEntry;
 import java.util.ArrayList;
 
 /**
