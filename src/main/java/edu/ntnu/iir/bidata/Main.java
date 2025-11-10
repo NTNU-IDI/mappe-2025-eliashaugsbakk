@@ -1,8 +1,19 @@
 package edu.ntnu.iir.bidata;
 
-class Main {
+import edu.ntnu.iir.bidata.manager.Manager;
+import java.io.IOException;
 
-  public static void main(String[] args) {
+/**
+ * Main class.
+ */
+public class Main {
+  /**
+   * Main method.
+   *
+   */
+  public static void main(String[] args) throws IOException, InterruptedException {
 
+    Manager manager = new Manager();
+    manager.init();
   }
 }
