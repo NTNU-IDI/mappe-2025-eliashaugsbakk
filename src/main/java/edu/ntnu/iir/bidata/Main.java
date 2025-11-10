@@ -1,24 +1,8 @@
 package edu.ntnu.iir.bidata;
 
-import edu.ntnu.iir.bidata.database.JsonReaderWriter;
-import edu.ntnu.iir.bidata.ui.UI;
-import java.io.IOException;
+class Main {
 
-/**
- * Main class.
- */
-public class Main {
-  /**
-   * Main method.
-   *
-   */
-  public static void main(String[] args) throws IOException, InterruptedException {
-    // loading the previous diary entries, if they exist.
-    JsonReaderWriter.loadPreviousEntries();
+  public static void main(String[] args) {
 
-    UI ui = new UI();
-    ui.start();
-    ui.init();
-    // The menu loop begins
   }
 }
