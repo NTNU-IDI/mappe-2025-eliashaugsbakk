@@ -85,7 +85,7 @@ public class DiaryEntry {
   }
 
   /**
-   * Returns the time of tha last edit to the diary entry.
+   * Returns the time of the last edit to the diary entry.
    *
    * @return The time of the last edit.
    */
@@ -94,10 +94,10 @@ public class DiaryEntry {
   }
 
   /**
-   * Update the last edited time to now. This method should be called whenever the diary entry is
-   * edited.
+   * Update the last edited time to the current time. This method should be called whenever the
+   * diary entry is edited.
    */
-  public void setTimeEdited(String timeEdited) {
+  public void setTimeEdited() {
     this.timeEdited = LocalDateTime.now();
   }
 
@@ -142,7 +142,7 @@ public class DiaryEntry {
   /**
    * Returns the title of the diary entry.
    *
-   * @return The title of the diray entry.
+   * @return The title of the diary entry.
    */
   public String getTitle() {
     return title;
@@ -187,7 +187,7 @@ public class DiaryEntry {
   }
 
   /**
-   * Updates the users rating of the activity or experience on a scale from 0 to 10.
+   * Updates the users' rating of the activity or experience on a scale from 0 to 10.
    *
    * @param rating The rating of the activity.
    */
