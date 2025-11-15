@@ -7,11 +7,7 @@ import java.util.ArrayList;
  * retrieve these entries.
  */
 public class Diary {
-  ArrayList<DiaryEntry> diaryEntries = new ArrayList<>();
-
-  public Diary() {
-
-  }
+  private ArrayList<DiaryEntry> entries = new ArrayList<>();
 
   /**
    * Adds a new diary entry to the diary.
@@ -21,7 +17,16 @@ public class Diary {
    *          content.
    */
   public void addDiaryEntry(DiaryEntry e) {
-    diaryEntries.add(e);
+    entries.add(e);
+  }
+
+  /**
+   * Adds a collection of new diary entries to the diary.
+   *
+   * @param entriesToAdd the list of diary entries to be added.
+   */
+  public void addDiaryEntries(ArrayList<DiaryEntry> entriesToAdd) {
+    entries.addAll(entriesToAdd);
   }
 
   /**
@@ -30,6 +35,6 @@ public class Diary {
    * @return A list of all diary entries.
    */
   public ArrayList<DiaryEntry> getAllDiaryEntries() {
-    return diaryEntries;
+    return entries;
   }
 }
