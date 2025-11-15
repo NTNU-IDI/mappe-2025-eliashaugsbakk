@@ -1,5 +1,6 @@
 package edu.ntnu.iir.bidata.model;
 
+import edu.ntnu.iir.bidata.storage.DiaryEntryStorageDto;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -37,6 +38,17 @@ public class DiaryEntry {
   private String activity;
   private double rating;
   private String text;
+
+  public DiaryEntry(DiaryEntryStorageDto dto) {
+    timeWritten = LocalDateTime.parse(dto.getTimeWritten());
+    timeEdited = LocalDateTime.parse(dto.getTimeEdited());
+    author = dto.getAuthor();
+    destination = dto.getDestination();
+    activity = dto.getActivity();
+    rating = dto.getRating();
+    title = dto.getTitle();
+    text = dto.getText();
+  }
 
   /**
    * Creates a new diary entry, describing an activity during a trip.
@@ -102,7 +114,7 @@ public class DiaryEntry {
   }
 
   /**
-   * Returs the name of the author.
+   * Returns the name of the author.
    *
    * @return The name of the author.
    */

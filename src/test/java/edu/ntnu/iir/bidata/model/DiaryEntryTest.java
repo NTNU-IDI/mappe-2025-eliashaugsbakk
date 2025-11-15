@@ -1,5 +1,6 @@
 package edu.ntnu.iir.bidata.model;
 
+import edu.ntnu.iir.bidata.storage.DiaryEntryStorageDto;
 import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 
@@ -8,16 +9,20 @@ import static org.junit.jupiter.api.Assertions.*;
 class DiaryEntryTest {
 
   @Test
-  void testConstructor() {
-    DiaryEntry diaryEntry =
+  void testDiaryEntryToDtoBackTODiaryEntry() {
+    DiaryEntry original =
         new DiaryEntry("AuthorName", "Destination", "Activity", 5.5, "EntryTitle", "Some text");
+    DiaryEntryStorageDto dto = new DiaryEntryStorageDto(original);
+    DiaryEntry recreated = new DiaryEntry(dto);
 
-    assertEquals("AuthorName", diaryEntry.getAuthor());
-    assertEquals("Destination", diaryEntry.getDestination());
-    assertEquals("Activity", diaryEntry.getActivity());
-    assertEquals(5.5, diaryEntry.getRating());
-    assertEquals("EntryTitle", diaryEntry.getTitle());
-    assertEquals("Some text", diaryEntry.getText());
+    assertEquals(original.getTimeWritten(), recreated.getTimeWritten());
+    assertEquals(original.getTimeEdited(), recreated.getTimeEdited());
+    assertEquals(original.getAuthor(), recreated.getAuthor());
+    assertEquals(original.getDestination(), recreated.getDestination());
+    assertEquals(original.getActivity(), recreated.getActivity());
+    assertEquals(original.getRating(), recreated.getRating());
+    assertEquals(original.getTitle(), recreated.getTitle());
+    assertEquals(original.getText(), recreated.getText());
   }
 
   @Test
