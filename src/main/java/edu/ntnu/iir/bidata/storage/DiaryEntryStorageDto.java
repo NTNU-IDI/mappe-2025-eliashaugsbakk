@@ -1,6 +1,7 @@
 package edu.ntnu.iir.bidata.storage;
 
 import edu.ntnu.iir.bidata.model.DiaryEntry;
+import java.time.LocalDateTime;
 /**
  * This class creates a data transfer object of {@code DiaryEntry} as a helper for DiaryStorage to
  * store the diary entry to file.
@@ -9,6 +10,7 @@ import edu.ntnu.iir.bidata.model.DiaryEntry;
  * {@code DiaryEntry.timeWritten} and {@code DiaryEntry.timeEdited} as String, not as
  * {@code LocalDateTime}
  */
+
 public class DiaryEntryStorageDto {
   private final String timeWritten;
   private final String timeEdited;
@@ -19,6 +21,13 @@ public class DiaryEntryStorageDto {
   private final String title;
   private final String text;
 
+  /**
+   * Constructor for creating dto for DiaryEntry object. Copies all fields from a DiaryEntry and
+   * stores them. {@link LocalDateTime} gets converted to a {@link String} representation using
+   * {@code LocalDateTime.toString()}
+   *
+   * @param diaryEntry diary entry object to copy fields from
+   */
   public DiaryEntryStorageDto(DiaryEntry diaryEntry) {
     this.timeWritten = diaryEntry.getTimeWritten().toString();
     this.timeEdited = diaryEntry.getTimeEdited().toString();
