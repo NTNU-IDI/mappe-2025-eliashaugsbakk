@@ -1,5 +1,9 @@
-# Compiled class files
-bin/
+# intellij
+.idea/
+.classpath
 
-# VS Code settings
-.vscode/
+# build output
+target/
+
+# diary containts for testing
+register/
