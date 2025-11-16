@@ -39,6 +39,11 @@ public class DiaryEntry {
   private double rating;
   private String text;
 
+  /**
+   * Creates a DiaryEntry from a data transfer object: DiaryEntryStorageDto.
+   *
+   * @param dto data transfer object.
+   */
   public DiaryEntry(DiaryEntryStorageDto dto) {
     timeWritten = LocalDateTime.parse(dto.getTimeWritten());
     timeEdited = LocalDateTime.parse(dto.getTimeEdited());
