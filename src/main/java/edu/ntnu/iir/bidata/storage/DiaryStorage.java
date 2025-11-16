@@ -22,7 +22,14 @@ public class DiaryStorage {
   private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
   private final String filepath;
 
-  DiaryStorage(String filepath) {
+  /**
+   * Constructs a {@code DiaryStorage} instance for managing the storage of diary entries in a JSON
+   * file located at the specified file path.
+   *
+   * @param filepath the file path where the diary entries will be stored or loaded from. Cannot be
+   *                 {@code null} or empty
+   */
+  public DiaryStorage(String filepath) {
     this.filepath = filepath;
   }
 
