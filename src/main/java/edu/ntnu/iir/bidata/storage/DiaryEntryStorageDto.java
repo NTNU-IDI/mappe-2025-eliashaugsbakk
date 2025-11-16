@@ -22,9 +22,9 @@ public class DiaryEntryStorageDto {
   private final String text;
 
   /**
-   * Constructor for creating dto for DiaryEntry object. Copies all fields from a DiaryEntry and
-   * stores them. {@link LocalDateTime} gets converted to a {@link String} representation using
-   * {@code LocalDateTime.toString()}
+   * Constructor for creating {@code DiaryEntryStorageDto}. This is a dto for DiaryEntry object. It
+   * copies all fields from a DiaryEntry. {@link LocalDateTime} gets converted to a {@link String}
+   * representation using {@code LocalDateTime.toString()}
    *
    * @param diaryEntry diary entry object to copy fields from
    */
