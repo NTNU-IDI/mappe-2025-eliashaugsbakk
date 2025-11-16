@@ -14,7 +14,7 @@ public class Diary {
    * Filters the diary entries by the specified author.
    *
    * @param author the author whose diary entries are to be retrieved.
-   * @return a list of diary entries written by the specified author. If no entries are found,
+   * @return a list of diary entries written by the specified author. If no entries are found, it
    * returns an empty list.
    */
   public ArrayList<DiaryEntry> filterByAuthor(String author) {
@@ -48,7 +48,7 @@ public class Diary {
    * Filters the diary entries by the specified destination.
    *
    * @param destination the destination to filter entries by.
-   * @return a list of diary entries with the specified destination. If no entries are found,
+   * @return a list of diary entries with the specified destination. If no entries are found, it
    * returns an empty list.
    */
   public ArrayList<DiaryEntry> filterByDestination(String destination) {
