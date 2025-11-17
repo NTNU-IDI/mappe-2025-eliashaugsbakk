@@ -243,7 +243,6 @@ public class DiaryEntry {
     String formattedWritten = timeWritten.format(formatter);
     String formattedEdited = timeEdited.format(formatter);
     return """
-        X=================================>
         Written: %s
         Last edit: %s
         
@@ -255,7 +254,6 @@ public class DiaryEntry {
         Title: %s
         Main Entry:
         %s
-        X=================================>
         """.formatted(formattedWritten, formattedEdited, author, destination, activity, rating,
         title, text);
   }

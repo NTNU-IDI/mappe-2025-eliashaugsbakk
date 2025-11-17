@@ -22,24 +22,29 @@ public class Main {
    * @throws IOException loading and saving entries may cause an error
    */
   public static void main(String[] args) throws IOException {
-    // create a DiaryStorage instance to load and save diary entries
-    DiaryStorage storage = new DiaryStorage("register/data.json");
+    Main main = new Main();
+    main.init();
+  }
 
-    // create a Diary instance to store diary entries in memory and do operations on the
-    // collection of diary entries
-    Diary diary = new Diary();
-    diary.addDiaryEntries(storage.loadEntries());
+  private void init() throws IOException {
+      // create a DiaryStorage instance to load and save diary entries
+      DiaryStorage storage = new DiaryStorage("register/data.json");
 
-    // create a UI instance to handle the main program loop
-    // with Prompter and Formatter as arguments
-    Prompter prompter = new Prompter();
-    Formatter formatter = new Formatter();
-    UI ui = new UI(prompter, formatter, diary);
+      // create a Diary instance to store diary entries in memory and do operations on the
+      // collection of diary entries
+      Diary diary = new Diary();
+      diary.addDiaryEntries(storage.loadEntries());
 
-    // run the main program loop
-    ui.run();
+      // create a UI instance to handle the main program loop
+      // with Prompter and Formatter as arguments
+      Prompter prompter = new Prompter();
+      Formatter formatter = new Formatter();
+      UI ui = new UI(prompter, formatter, diary);
 
-    // store diary entries before exiting the program
-    storage.writeToFile(diary.getAllDiaryEntries());
+      // run the main program loop
+      ui.run();
+
+      // store diary entries before exiting the program
+      storage.writeToFile(diary.getAllDiaryEntries());
   }
 }
