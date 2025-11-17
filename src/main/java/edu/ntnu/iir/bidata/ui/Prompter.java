@@ -10,10 +10,20 @@ import java.util.Scanner;
 public class Prompter {
   Scanner sc = new Scanner(System.in);
 
+  /**
+   * Prints string to terminal.
+   *
+   * @param string The string to println
+   */
   private void print(String string) {
     System.out.print(string);
   }
 
+  /**
+   * Print string to terminal with newline after.
+   *
+   * @param string The string to print
+   */
   public void println(String string) {
     System.out.println(string);
   }
@@ -69,7 +79,7 @@ public class Prompter {
     int line = 0;
 
     while (true) {
-      print(STR."\{String.format("%3d", line)}  ");
+      print(String.format("%3d", line));
       line++;
       String inputText = sc.nextLine();
       if (inputText.equals("bye")) {

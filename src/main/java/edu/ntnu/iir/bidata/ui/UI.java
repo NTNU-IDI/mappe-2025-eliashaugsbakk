@@ -2,9 +2,13 @@ package edu.ntnu.iir.bidata.ui;
 
 import edu.ntnu.iir.bidata.model.Diary;
 import edu.ntnu.iir.bidata.model.DiaryEntry;
-
 import java.util.ArrayList;
 
+/**
+ * The UI class provides a user-facing interface for interacting with a diary application.
+ * It facilitates user input and output, allowing diary entries to be read, written, or saved and exited.
+ * The class relies on auxiliary classes for prompting user interactions, formatting data, and managing diary entries.
+ */
 public class UI {
   private static final int SAVE_AND_EXIT = 0;
   private static final int READ_ENTRY = 1;
@@ -14,12 +18,32 @@ public class UI {
   Prompter prompter;
   Formatter formatter;
 
+  /**
+   * Constructs a new UI instance.
+   *
+   * @param prompter the Prompter object used for console interaction
+   * @param formatter the Formatter object for text formatting
+   * @param diary the Diary object to manage diary entries
+   */
   public UI(Prompter prompter, Formatter formatter, Diary diary) {
     this.prompter = prompter;
     this.formatter = formatter;
     this.diary = diary;
   }
 
+  /**
+   * Initiates and manages the main execution loop for the user interface.
+   *
+   * <p>The method continuously prompts the user with options to read a diary entry,
+   * write a new entry, or save and exit. Based on the user's choice, it invokes
+   * the corresponding functionality.
+   * The loop runs until the user chooses to save and exit.
+   *
+   * <p>The available options are:
+   * - Read Entry: Allows the user to view a specific diary entry.
+   * - Write Entry: Enables the user to create a new diary entry.
+   * - Save and Exit: Terminates the loop and returns control to the caller.
+   */
   public void run() {
     mainLoop:
     while (true) {
@@ -30,7 +54,10 @@ public class UI {
       switch (choice) {
         case READ_ENTRY -> readEntry();
         case WRITE_ENTRY -> writeEntry();
-        case SAVE_AND_EXIT -> { break mainLoop; }
+        case SAVE_AND_EXIT -> {
+          break mainLoop;
+        }
+        default -> prompter.warning("Not a valid option");
       }
     }
   }
@@ -41,7 +68,6 @@ public class UI {
    */
   private void readEntry() {
     try {
-
       DiaryEntry entry = chooseEntry(diary.getAllDiaryEntries());
       if (entry == null) {
         // no entry was selected, probably because the diary is empty
@@ -78,7 +104,7 @@ public class UI {
       if (choice >= 0 && choice < entries.size()) {
         break;
       }
-      prompter.warning(STR."Please choose a number between 0 and \{entries.size() - 1}.");
+      prompter.warning("Please choose a number between 0 and %s".formatted(entries.size() - 1));
     }
     return entries.get(choice);
   }
