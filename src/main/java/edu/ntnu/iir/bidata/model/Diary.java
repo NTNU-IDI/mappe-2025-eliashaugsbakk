@@ -31,70 +31,72 @@ public class Diary {
   }
 
   /**
-   * Filters the diary entries by the specified author.
+   * Filters the inputted list of diary entries by the specified author.
    *
+   * @param originalList the unfiltered ArrayList
    * @param author the author whose diary entries are to be retrieved.
-   * @return a list of diary entries written by the specified author. If no entries are found, it
-   * returns an empty list.
    */
-  public ArrayList<DiaryEntry> filterByAuthor(ArrayList<DiaryEntry> originalList, String author) {
+  public void filterByAuthor(ArrayList<DiaryEntry> originalList, String author) {
     ArrayList<DiaryEntry> filteredList = new ArrayList<>();
     for (DiaryEntry entry : originalList) {
       if (entry.getAuthor().equals(author)) {
         filteredList.add(entry);
       }
     }
-    return filteredList;
+    originalList.clear();
+    originalList.addAll(filteredList);
   }
 
   /**
-   * Filters the diary entries by the specified activity.
+   * Filters the list of inputted diary entries by the specified activity.
    *
+   * @param originalList the unfiltered ArrayList
    * @param activity the activity to filter entries by.
-   * @return a list of diary entries with the specified activity. If no entries are found, returns
-   * an empty list.
    */
-  public ArrayList<DiaryEntry> filterByActivity(ArrayList<DiaryEntry> originalList, String activity) {
+  public void filterByActivity(ArrayList<DiaryEntry> originalList, String activity) {
     ArrayList<DiaryEntry> filteredList = new ArrayList<>();
     for (DiaryEntry entry : originalList) {
       if (entry.getActivity().equals(activity)) {
         filteredList.add(entry);
       }
     }
-    return filteredList;
+    originalList.clear();
+    originalList.addAll(filteredList);
   }
 
   /**
-   * Filters the diary entries by the specified destination.
+   * Filters the inputted list of diary entries by the specified destination.
    *
+   * @param originalList the unfiltered ArrayList
    * @param destination the destination to filter entries by.
-   * @return a list of diary entries with the specified destination. If no entries are found, it
-   * returns an empty list.
    */
-  public ArrayList<DiaryEntry> filterByDestination(ArrayList<DiaryEntry> originalList,String destination) {
+  public void filterByDestination(ArrayList<DiaryEntry> originalList,String destination) {
     ArrayList<DiaryEntry> filteredList = new ArrayList<>();
     for (DiaryEntry entry : originalList) {
       if (entry.getDestination().equals(destination)) {
         filteredList.add(entry);
       }
     }
-    return filteredList;
+    originalList.clear();
+    originalList.addAll(filteredList);
   }
 
   /**
+   * Filters the inputted list of diary entries by time interval.
    *
+   * @param originalList the unfiltered ArrayList
    * @param timeStart the creation time from witch to allow entries through
    * @param timeStop the creation time to which entries are allowed
-   * @return a list of diary entries created in the given time span
    */
-  public ArrayList<DiaryEntry> filterByTimeCreated(ArrayList<DiaryEntry> originalList,LocalDateTime timeStart, LocalDateTime timeStop) {
+  public void filterByTimeCreated(ArrayList<DiaryEntry> originalList,LocalDateTime timeStart, LocalDateTime timeStop) {
     ArrayList<DiaryEntry> filteredList = new ArrayList<>();
     for (DiaryEntry entry : originalList) {
       if (entry.getTimeWritten().isAfter(timeStart) && entry.getTimeWritten().isBefore(timeStop)) {
         filteredList.add(entry);
       }
     }
-    return filteredList;
+    originalList.clear();
+    originalList.addAll(filteredList);
   }
 
   /**

@@ -71,6 +71,7 @@ public class CollectionUI {
         }
         default -> prompter.warning("Not a valid option");
       }
+
     }
   }
 }

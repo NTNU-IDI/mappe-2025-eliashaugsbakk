@@ -2,9 +2,17 @@ package edu.ntnu.iir.bidata.ui;
 
 import edu.ntnu.iir.bidata.model.Diary;
 import edu.ntnu.iir.bidata.model.DiaryEntry;
-
 import java.util.ArrayList;
 
+/**
+ * Class to handle all user actions related to handling one instance of a diary entry.
+ * This includes:
+ *  - Creating a new entry
+ *  - Editing an existing entry
+ *  - Reading an entry
+ *  - Deleting an entry
+ *  -
+ */
 public class EntryUI {
   Diary diary;
   Prompter prompter;
@@ -73,7 +81,8 @@ public class EntryUI {
    */
   public void writeEntry() {
     String author = prompter.prompt("Enter an author.");
-    String destination = prompter.prompt("Enter the destination of your travels or the general traver context.");
+    String destination = prompter.prompt("Enter the destination of your " +
+        "travels or the general traver context.");
     String title = prompter.prompt("Enter the Title of your entry.");
     String activity = prompter.prompt("Enter the activity related to your entry.");
     activity = activity.toLowerCase();
