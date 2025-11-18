@@ -39,7 +39,7 @@ public class Main {
       // with Prompter and Formatter as arguments
       Prompter prompter = new Prompter();
       Formatter formatter = new Formatter();
-      UI ui = new UI(prompter, formatter, diary);
+      UI ui = new UI(prompter, diary);
 
       // run the main program loop
       ui.run();

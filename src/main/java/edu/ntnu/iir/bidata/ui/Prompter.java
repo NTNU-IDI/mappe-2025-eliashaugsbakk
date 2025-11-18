@@ -94,6 +94,22 @@ public class Prompter {
   }
 
   /**
+   * Method to take confirmation from the user when doing something potentially destructing.
+   * Usually deleting a Diary Entry or abandoning a collection of entries.
+   *
+   * @param message the message containing the user's option
+   * @return the users choise
+   */
+  public boolean confirmAction(String message) {
+    println("X=========================X");
+    println(message);
+    println("X=========================X");
+    println("Write yes to confirm, no to return");
+    String answer = sc.nextLine();
+    return answer.trim().equalsIgnoreCase("yes");
+  }
+
+  /**
    * Shows options and reads an integer choice, repeating until a valid integer is entered.
    *
    * @param options the text with options to display
