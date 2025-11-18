@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * The Diary class represents a collection of diary entries. It provides functionality to manage and
@@ -11,93 +12,6 @@ import java.util.HashSet;
  */
 public class Diary {
   private final ArrayList<DiaryEntry> entries = new ArrayList<>();
-
-  /**
-   * Sorts a list of diary entries by the time it was created. The oldest entry first.
-   *
-   * @param entriesToSort the list of Diary Entries to sort
-   */
-  public void sortByTime(ArrayList<DiaryEntry> entriesToSort) {
-    entriesToSort.sort(Comparator.comparing(DiaryEntry::getTimeWritten));
-  }
-
-  /**
-   * Sorts a list of diary entries by the rating it assigned to it.
-   *
-   * @param entriesToSort the list of Diary Entries to sort
-   */
-  public void sortByRating(ArrayList<DiaryEntry> entriesToSort) {
-    entriesToSort.sort(Comparator.comparing(DiaryEntry::getRating));
-  }
-
-  /**
-   * Filters the inputted list of diary entries by the specified author.
-   *
-   * @param originalList the unfiltered ArrayList
-   * @param author the author whose diary entries are to be retrieved.
-   */
-  public void filterByAuthor(ArrayList<DiaryEntry> originalList, String author) {
-    ArrayList<DiaryEntry> filteredList = new ArrayList<>();
-    for (DiaryEntry entry : originalList) {
-      if (entry.getAuthor().equals(author)) {
-        filteredList.add(entry);
-      }
-    }
-    originalList.clear();
-    originalList.addAll(filteredList);
-  }
-
-  /**
-   * Filters the list of inputted diary entries by the specified activity.
-   *
-   * @param originalList the unfiltered ArrayList
-   * @param activity the activity to filter entries by.
-   */
-  public void filterByActivity(ArrayList<DiaryEntry> originalList, String activity) {
-    ArrayList<DiaryEntry> filteredList = new ArrayList<>();
-    for (DiaryEntry entry : originalList) {
-      if (entry.getActivity().equals(activity)) {
-        filteredList.add(entry);
-      }
-    }
-    originalList.clear();
-    originalList.addAll(filteredList);
-  }
-
-  /**
-   * Filters the inputted list of diary entries by the specified destination.
-   *
-   * @param originalList the unfiltered ArrayList
-   * @param destination the destination to filter entries by.
-   */
-  public void filterByDestination(ArrayList<DiaryEntry> originalList,String destination) {
-    ArrayList<DiaryEntry> filteredList = new ArrayList<>();
-    for (DiaryEntry entry : originalList) {
-      if (entry.getDestination().equals(destination)) {
-        filteredList.add(entry);
-      }
-    }
-    originalList.clear();
-    originalList.addAll(filteredList);
-  }
-
-  /**
-   * Filters the inputted list of diary entries by time interval.
-   *
-   * @param originalList the unfiltered ArrayList
-   * @param timeStart the creation time from witch to allow entries through
-   * @param timeStop the creation time to which entries are allowed
-   */
-  public void filterByTimeCreated(ArrayList<DiaryEntry> originalList,LocalDateTime timeStart, LocalDateTime timeStop) {
-    ArrayList<DiaryEntry> filteredList = new ArrayList<>();
-    for (DiaryEntry entry : originalList) {
-      if (entry.getTimeWritten().isAfter(timeStart) && entry.getTimeWritten().isBefore(timeStop)) {
-        filteredList.add(entry);
-      }
-    }
-    originalList.clear();
-    originalList.addAll(filteredList);
-  }
 
   /**
    * Adds a new diary entry to the diary.
@@ -161,4 +75,5 @@ public class Diary {
   public ArrayList<DiaryEntry> getAllDiaryEntries() {
     return entries;
   }
+
 }

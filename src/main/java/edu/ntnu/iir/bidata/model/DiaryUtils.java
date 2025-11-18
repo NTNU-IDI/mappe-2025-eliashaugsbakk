@@ -16,7 +16,7 @@ public class DiaryUtils {
    *
    * @param entriesToSort the list of Diary Entries to sort
    */
-  public void sortByTime(ArrayList<DiaryEntry> entriesToSort) {
+  public void sortByTime(List<DiaryEntry> entriesToSort) {
     entriesToSort.sort(Comparator.comparing(DiaryEntry::getTimeWritten));
   }
 
@@ -25,7 +25,7 @@ public class DiaryUtils {
    *
    * @param entriesToSort the list of Diary Entries to sort
    */
-  public void sortByRating(ArrayList<DiaryEntry> entriesToSort) {
+  public void sortByRating(List<DiaryEntry> entriesToSort) {
     entriesToSort.sort(Comparator.comparing(DiaryEntry::getRating));
   }
 
@@ -121,7 +121,7 @@ public class DiaryUtils {
    * @param originalList the list to get activities from
    * @return the list of unique authors
    */
-  public List<String> getDistinctActivity(ArrayList<DiaryEntry> originalList) {
+  public List<String> getDistinctActivities(ArrayList<DiaryEntry> originalList) {
     HashSet<String> activities = new HashSet<>();
     for (DiaryEntry entry : originalList) {
       activities.add(entry.getActivity());
