@@ -2,7 +2,10 @@ package edu.ntnu.iir.bidata.ui;
 
 import edu.ntnu.iir.bidata.model.Diary;
 import edu.ntnu.iir.bidata.model.DiaryEntry;
+import edu.ntnu.iir.bidata.model.DiaryUtils;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Handles the creation and editing of a collection of {@link DiaryEntry} holding them in an
@@ -11,17 +14,27 @@ import java.util.ArrayList;
  */
 public class CollectionUI {
 
+  // options to choose
   private static final int COLL_RETURN_TO_MAIN_MENU = 0;
   private static final int COLL_PRINT_COLLECTION = 1;
   private static final int COLL_APPLY_FILTER = 2;
   private static final int COLL_SORT_COLLECTION = 3;
   private static final int COLL_CHOOSE_ENTRY = 4;
 
+  // filters to apply
+  private static final int FILTER_AUTHOR = 1;
+  private static final int FILTER_ACTIVITY = 2;
+  private static final int FILTER_DESTINATION = 3;
+  private static final int FILTER_TIME_CREATED = 4;
+  private static final int FILTER_NO_FILTER = 0;
+
   Diary diary;
+  DiaryUtils diaryUtils;
   Prompter prompter;
 
-  CollectionUI(Diary diary, Prompter prompter) {
+  CollectionUI(Diary diary, DiaryUtils diaryUtils, Prompter prompter) {
     this.diary = diary;
+    this.diaryUtils = diaryUtils;
     this.prompter = prompter;
   }
 
@@ -40,7 +53,6 @@ public class CollectionUI {
     collLoop:
     while (true) {
       int currentEntries = collection.size();
-      int[] currentFilters = null;
       String currentEntriesString = String.valueOf(currentEntries);
 
       if (currentEntries == 0) {
@@ -60,10 +72,11 @@ public class CollectionUI {
           COLL_SORT_COLLECTION, COLL_CHOOSE_ENTRY, COLL_RETURN_TO_MAIN_MENU));
 
       switch (choice) {
-        case COLL_PRINT_COLLECTION -> {}
-        case COLL_APPLY_FILTER -> {}
-        case COLL_SORT_COLLECTION -> {}
-        case COLL_CHOOSE_ENTRY -> {}
+        case COLL_PRINT_COLLECTION -> prompter.printListOfDiaries(collection);
+        case COLL_APPLY_FILTER ->   applyFilter(collection);
+        case COLL_SORT_COLLECTION -> sortCollection(collection);
+        case COLL_CHOOSE_ENTRY -> {
+        }
         case COLL_RETURN_TO_MAIN_MENU -> {
           if (prompter.confirmAction("This action will reset your current collection.")) {
             break collLoop;
@@ -71,7 +84,57 @@ public class CollectionUI {
         }
         default -> prompter.warning("Not a valid option");
       }
+    }
+  }
 
+  private void applyFilter(ArrayList<DiaryEntry> entries) {
+    filterLoop:
+    while (true) {
+      int choice = prompter.promptInt("""
+          Choose what filter to apply:
+          \t%s - Author
+          \t%s - Activity
+          \t%s - Destination
+          \t%s - Time created
+          \t%s - Done""".formatted(FILTER_AUTHOR, FILTER_ACTIVITY, FILTER_DESTINATION,
+          FILTER_TIME_CREATED, FILTER_NO_FILTER));
+
+      switch (choice) {
+        case FILTER_AUTHOR -> {
+          String author = prompter.chooseFromList(diaryUtils.getDistinctAuthors(entries));
+          diaryUtils.filterByAuthor(entries, author);
+        }
+        case FILTER_ACTIVITY -> {
+          String activity = prompter.chooseFromList(diaryUtils.getDistinctActivities(entries));
+          diaryUtils.filterByActivity(entries, activity);
+        }
+        case FILTER_DESTINATION -> {
+          String destination = prompter.chooseFromList(diaryUtils.getDistinctDestinations(entries));
+          diaryUtils.filterByDestination(entries, destination);
+        }
+        case FILTER_TIME_CREATED -> {
+          LocalDateTime timeStart = prompter.chooseTime("Start time");
+          LocalDateTime timeStop = prompter.chooseTime("End time");
+
+          diaryUtils.filterByTimeCreated(entries, timeStart, timeStop);
+        }
+        case FILTER_NO_FILTER -> {
+          break filterLoop;
+        }
+        default -> prompter.warning("Not a valid option");
+      }
+    }
+  }
+
+  private void sortCollection(List<DiaryEntry> entries) {
+    int choice = prompter.promptInt("""
+        Sort entries by:
+        \t1. Rating
+        \t2. Time written""");
+    switch (choice) {
+      case 1 -> diaryUtils.sortByRating(entries);
+      case 2 -> diaryUtils.sortByTime(entries);
+      default -> prompter.warning("Invalid option");
     }
   }
 }

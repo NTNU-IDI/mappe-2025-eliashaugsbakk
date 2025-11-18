@@ -1,6 +1,12 @@
 package edu.ntnu.iir.bidata.ui;
 
+import edu.ntnu.iir.bidata.model.DiaryEntry;
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -8,7 +14,17 @@ import java.util.Scanner;
  * warnings, and prompts, and to read user input.
  */
 public class Prompter {
-  Scanner sc = new Scanner(System.in);
+  private final Scanner sc = new Scanner(System.in);
+  private final Formatter formatter;
+
+  /**
+   * Constructor to assign formatter.
+   *
+   * @param formatter to format ready for printing
+   */
+  public Prompter(Formatter formatter) {
+    this.formatter = formatter;
+  }
 
   /**
    * Prints string to terminal.
@@ -129,5 +145,72 @@ public class Prompter {
         warning("Input must be an integer. Please try again.");
       }
     }
+  }
+
+  /**
+   * Lets the user choose an option from a list. Eather by writing
+   * the option or picking a number assigned to each option.
+   *
+   * @param options the list of options to choose from
+   * @return the option chosen
+   */
+  public String chooseFromList(List<String> options) {
+    println(formatter.formatStringList(options));
+
+    while (true) {
+
+      int choiceInt;
+      String choiceString = "";
+      if (sc.hasNextInt()) {
+        choiceInt = sc.nextInt();
+        sc.nextLine(); // to soak up any extra input, after the int
+
+        try {
+          choiceString = options.get(choiceInt - 1);
+        } catch (IndexOutOfBoundsException e) {
+          warning("Not a valid choice");
+        }
+      } else {
+        choiceString = sc.nextLine();
+      }
+      for (String option : options) {
+        if (option.equalsIgnoreCase(choiceString)) {
+          return choiceString;
+        } else {
+          warning("Invalid input");
+        }
+      }
+    }
+  }
+
+  /**
+   * Lets the user create a LocalDateTime object.
+   *
+   * @param prompt the prompt to give the user
+   * @return the time chosen by the user
+   */
+  public LocalDateTime chooseTime(String prompt) {
+    while (true) {
+      print(prompt);
+      println(" (yyyy-MM-dd HH:mm)");
+      print(">");
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+      String input = sc.nextLine();
+
+      try {
+        return LocalDateTime.parse(input, formatter);
+      } catch (DateTimeException e) {
+        warning("Invalid date");
+      }
+    }
+  }
+
+  /**
+   * Prints out a formatted collection of diary entries.
+   *
+   * @param entries the entries to format and print
+   */
+  public void printListOfDiaries(ArrayList<DiaryEntry> entries) {
+    message(formatter.formatDiaryEntryList(entries));
   }
 }
