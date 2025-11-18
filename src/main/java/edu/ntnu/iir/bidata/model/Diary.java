@@ -1,6 +1,8 @@
 package edu.ntnu.iir.bidata.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 
 /**
@@ -11,15 +13,33 @@ public class Diary {
   private final ArrayList<DiaryEntry> entries = new ArrayList<>();
 
   /**
+   * Sorts a list of diary entries by the time it was created. The oldest entry first.
+   *
+   * @param entriesToSort the list of Diary Entries to sort
+   */
+  public void sortByTime(ArrayList<DiaryEntry> entriesToSort) {
+    entriesToSort.sort(Comparator.comparing(DiaryEntry::getTimeWritten));
+  }
+
+  /**
+   * Sorts a list of diary entries by the rating it assigned to it.
+   *
+   * @param entriesToSort the list of Diary Entries to sort
+   */
+  public void sortByRating(ArrayList<DiaryEntry> entriesToSort) {
+    entriesToSort.sort(Comparator.comparing(DiaryEntry::getRating));
+  }
+
+  /**
    * Filters the diary entries by the specified author.
    *
    * @param author the author whose diary entries are to be retrieved.
    * @return a list of diary entries written by the specified author. If no entries are found, it
    * returns an empty list.
    */
-  public ArrayList<DiaryEntry> filterByAuthor(String author) {
+  public ArrayList<DiaryEntry> filterByAuthor(ArrayList<DiaryEntry> originalList, String author) {
     ArrayList<DiaryEntry> filteredList = new ArrayList<>();
-    for (DiaryEntry entry : entries) {
+    for (DiaryEntry entry : originalList) {
       if (entry.getAuthor().equals(author)) {
         filteredList.add(entry);
       }
@@ -34,9 +54,9 @@ public class Diary {
    * @return a list of diary entries with the specified activity. If no entries are found, returns
    * an empty list.
    */
-  public ArrayList<DiaryEntry> filterByActivity(String activity) {
+  public ArrayList<DiaryEntry> filterByActivity(ArrayList<DiaryEntry> originalList, String activity) {
     ArrayList<DiaryEntry> filteredList = new ArrayList<>();
-    for (DiaryEntry entry : entries) {
+    for (DiaryEntry entry : originalList) {
       if (entry.getActivity().equals(activity)) {
         filteredList.add(entry);
       }
@@ -51,10 +71,26 @@ public class Diary {
    * @return a list of diary entries with the specified destination. If no entries are found, it
    * returns an empty list.
    */
-  public ArrayList<DiaryEntry> filterByDestination(String destination) {
+  public ArrayList<DiaryEntry> filterByDestination(ArrayList<DiaryEntry> originalList,String destination) {
     ArrayList<DiaryEntry> filteredList = new ArrayList<>();
-    for (DiaryEntry entry : entries) {
+    for (DiaryEntry entry : originalList) {
       if (entry.getDestination().equals(destination)) {
+        filteredList.add(entry);
+      }
+    }
+    return filteredList;
+  }
+
+  /**
+   *
+   * @param timeStart the creation time from witch to allow entries through
+   * @param timeStop the creation time to which entries are allowed
+   * @return a list of diary entries created in the given time span
+   */
+  public ArrayList<DiaryEntry> filterByTimeCreated(ArrayList<DiaryEntry> originalList,LocalDateTime timeStart, LocalDateTime timeStop) {
+    ArrayList<DiaryEntry> filteredList = new ArrayList<>();
+    for (DiaryEntry entry : originalList) {
+      if (entry.getTimeWritten().isAfter(timeStart) && entry.getTimeWritten().isBefore(timeStop)) {
         filteredList.add(entry);
       }
     }
@@ -111,7 +147,6 @@ public class Diary {
         throw new IllegalArgumentException("duplicate titles are not allowed");
       }
     }
-
     // Only add after validation passes for all
     entries.addAll(entriesToAdd);
   }
