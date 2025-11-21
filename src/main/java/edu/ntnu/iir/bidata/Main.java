@@ -43,7 +43,7 @@ public class Main {
     DiaryUtils diaryUtils = new DiaryUtils();
     Prompter prompter = new Prompter(formatter);
     EntryUI entryUI = new EntryUI(diary, prompter);
-    UI ui = new UI(prompter, diary, diaryUtils, entryUI,formatter);
+    UI ui = new UI(prompter, diary, diaryUtils, entryUI);
 
     // run the main program loop
     ui.run();

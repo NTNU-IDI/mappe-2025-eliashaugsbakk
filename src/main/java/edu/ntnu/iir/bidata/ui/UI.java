@@ -23,9 +23,9 @@ public class UI {
    * @param diary the Diary object to manage diary entries
    */
   public UI(Prompter prompter, Diary diary, DiaryUtils diaryUtils,
-      EntryUI entryUI, Formatter formatter) {
+      EntryUI entryUI) {
     this.prompter = prompter;
-    this.collectionUI = new CollectionUI(diary, diaryUtils, entryUI, prompter, formatter);
+    this.collectionUI = new CollectionUI(diary, diaryUtils, entryUI, prompter);
     this.entryUI = new EntryUI(diary, prompter);
   }
 
