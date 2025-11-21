@@ -213,4 +213,41 @@ public class Prompter {
   public void printListOfDiaries(ArrayList<DiaryEntry> entries) {
     message(formatter.formatDiaryEntryList(entries));
   }
+
+  /**
+   * Lets the user choose one diary entry out of a list of entries.
+   *
+   * @param entries the list of entries to choose from
+   * @return the DiaryEntry the user has chosen
+   */
+  public DiaryEntry chooseFromListOfEntries(List<DiaryEntry> entries) {
+    while (true) {
+      println(formatter.formatDiaryEntryIndexedList(entries));
+      println("Choose an entry by typing the Index or title");
+      print("> ");
+      DiaryEntry choiceEntry;
+      int choiceInt;
+      String choiceString = "";
+      if (sc.hasNextInt()) {
+        choiceInt = sc.nextInt();
+        sc.nextLine(); // to soak up any extra input, after the int
+        try {
+          choiceEntry = entries.get(choiceInt - 1);
+          return choiceEntry;
+        } catch (IndexOutOfBoundsException e) {
+          warning("Not a valid choice");
+        }
+      } else {
+        choiceString = sc.nextLine();
+        for (DiaryEntry entry : entries) {
+          if (entry.getTitle().equalsIgnoreCase(choiceString)) {
+            choiceEntry = entry;
+            return choiceEntry;
+          } else {
+            warning("Invalid input");
+          }
+        }
+      }
+    }
+  }
 }

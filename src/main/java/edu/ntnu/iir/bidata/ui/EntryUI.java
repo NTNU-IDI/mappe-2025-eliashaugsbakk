@@ -2,7 +2,6 @@ package edu.ntnu.iir.bidata.ui;
 
 import edu.ntnu.iir.bidata.model.Diary;
 import edu.ntnu.iir.bidata.model.DiaryEntry;
-import java.util.ArrayList;
 
 /**
  * Class to handle all user actions related to handling one instance of a diary entry.
@@ -11,13 +10,17 @@ import java.util.ArrayList;
  *  - Editing an existing entry
  *  - Reading an entry
  *  - Deleting an entry
- *  -
  */
 public class EntryUI {
-  Diary diary;
-  Prompter prompter;
+  private final Diary diary;
+  private final Prompter prompter;
 
-  EntryUI(Diary diary, Prompter prompter) {
+  /**
+   * Constructor to let EntryUI to interact with {@link Prompter}.
+   *
+   * @param prompter to give output and take input from the user
+   */
+  public EntryUI(Diary diary, Prompter prompter) {
     this.diary = diary;
     this.prompter = prompter;
   }
@@ -26,9 +29,8 @@ public class EntryUI {
    * Calls on chooseEntry to let the user pick a diary entry to read, then prints out the toString
    * of the chosen DiaryEntry.
    */
-  private void readEntry() {
+  public void readEntry(DiaryEntry entry) {
     try {
-      DiaryEntry entry = chooseEntry(diary.getAllDiaryEntries());
       if (entry == null) {
         // no entry was selected, probably because the diary is empty
         return;
@@ -39,35 +41,6 @@ public class EntryUI {
     }
   }
 
-  /**
-   * Prompts the user to choose an entry from a list of diary entries.
-   *
-   * @return A diary entry chosen by the user
-   */
-  private DiaryEntry chooseEntry(ArrayList<DiaryEntry> entries) {
-    if (entries.isEmpty()) {
-      prompter.warning("No entries are available");
-      return null;
-    }
-
-    StringBuilder prompt = new StringBuilder("Choose an entry:\n");
-    for (int i = 0; i < entries.size(); i++) {
-      prompt.append(i)
-          .append(" : ")
-          .append(entries.get(i).getTitle())
-          .append("\n");
-    }
-
-    int choice;
-    while (true) {
-      choice = prompter.promptInt(prompt.toString());
-      if (choice >= 0 && choice < entries.size()) {
-        break;
-      }
-      prompter.warning("Please choose a number between 0 and %s".formatted(entries.size() - 1));
-    }
-    return entries.get(choice);
-  }
 
   /**
    * Prompts the user for the information needed to create a new diary entry
@@ -81,9 +54,9 @@ public class EntryUI {
    */
   public void writeEntry() {
     String author = prompter.prompt("Enter an author.");
-    String destination = prompter.prompt("Enter the destination of your " +
-        "travels or the general traver context.");
-    String title = prompter.prompt("Enter the Title of your entry.");
+    String destination = prompter.prompt("Enter the destination of your "
+        + "travels or the general traver context.");
+    String title = setTitle();
     String activity = prompter.prompt("Enter the activity related to your entry.");
     activity = activity.toLowerCase();
     double rating;
@@ -100,7 +73,35 @@ public class EntryUI {
       }
     }
     String text = prompter.multipleLinePrompt("Write the main body of your diary entry.");
-
     diary.addDiaryEntry(new DiaryEntry(author, destination, activity, rating, title, text));
+  }
+
+  private String setTitle() {
+    String title = prompter.prompt("Write the title of your entry");
+    for (DiaryEntry entry : diary.getAllDiaryEntries()) {
+      if (entry.getTitle().equalsIgnoreCase(title)) {
+        prompter.warning("Diary entry title has to be unique.");
+        setTitle();
+      }
+    }
+    return title;
+  }
+
+  /**
+   * Method to edit the contents of a DiaryEntry.
+   *
+   * @param entry the DiaryEntry to edit
+   */
+  public void editEntry(DiaryEntry entry) {
+    // TODO: Write editEntry
+  }
+
+  /**
+   * Method to delete a DiaryEntry.
+   *
+   * @param entry the DiaryEntry to delet.
+   */
+  public void deleteEntry(DiaryEntry entry) {
+    // TODO: Write deleteEntry
   }
 }

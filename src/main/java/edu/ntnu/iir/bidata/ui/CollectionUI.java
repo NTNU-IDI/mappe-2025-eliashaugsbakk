@@ -14,8 +14,10 @@ import java.util.List;
  */
 public class CollectionUI {
 
+  // exit menu
+  private static final int EXIT_MENU = 0;
+
   // options to choose
-  private static final int COLL_RETURN_TO_MAIN_MENU = 0;
   private static final int COLL_PRINT_COLLECTION = 1;
   private static final int COLL_APPLY_FILTER = 2;
   private static final int COLL_SORT_COLLECTION = 3;
@@ -26,16 +28,30 @@ public class CollectionUI {
   private static final int FILTER_ACTIVITY = 2;
   private static final int FILTER_DESTINATION = 3;
   private static final int FILTER_TIME_CREATED = 4;
-  private static final int FILTER_NO_FILTER = 0;
 
-  Diary diary;
-  DiaryUtils diaryUtils;
-  Prompter prompter;
+  // sort entries
+  private static final int BY_RATING = 1;
+  private static final int BY_TIME_WRITTEN = 2;
 
-  CollectionUI(Diary diary, DiaryUtils diaryUtils, Prompter prompter) {
+  // diary actions
+  private static final int READ_ENTRY = 1;
+  private static final int EDIT_ENTRY = 2;
+  private static final int DELETE_ENTRY = 3;
+
+
+  private final Diary diary;
+  private final DiaryUtils diaryUtils;
+  private final EntryUI entryUI;
+  private final Prompter prompter;
+  private final Formatter formatter;
+
+  CollectionUI(Diary diary, DiaryUtils diaryUtils, EntryUI entryUI,
+      Prompter prompter, Formatter formatter) {
     this.diary = diary;
     this.diaryUtils = diaryUtils;
+    this.entryUI = entryUI;
     this.prompter = prompter;
+    this.formatter = formatter;
   }
 
   /**
@@ -69,15 +85,14 @@ public class CollectionUI {
               \t\t Read, Edit or Delete an entry
           \t%s - Return to Main menu""".formatted(
           currentEntriesString, COLL_PRINT_COLLECTION, COLL_APPLY_FILTER,
-          COLL_SORT_COLLECTION, COLL_CHOOSE_ENTRY, COLL_RETURN_TO_MAIN_MENU));
+          COLL_SORT_COLLECTION, COLL_CHOOSE_ENTRY, EXIT_MENU));
 
       switch (choice) {
         case COLL_PRINT_COLLECTION -> prompter.printListOfDiaries(collection);
         case COLL_APPLY_FILTER ->   applyFilter(collection);
         case COLL_SORT_COLLECTION -> sortCollection(collection);
-        case COLL_CHOOSE_ENTRY -> {
-        }
-        case COLL_RETURN_TO_MAIN_MENU -> {
+        case COLL_CHOOSE_ENTRY -> chooseEntry(collection);
+        case EXIT_MENU -> {
           if (prompter.confirmAction("This action will reset your current collection.")) {
             break collLoop;
           }
@@ -97,7 +112,7 @@ public class CollectionUI {
           \t%s - Destination
           \t%s - Time created
           \t%s - Done""".formatted(FILTER_AUTHOR, FILTER_ACTIVITY, FILTER_DESTINATION,
-          FILTER_TIME_CREATED, FILTER_NO_FILTER));
+          FILTER_TIME_CREATED, EXIT_MENU));
 
       switch (choice) {
         case FILTER_AUTHOR -> {
@@ -118,7 +133,7 @@ public class CollectionUI {
 
           diaryUtils.filterByTimeCreated(entries, timeStart, timeStop);
         }
-        case FILTER_NO_FILTER -> {
+        case EXIT_MENU -> {
           break filterLoop;
         }
         default -> prompter.warning("Not a valid option");
@@ -129,12 +144,41 @@ public class CollectionUI {
   private void sortCollection(List<DiaryEntry> entries) {
     int choice = prompter.promptInt("""
         Sort entries by:
-        \t1. Rating
-        \t2. Time written""");
+        \t%s. Rating
+        \t%s. Time written""".formatted(BY_RATING, BY_TIME_WRITTEN));
     switch (choice) {
       case 1 -> diaryUtils.sortByRating(entries);
       case 2 -> diaryUtils.sortByTime(entries);
       default -> prompter.warning("Invalid option");
+    }
+  }
+
+
+  private void chooseEntry(List<DiaryEntry> entries) {
+    DiaryEntry chosenDiaryEntry = null;
+    entriyLoop:
+    while (true) {
+      if (chosenDiaryEntry == null) {
+        chosenDiaryEntry = prompter.chooseFromListOfEntries(entries);
+      } else {
+        prompter.println("Chosen entry: " + chosenDiaryEntry.getTitle());
+
+        int choice = prompter.promptInt("""
+          Choose your next action:
+          \t%s - Read entry
+          \t%s - Edit entry
+          \t%s - Delete entry
+          \t%s - Done""".formatted(READ_ENTRY, EDIT_ENTRY, DELETE_ENTRY, EXIT_MENU));
+        switch (choice) {
+          case READ_ENTRY -> entryUI.readEntry(chosenDiaryEntry);
+          case EDIT_ENTRY -> entryUI.editEntry(chosenDiaryEntry);
+          case DELETE_ENTRY -> entryUI.deleteEntry(chosenDiaryEntry);
+          case EXIT_MENU -> {
+            break entriyLoop;
+          }
+          default -> prompter.warning("Invalid option");
+        }
+      }
     }
   }
 }
