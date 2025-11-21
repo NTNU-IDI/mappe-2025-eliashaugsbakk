@@ -31,7 +31,7 @@ class DiaryEntryTest {
         new DiaryEntry("AuthorName", "Destination", "Activity", 5.5, "EntryTitle", "Some text");
 
     diaryEntry.setAuthor("NewAuthor");
-    diaryEntry.setDestinationString("NewDestination");
+    diaryEntry.setDestination("NewDestination");
     diaryEntry.setActivity("NewActivity");
     diaryEntry.setRating(9);
     diaryEntry.setTitle("NewTitle");
@@ -110,5 +110,6 @@ class DiaryEntryTest {
     assertTrue(result.contains("Activity"));
     assertTrue(result.contains("5.5"));
     assertTrue(result.contains("EntryTitle"));
+    assertTrue(result.contains("Some text"));
   }
 }

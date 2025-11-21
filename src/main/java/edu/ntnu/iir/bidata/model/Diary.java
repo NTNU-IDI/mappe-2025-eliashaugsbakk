@@ -1,10 +1,7 @@
 package edu.ntnu.iir.bidata.model;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashSet;
-import java.util.List;
 
 /**
  * The Diary class represents a collection of diary entries. It provides functionality to manage and
@@ -76,4 +73,13 @@ public class Diary {
     return entries;
   }
 
+  /**
+   * Methode for deleting a diary entry from the list stored in Diary. This deletes it permenantly
+   * after the program exits normally.
+   *
+   * @param entry the entry to delete
+   */
+  public void deleteEntry(DiaryEntry entry) {
+    entries.remove(entry);
+  }
 }

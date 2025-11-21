@@ -152,7 +152,7 @@ public class DiaryEntry {
    *
    * @param destination The destination of the general travel context..
    */
-  public void setDestinationString(String destination) {
+  public void setDestination(String destination) {
     this.destination = destination;
   }
 
@@ -208,7 +208,7 @@ public class DiaryEntry {
    *
    * @param rating The rating of the activity.
    */
-  public void setRating(int rating) {
+  public void setRating(double rating) {
     this.rating = checkRating(rating);
   }
 
@@ -251,7 +251,10 @@ public class DiaryEntry {
         Activity: %s
         Rating: %.1f
         Title: %s
+        
+        Main entry:
+        %s
         """.formatted(formattedWritten, formattedEdited, author, destination, activity, rating,
-        title);
+        title, text);
   }
 }

@@ -43,15 +43,13 @@ public class CollectionUI {
   private final DiaryUtils diaryUtils;
   private final EntryUI entryUI;
   private final Prompter prompter;
-  private final Formatter formatter;
 
   CollectionUI(Diary diary, DiaryUtils diaryUtils, EntryUI entryUI,
-      Prompter prompter, Formatter formatter) {
+      Prompter prompter) {
     this.diary = diary;
     this.diaryUtils = diaryUtils;
     this.entryUI = entryUI;
     this.prompter = prompter;
-    this.formatter = formatter;
   }
 
   /**
@@ -81,7 +79,7 @@ public class CollectionUI {
           \t%s - Print the current collection
           \t%s - Apply a filter to the collection
           \t%s - Sort the current collection
-          \t%s - Pick an entry to\s
+          \t%s - Pick an entry to:\s
               \t\t Read, Edit or Delete an entry
           \t%s - Return to Main menu""".formatted(
           currentEntriesString, COLL_PRINT_COLLECTION, COLL_APPLY_FILTER,
@@ -172,7 +170,11 @@ public class CollectionUI {
         switch (choice) {
           case READ_ENTRY -> entryUI.readEntry(chosenDiaryEntry);
           case EDIT_ENTRY -> entryUI.editEntry(chosenDiaryEntry);
-          case DELETE_ENTRY -> entryUI.deleteEntry(chosenDiaryEntry);
+          case DELETE_ENTRY -> {
+            if (entryUI.deleteEntry(chosenDiaryEntry)) {
+              break entriyLoop;
+            }
+          }
           case EXIT_MENU -> {
             break entriyLoop;
           }

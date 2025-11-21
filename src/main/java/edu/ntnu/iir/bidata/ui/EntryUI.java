@@ -12,6 +12,14 @@ import edu.ntnu.iir.bidata.model.DiaryEntry;
  *  - Deleting an entry
  */
 public class EntryUI {
+  private static final int EXIT_LOOP = 0;
+  private static final int EDIT_AUTHOR = 1;
+  private static final int EDIT_DESTINATION = 2;
+  private static final int EDIT_ACTIVITY = 3;
+  private static final int EDIT_RATING = 4;
+  private static final int EDIT_TITLE = 5;
+  private static final int EDIT_TEXT = 6;
+
   private final Diary diary;
   private final Prompter prompter;
 
@@ -56,9 +64,16 @@ public class EntryUI {
     String author = prompter.prompt("Enter an author.");
     String destination = prompter.prompt("Enter the destination of your "
         + "travels or the general traver context.");
+    double rating = setRating();
     String title = setTitle();
     String activity = prompter.prompt("Enter the activity related to your entry.");
     activity = activity.toLowerCase();
+
+    String text = prompter.multipleLinePrompt("Write the main body of your diary entry.");
+    diary.addDiaryEntry(new DiaryEntry(author, destination, activity, rating, title, text));
+  }
+
+  private double setRating() {
     double rating;
     while (true) {
       try {
@@ -66,14 +81,12 @@ public class EntryUI {
         if (rating < 0 || rating > 10) {
           prompter.warning("Rating must be between 0 and 10.");
         } else {
-          break;
+          return rating;
         }
       } catch (NumberFormatException e) {
         prompter.warning("Input must be a number");
       }
     }
-    String text = prompter.multipleLinePrompt("Write the main body of your diary entry.");
-    diary.addDiaryEntry(new DiaryEntry(author, destination, activity, rating, title, text));
   }
 
   private String setTitle() {
@@ -93,15 +106,77 @@ public class EntryUI {
    * @param entry the DiaryEntry to edit
    */
   public void editEntry(DiaryEntry entry) {
-    // TODO: Write editEntry
+    editLoop:
+    while (true) {
+      prompter.println(entry.toString());
+      int choice = prompter.promptInt("""
+          \t%s - edit Author
+          \t%s - edit Destination
+          \t%s - edit Activity
+          \t%s - edit Rating
+          \t%s - edit Title
+          \t%s - edit Text
+          \t%s - done""".formatted(EDIT_AUTHOR, EDIT_DESTINATION, EDIT_ACTIVITY, EDIT_RATING,
+          EDIT_TITLE, EDIT_TEXT, EXIT_LOOP));
+      switch (choice) {
+        case EDIT_AUTHOR -> editAuthor(entry);
+        case EDIT_DESTINATION -> editDestination(entry);
+        case EDIT_ACTIVITY -> editActivity(entry);
+        case EDIT_RATING -> editRating(entry);
+        case EDIT_TITLE -> editTitle(entry);
+        case EDIT_TEXT -> editText(entry);
+        case EXIT_LOOP -> {
+          break editLoop;
+        }
+        default -> prompter.warning("Not a valid input.");
+      }
+    }
+  }
+
+  private void editAuthor(DiaryEntry entry) {
+    prompter.println("Current author: " + entry.getAuthor());
+    entry.setAuthor(prompter.prompt("Enter new author: "));
+  }
+
+  private void editDestination(DiaryEntry entry) {
+    prompter.println("Current destination: " + entry.getDestination());
+    entry.setDestination(prompter.prompt("Enter new destination: "));
+  }
+
+  private void editActivity(DiaryEntry entry) {
+    prompter.println("Current activity: " + entry.getActivity());
+    entry.setActivity(prompter.prompt("Enter new activity: "));
+  }
+
+  private void editRating(DiaryEntry entry) {
+    entry.setRating(setRating());
+  }
+
+  private void editTitle(DiaryEntry entry) {
+    prompter.println("Current title: " + entry.getTitle());
+    entry.setText(setTitle());
+  }
+
+  private void editText(DiaryEntry entry) {
+    prompter.println("Current text:\n\n" + entry.getText());
+    entry.setText(prompter.multipleLinePrompt("Write the new main body of your diary entry."));
   }
 
   /**
-   * Method to delete a DiaryEntry.
+   * Asks the user if they want to delete the diary entry. If yes, it deletes and returns true.
+   * If not, it returns false without deleting the entry.
    *
-   * @param entry the DiaryEntry to delet.
+   * @param entry the entry to delete
+   * @return returs true if the deletion was successful
    */
-  public void deleteEntry(DiaryEntry entry) {
-    // TODO: Write deleteEntry
+  public boolean deleteEntry(DiaryEntry entry) {
+    if (prompter.confirmAction("You are about to delete the diary entry: " + entry.getTitle())) {
+      diary.deleteEntry(entry);
+      prompter.message("Entry has been deleted.");
+      return true;
+    } else {
+      prompter.message("No entry was deleted.");
+      return false;
+    }
   }
 }
