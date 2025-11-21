@@ -250,11 +250,8 @@ public class DiaryEntry {
         Destination: %s
         Activity: %s
         Rating: %.1f
-        
         Title: %s
-        Main Entry:
-        %s
         """.formatted(formattedWritten, formattedEdited, author, destination, activity, rating,
-        title, text);
+        title);
   }
 }

@@ -110,6 +110,5 @@ class DiaryEntryTest {
     assertTrue(result.contains("Activity"));
     assertTrue(result.contains("5.5"));
     assertTrue(result.contains("EntryTitle"));
-    assertTrue(result.contains("Some text"));
   }
 }
