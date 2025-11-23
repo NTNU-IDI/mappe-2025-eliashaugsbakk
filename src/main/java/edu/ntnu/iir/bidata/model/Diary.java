@@ -20,7 +20,7 @@ public class Diary {
    */
   public void addDiaryEntry(DiaryEntry entry) {
     for (DiaryEntry e : entries) {
-      if (e.getTitle().equals(entry.getTitle())) {
+      if (e.getTitle().equalsIgnoreCase(entry.getTitle())) {
         throw new IllegalArgumentException("duplicate titles are not allowed");
       }
     }
@@ -41,7 +41,7 @@ public class Diary {
     // Titles of entries already in the diary
     HashSet<String> existingTitles = new HashSet<>();
     for (DiaryEntry entry : entries) {
-      existingTitles.add(entry.getTitle());
+      existingTitles.add(entry.getTitle().toLowerCase());
     }
 
     // Titles within this batch to catch duplicates inside entriesToAdd
@@ -49,9 +49,9 @@ public class Diary {
 
     // Checks for duplicates
     for (DiaryEntry entryToAdd : entriesToAdd) {
-      String title = entryToAdd.getTitle();
+      String title = entryToAdd.getTitle().toLowerCase();
 
-      if (existingTitles.contains(title)) {
+      if (existingTitles.contains(title.toLowerCase())) {
         throw new IllegalArgumentException("duplicate titles are not allowed");
       }
 

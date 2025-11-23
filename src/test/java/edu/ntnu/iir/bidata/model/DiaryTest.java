@@ -2,7 +2,6 @@ package edu.ntnu.iir.bidata.model;
 
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -76,5 +75,35 @@ public class DiaryTest {
     assertThrows(IllegalArgumentException.class, () -> diary.addDiaryEntries(entries));
   }
 
+  @Test
+  void addEntriesDoesNotAllowDuplicateTitlesNotCaseSenitive() {
+    DiaryEntry entry0 = new DiaryEntry("author0", "dest0", "act0", 0, "title0", "text0");
+    DiaryEntry entry1 = new DiaryEntry("author1", "dest1", "act1", 1, "TITLE0", "text1");
+    var entries = new ArrayList<DiaryEntry>();
+    entries.add(entry0);
+    entries.add(entry1);
 
+    Diary diary = new Diary();
+
+    assertThrows(IllegalArgumentException.class, () -> diary.addDiaryEntries(entries));
+  }
+
+  @Test
+  void deleteEntryDeletesEntries() {
+    DiaryEntry entry0 = new DiaryEntry("author0", "dest0", "act0", 0, "title0", "text0");
+    DiaryEntry entry1 = new DiaryEntry("author1", "dest1", "act1", 1, "title1", "text1");
+
+
+    var entries = new ArrayList<DiaryEntry>();
+    entries.add(entry0);
+    entries.add(entry1);
+
+    Diary diary = new Diary();
+    diary.addDiaryEntries(entries);
+
+    assertEquals(2, diary.getAllDiaryEntries().size());
+    diary.deleteEntry(entry0);
+    assertEquals(1, diary.getAllDiaryEntries().size());
+    assertEquals("title1", diary.getAllDiaryEntries().getFirst().getTitle());
+  }
 }
