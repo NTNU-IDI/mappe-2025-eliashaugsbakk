@@ -161,6 +161,7 @@ public class DiaryEntry {
    */
   public void setAuthor(String author) {
     this.author = author;
+    setTimeEdited();
   }
 
   /**
@@ -181,6 +182,7 @@ public class DiaryEntry {
    */
   public void setDestination(String destination) {
     this.destination = destination;
+    setTimeEdited();
   }
 
   /**
@@ -199,6 +201,7 @@ public class DiaryEntry {
    */
   public void setTitle(String title) {
     this.title = title;
+    setTimeEdited();
   }
 
   /**
@@ -219,6 +222,7 @@ public class DiaryEntry {
    */
   public void setActivity(String category) {
     this.activity = category;
+    setTimeEdited();
   }
 
   /**
@@ -237,6 +241,7 @@ public class DiaryEntry {
    */
   public void setRating(double rating) {
     this.rating = checkRating(rating);
+    setTimeEdited();
   }
 
   /**
@@ -257,6 +262,7 @@ public class DiaryEntry {
    */
   public void setText(String text) {
     this.text = text;
+    setTimeEdited();
   }
 
   /**
