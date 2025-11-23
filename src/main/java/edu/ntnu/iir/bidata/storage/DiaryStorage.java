@@ -67,7 +67,7 @@ public class DiaryStorage {
    * Reads the JSON file and returns the list of diary entries.
    *
    * @return a list of diary entries, possibly empty. May be {@code null} if the file does not
-   * contain a JSON array
+   *     contain a JSON array
    *
    * @throws IOException if the file cannot be read
    */

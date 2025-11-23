@@ -12,7 +12,7 @@ import java.util.List;
  * {@link ArrayList}.
  * Also provides the user with options to interact with one of the entries in their collection.
  */
-public class CollectionUI {
+public class CollectionUi {
 
   // exit menu
   private static final int EXIT_MENU = 0;
@@ -41,14 +41,14 @@ public class CollectionUI {
 
   private final Diary diary;
   private final DiaryUtils diaryUtils;
-  private final EntryUI entryUI;
+  private final EntryUi entryUi;
   private final Prompter prompter;
 
-  CollectionUI(Diary diary, DiaryUtils diaryUtils, EntryUI entryUI,
+  CollectionUi(Diary diary, DiaryUtils diaryUtils, EntryUi entryUi,
       Prompter prompter) {
     this.diary = diary;
     this.diaryUtils = diaryUtils;
-    this.entryUI = entryUI;
+    this.entryUi = entryUi;
     this.prompter = prompter;
   }
 
@@ -177,10 +177,10 @@ public class CollectionUI {
           \t%s - Delete entry
           \t%s - Done""".formatted(READ_ENTRY, EDIT_ENTRY, DELETE_ENTRY, EXIT_MENU));
         switch (choice) {
-          case READ_ENTRY -> entryUI.readEntry(chosenDiaryEntry);
-          case EDIT_ENTRY -> entryUI.editEntry(chosenDiaryEntry);
+          case READ_ENTRY -> entryUi.readEntry(chosenDiaryEntry);
+          case EDIT_ENTRY -> entryUi.editEntry(chosenDiaryEntry);
           case DELETE_ENTRY -> {
-            if (entryUI.deleteEntry(chosenDiaryEntry)) {
+            if (entryUi.deleteEntry(chosenDiaryEntry)) {
               break entriyLoop;
             }
           }
