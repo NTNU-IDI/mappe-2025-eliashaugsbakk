@@ -7,26 +7,26 @@ import edu.ntnu.iir.bidata.model.DiaryUtils;
  * Handles the main menu loop of the program, presenting options to
  * write diary entries or work with collections of entries.
  */
-public class UI {
+public class Ui {
   private static final int MAIN_SAVE_AND_EXIT = 0;
   private static final int MAIN_WRITE_ENTRY = 1;
   private static final int MAIN_CREATE_COLLECTION = 2;
 
   private final Prompter prompter;
-  private final CollectionUI collectionUI;
-  private final EntryUI entryUI;
+  private final CollectionUi collectionUi;
+  private final EntryUi entryUi;
 
   /**
-   * Constructs a new UI instance.
+   * Constructs a new Ui instance.
    *
    * @param prompter the Prompter object used for console interaction
    * @param diary the Diary object to manage diary entries
    */
-  public UI(Prompter prompter, Diary diary, DiaryUtils diaryUtils,
-      EntryUI entryUI) {
+  public Ui(Prompter prompter, Diary diary, DiaryUtils diaryUtils,
+      EntryUi entryUi) {
     this.prompter = prompter;
-    this.collectionUI = new CollectionUI(diary, diaryUtils, entryUI, prompter);
-    this.entryUI = new EntryUI(diary, diaryUtils, prompter);
+    this.collectionUi = new CollectionUi(diary, diaryUtils, entryUi, prompter);
+    this.entryUi = new EntryUi(diary, diaryUtils, prompter);
   }
 
   /**
@@ -41,8 +41,8 @@ public class UI {
               \t\t List, Read, Edit or Delete entries.
             \t%s - Save and Exit""".formatted(MAIN_WRITE_ENTRY, MAIN_CREATE_COLLECTION, MAIN_SAVE_AND_EXIT));
       switch (choice) {
-        case MAIN_WRITE_ENTRY -> entryUI.writeEntry();
-        case MAIN_CREATE_COLLECTION -> collectionUI.collection();
+        case MAIN_WRITE_ENTRY -> entryUi.writeEntry();
+        case MAIN_CREATE_COLLECTION -> collectionUi.collection();
         case MAIN_SAVE_AND_EXIT -> {
           break mainLoop;
         }

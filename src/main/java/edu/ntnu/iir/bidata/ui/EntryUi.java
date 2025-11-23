@@ -13,7 +13,7 @@ import edu.ntnu.iir.bidata.model.DiaryUtils;
  *  - Reading an entry
  *  - Deleting an entry
  */
-public class EntryUI {
+public class EntryUi {
   private static final int EXIT_LOOP = 0;
   private static final int EDIT_AUTHOR = 1;
   private static final int EDIT_DESTINATION = 2;
@@ -27,11 +27,11 @@ public class EntryUI {
   private final Prompter prompter;
 
   /**
-   * Constructor to let EntryUI to interact with {@link Prompter}.
+   * Constructor to let EntryUi to interact with {@link Prompter}.
    *
    * @param prompter to give output and take input from the user
    */
-  public EntryUI(Diary diary, DiaryUtils diaryutils, Prompter prompter) {
+  public EntryUi(Diary diary, DiaryUtils diaryutils, Prompter prompter) {
     this.diary = diary;
     this.diaryUtils = diaryutils;
     this.prompter = prompter;
