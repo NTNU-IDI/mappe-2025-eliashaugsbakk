@@ -1,0 +1,642 @@
+[
+  {
+    "timeWritten": "2017-06-08T00:00",
+    "timeEdited": "2017-06-08T00:00",
+    "author": "Jonas",
+    "destination": "Oslo",
+    "activity": "Stroll",
+    "rating": 2.9,
+    "title": "title1",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2023-04-20T00:00",
+    "timeEdited": "2023-04-20T00:00",
+    "author": "Jonas",
+    "destination": "Oslo",
+    "activity": "Bathing",
+    "rating": 2.5,
+    "title": "title2",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2018-05-05T00:00",
+    "timeEdited": "2018-05-05T00:00",
+    "author": "Jonas",
+    "destination": "Oslo",
+    "activity": "Dining",
+    "rating": 4.4,
+    "title": "title3",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2021-05-12T00:00",
+    "timeEdited": "2021-05-12T00:00",
+    "author": "Jonas",
+    "destination": "Oslo",
+    "activity": "Hike",
+    "rating": 0.5,
+    "title": "title4",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2024-03-03T00:00",
+    "timeEdited": "2024-03-03T00:00",
+    "author": "Jonas",
+    "destination": "Bergen",
+    "activity": "Stroll",
+    "rating": 7.6,
+    "title": "title5",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2023-09-11T00:00",
+    "timeEdited": "2023-09-11T00:00",
+    "author": "Jonas",
+    "destination": "Bergen",
+    "activity": "Bathing",
+    "rating": 8.1,
+    "title": "title6",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2017-08-04T00:00",
+    "timeEdited": "2017-08-04T00:00",
+    "author": "Jonas",
+    "destination": "Bergen",
+    "activity": "Dining",
+    "rating": 4.1,
+    "title": "title7",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2019-01-13T00:00",
+    "timeEdited": "2019-01-13T00:00",
+    "author": "Jonas",
+    "destination": "Bergen",
+    "activity": "Hike",
+    "rating": 5.3,
+    "title": "title8",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2016-09-18T00:00",
+    "timeEdited": "2016-09-18T00:00",
+    "author": "Jonas",
+    "destination": "Stockholm",
+    "activity": "Stroll",
+    "rating": 6.7,
+    "title": "title9",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2024-06-02T00:00",
+    "timeEdited": "2024-06-02T00:00",
+    "author": "Jonas",
+    "destination": "Stockholm",
+    "activity": "Bathing",
+    "rating": 8.3,
+    "title": "title10",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2022-08-05T00:00",
+    "timeEdited": "2022-08-05T00:00",
+    "author": "Jonas",
+    "destination": "Stockholm",
+    "activity": "Dining",
+    "rating": 6.8,
+    "title": "title11",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2021-04-22T00:00",
+    "timeEdited": "2021-04-22T00:00",
+    "author": "Jonas",
+    "destination": "Stockholm",
+    "activity": "Hike",
+    "rating": 7.1,
+    "title": "title12",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2022-03-15T00:00",
+    "timeEdited": "2022-03-15T00:00",
+    "author": "Jonas",
+    "destination": "Narvik",
+    "activity": "Stroll",
+    "rating": 1.6,
+    "title": "title13",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2022-02-13T00:00",
+    "timeEdited": "2022-02-13T00:00",
+    "author": "Jonas",
+    "destination": "Narvik",
+    "activity": "Bathing",
+    "rating": 2.1,
+    "title": "title14",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2016-10-14T00:00",
+    "timeEdited": "2016-10-14T00:00",
+    "author": "Jonas",
+    "destination": "Narvik",
+    "activity": "Dining",
+    "rating": 8.3,
+    "title": "title15",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2023-07-03T00:00",
+    "timeEdited": "2023-07-03T00:00",
+    "author": "Jonas",
+    "destination": "Narvik",
+    "activity": "Hike",
+    "rating": 1.1,
+    "title": "title16",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2024-11-12T00:00",
+    "timeEdited": "2024-11-12T00:00",
+    "author": "Vilde",
+    "destination": "Oslo",
+    "activity": "Stroll",
+    "rating": 0.0,
+    "title": "title17",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2022-12-24T00:00",
+    "timeEdited": "2022-12-24T00:00",
+    "author": "Vilde",
+    "destination": "Oslo",
+    "activity": "Bathing",
+    "rating": 0.1,
+    "title": "title18",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2023-10-26T00:00",
+    "timeEdited": "2023-10-26T00:00",
+    "author": "Vilde",
+    "destination": "Oslo",
+    "activity": "Dining",
+    "rating": 0.3,
+    "title": "title19",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2020-09-24T00:00",
+    "timeEdited": "2020-09-24T00:00",
+    "author": "Vilde",
+    "destination": "Oslo",
+    "activity": "Hike",
+    "rating": 2.9,
+    "title": "title20",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2019-07-18T00:00",
+    "timeEdited": "2019-07-18T00:00",
+    "author": "Vilde",
+    "destination": "Bergen",
+    "activity": "Stroll",
+    "rating": 4.4,
+    "title": "title21",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2022-03-25T00:00",
+    "timeEdited": "2022-03-25T00:00",
+    "author": "Vilde",
+    "destination": "Bergen",
+    "activity": "Bathing",
+    "rating": 6.2,
+    "title": "title22",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2022-05-18T00:00",
+    "timeEdited": "2022-05-18T00:00",
+    "author": "Vilde",
+    "destination": "Bergen",
+    "activity": "Dining",
+    "rating": 8.1,
+    "title": "title23",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2020-08-19T00:00",
+    "timeEdited": "2020-08-19T00:00",
+    "author": "Vilde",
+    "destination": "Bergen",
+    "activity": "Hike",
+    "rating": 9.6,
+    "title": "title24",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2022-03-08T00:00",
+    "timeEdited": "2022-03-08T00:00",
+    "author": "Vilde",
+    "destination": "Stockholm",
+    "activity": "Stroll",
+    "rating": 4.7,
+    "title": "title25",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2021-12-13T00:00",
+    "timeEdited": "2021-12-13T00:00",
+    "author": "Vilde",
+    "destination": "Stockholm",
+    "activity": "Bathing",
+    "rating": 7.0,
+    "title": "title26",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2023-12-17T00:00",
+    "timeEdited": "2023-12-17T00:00",
+    "author": "Vilde",
+    "destination": "Stockholm",
+    "activity": "Dining",
+    "rating": 0.0,
+    "title": "title27",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2015-12-17T00:00",
+    "timeEdited": "2015-12-17T00:00",
+    "author": "Vilde",
+    "destination": "Stockholm",
+    "activity": "Hike",
+    "rating": 4.6,
+    "title": "title28",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2020-08-02T00:00",
+    "timeEdited": "2020-08-02T00:00",
+    "author": "Vilde",
+    "destination": "Narvik",
+    "activity": "Stroll",
+    "rating": 9.7,
+    "title": "title29",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2023-02-21T00:00",
+    "timeEdited": "2023-02-21T00:00",
+    "author": "Vilde",
+    "destination": "Narvik",
+    "activity": "Bathing",
+    "rating": 9.8,
+    "title": "title30",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2019-06-19T00:00",
+    "timeEdited": "2019-06-19T00:00",
+    "author": "Vilde",
+    "destination": "Narvik",
+    "activity": "Dining",
+    "rating": 8.9,
+    "title": "title31",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2019-06-24T00:00",
+    "timeEdited": "2019-06-24T00:00",
+    "author": "Vilde",
+    "destination": "Narvik",
+    "activity": "Hike",
+    "rating": 3.8,
+    "title": "title32",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2016-09-22T00:00",
+    "timeEdited": "2016-09-22T00:00",
+    "author": "Synne",
+    "destination": "Oslo",
+    "activity": "Stroll",
+    "rating": 9.5,
+    "title": "title33",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2019-09-18T00:00",
+    "timeEdited": "2019-09-18T00:00",
+    "author": "Synne",
+    "destination": "Oslo",
+    "activity": "Bathing",
+    "rating": 3.5,
+    "title": "title34",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2017-01-04T00:00",
+    "timeEdited": "2017-01-04T00:00",
+    "author": "Synne",
+    "destination": "Oslo",
+    "activity": "Dining",
+    "rating": 0.4,
+    "title": "title35",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2015-09-03T00:00",
+    "timeEdited": "2015-09-03T00:00",
+    "author": "Synne",
+    "destination": "Oslo",
+    "activity": "Hike",
+    "rating": 2.5,
+    "title": "title36",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2019-05-02T00:00",
+    "timeEdited": "2019-05-02T00:00",
+    "author": "Synne",
+    "destination": "Bergen",
+    "activity": "Stroll",
+    "rating": 8.6,
+    "title": "title37",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2024-01-19T00:00",
+    "timeEdited": "2024-01-19T00:00",
+    "author": "Synne",
+    "destination": "Bergen",
+    "activity": "Bathing",
+    "rating": 0.5,
+    "title": "title38",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2024-12-11T00:00",
+    "timeEdited": "2024-12-11T00:00",
+    "author": "Synne",
+    "destination": "Bergen",
+    "activity": "Dining",
+    "rating": 2.0,
+    "title": "title39",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2021-07-01T00:00",
+    "timeEdited": "2021-07-01T00:00",
+    "author": "Synne",
+    "destination": "Bergen",
+    "activity": "Hike",
+    "rating": 1.9,
+    "title": "title40",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2024-02-16T00:00",
+    "timeEdited": "2024-02-16T00:00",
+    "author": "Synne",
+    "destination": "Stockholm",
+    "activity": "Stroll",
+    "rating": 3.6,
+    "title": "title41",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2015-10-18T00:00",
+    "timeEdited": "2015-10-18T00:00",
+    "author": "Synne",
+    "destination": "Stockholm",
+    "activity": "Bathing",
+    "rating": 1.1,
+    "title": "title42",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2015-01-01T00:00",
+    "timeEdited": "2015-01-01T00:00",
+    "author": "Synne",
+    "destination": "Stockholm",
+    "activity": "Dining",
+    "rating": 4.1,
+    "title": "title43",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2020-11-14T00:00",
+    "timeEdited": "2020-11-14T00:00",
+    "author": "Synne",
+    "destination": "Stockholm",
+    "activity": "Hike",
+    "rating": 9.1,
+    "title": "title44",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2022-06-11T00:00",
+    "timeEdited": "2022-06-11T00:00",
+    "author": "Synne",
+    "destination": "Narvik",
+    "activity": "Stroll",
+    "rating": 6.9,
+    "title": "title45",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2017-06-12T00:00",
+    "timeEdited": "2017-06-12T00:00",
+    "author": "Synne",
+    "destination": "Narvik",
+    "activity": "Bathing",
+    "rating": 2.8,
+    "title": "title46",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2024-08-11T00:00",
+    "timeEdited": "2024-08-11T00:00",
+    "author": "Synne",
+    "destination": "Narvik",
+    "activity": "Dining",
+    "rating": 2.1,
+    "title": "title47",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2015-04-19T00:00",
+    "timeEdited": "2015-04-19T00:00",
+    "author": "Synne",
+    "destination": "Narvik",
+    "activity": "Hike",
+    "rating": 6.3,
+    "title": "title48",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2020-01-14T00:00",
+    "timeEdited": "2020-01-14T00:00",
+    "author": "Knut",
+    "destination": "Oslo",
+    "activity": "Stroll",
+    "rating": 7.5,
+    "title": "title49",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2016-04-20T00:00",
+    "timeEdited": "2016-04-20T00:00",
+    "author": "Knut",
+    "destination": "Oslo",
+    "activity": "Bathing",
+    "rating": 2.7,
+    "title": "title50",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2023-01-01T00:00",
+    "timeEdited": "2023-01-01T00:00",
+    "author": "Knut",
+    "destination": "Oslo",
+    "activity": "Dining",
+    "rating": 9.2,
+    "title": "title51",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2017-04-22T00:00",
+    "timeEdited": "2017-04-22T00:00",
+    "author": "Knut",
+    "destination": "Oslo",
+    "activity": "Hike",
+    "rating": 3.1,
+    "title": "title52",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2021-08-12T00:00",
+    "timeEdited": "2021-08-12T00:00",
+    "author": "Knut",
+    "destination": "Bergen",
+    "activity": "Stroll",
+    "rating": 7.8,
+    "title": "title53",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2024-11-02T00:00",
+    "timeEdited": "2024-11-02T00:00",
+    "author": "Knut",
+    "destination": "Bergen",
+    "activity": "Bathing",
+    "rating": 6.7,
+    "title": "title54",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2017-01-08T00:00",
+    "timeEdited": "2017-01-08T00:00",
+    "author": "Knut",
+    "destination": "Bergen",
+    "activity": "Dining",
+    "rating": 8.2,
+    "title": "title55",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2023-01-04T00:00",
+    "timeEdited": "2023-01-04T00:00",
+    "author": "Knut",
+    "destination": "Bergen",
+    "activity": "Hike",
+    "rating": 8.5,
+    "title": "title56",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2016-06-14T00:00",
+    "timeEdited": "2016-06-14T00:00",
+    "author": "Knut",
+    "destination": "Stockholm",
+    "activity": "Stroll",
+    "rating": 3.6,
+    "title": "title57",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2021-07-17T00:00",
+    "timeEdited": "2021-07-17T00:00",
+    "author": "Knut",
+    "destination": "Stockholm",
+    "activity": "Bathing",
+    "rating": 3.7,
+    "title": "title58",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2021-09-24T00:00",
+    "timeEdited": "2021-09-24T00:00",
+    "author": "Knut",
+    "destination": "Stockholm",
+    "activity": "Dining",
+    "rating": 5.0,
+    "title": "title59",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2018-03-07T00:00",
+    "timeEdited": "2018-03-07T00:00",
+    "author": "Knut",
+    "destination": "Stockholm",
+    "activity": "Hike",
+    "rating": 7.9,
+    "title": "title60",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2020-10-14T00:00",
+    "timeEdited": "2020-10-14T00:00",
+    "author": "Knut",
+    "destination": "Narvik",
+    "activity": "Stroll",
+    "rating": 5.0,
+    "title": "title61",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2016-02-14T00:00",
+    "timeEdited": "2016-02-14T00:00",
+    "author": "Knut",
+    "destination": "Narvik",
+    "activity": "Bathing",
+    "rating": 8.8,
+    "title": "title62",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2017-11-27T00:00",
+    "timeEdited": "2017-11-27T00:00",
+    "author": "Knut",
+    "destination": "Narvik",
+    "activity": "Dining",
+    "rating": 9.1,
+    "title": "title63",
+    "text": "dummy text"
+  },
+  {
+    "timeWritten": "2015-10-26T00:00",
+    "timeEdited": "2015-10-26T00:00",
+    "author": "Knut",
+    "destination": "Narvik",
+    "activity": "Hike",
+    "rating": 7.3,
+    "title": "title64",
+    "text": "dummy text"
+  }
+]

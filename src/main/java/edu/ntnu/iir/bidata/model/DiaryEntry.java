@@ -39,6 +39,33 @@ public class DiaryEntry {
   private double rating;
   private String text;
 
+
+  /**
+   * Constructor to create fabricated diary entries. Takes fabricatedCreationTime to allow for
+   * any creation time. This is useful when showcasing the functionality of the program.
+   *
+   * @param fabricatedCreationTime the fabricated time of creation
+   * @param author      the name of the author
+   * @param destination the destination of the trip, or a more general travel (Traveling through
+   *                    Europe)
+   * @param activity    the activity this entry is describing
+   * @param rating      a rating the user assigns to the activity, on a scale from 0 to 10
+   * @param title       the title of the entry
+   * @param text        the main entry text, usually describing the activity
+   */
+  public DiaryEntry(LocalDateTime fabricatedCreationTime, String author, String destination,
+      String activity, double rating, String title,
+      String text) {
+    this.timeWritten = fabricatedCreationTime;
+    this.timeEdited = fabricatedCreationTime;
+    this.author = author;
+    this.destination = destination;
+    this.activity = activity;
+    this.rating = checkRating(rating);
+    this.title = title;
+    this.text = text;
+  }
+
   /**
    * Creates a DiaryEntry from a data transfer object: DiaryEntryStorageDto.
    *
@@ -58,13 +85,13 @@ public class DiaryEntry {
   /**
    * Creates a new diary entry, describing an activity during a trip.
    *
-   * @param author      The name of the author.
-   * @param destination The destination of the trip, or a more general travel (Traveling through
-   *                    Europe).
-   * @param activity    The activity this entry is describing.
-   * @param rating      A rating the user assigns to the activity, on a scale from 0 to 10.
-   * @param title       The title of the entry.
-   * @param text        The main entry text, usually describing the activity.
+   * @param author      the name of the author
+   * @param destination the destination of the trip, or a more general travel (Traveling through
+   *                    turope)
+   * @param activity    the activity this entry is describing
+   * @param rating      a rating the user assigns to the activity, on a scale from 0 to 10
+   * @param title       the title of the entry
+   * @param text        the main entry text, usually describing the activity
    */
   public DiaryEntry(String author, String destination, String activity, double rating, String title,
       String text) {
@@ -81,9 +108,9 @@ public class DiaryEntry {
   /**
    * Ensures that the rating is between 0 and 10.
    *
-   * @param rating The rating of the diary entry.
-   * @return The validated rating of the diary entry.
-   * @throws IllegalArgumentException If the rating is outside the valid range.
+   * @param rating The rating of the diary entry
+   * @return The validated rating of the diary entry
+   * @throws IllegalArgumentException If the rating is outside the valid range
    */
   private static double checkRating(double rating) {
     if (rating < 0 || rating > 10) {
@@ -95,7 +122,7 @@ public class DiaryEntry {
   /**
    * Returns the time the entry was first created.
    *
-   * @return The time written.
+   * @return the time written.
    */
   public LocalDateTime getTimeWritten() {
     return timeWritten;
@@ -104,7 +131,7 @@ public class DiaryEntry {
   /**
    * Returns the time of the last edit to the diary entry.
    *
-   * @return The time of the last edit.
+   * @return the time of the last edit
    */
   public LocalDateTime getTimeEdited() {
     return timeEdited;
@@ -121,7 +148,7 @@ public class DiaryEntry {
   /**
    * Returns the name of the author.
    *
-   * @return The name of the author.
+   * @return the name of the author
    */
   public String getAuthor() {
     return author;
@@ -130,7 +157,7 @@ public class DiaryEntry {
   /**
    * Updates the name of the author.
    *
-   * @param author The name of the author.
+   * @param author the name of the author
    */
   public void setAuthor(String author) {
     this.author = author;
@@ -140,7 +167,7 @@ public class DiaryEntry {
    * Returns the destination associated with this diary entry. This could also be a more general
    * description of the journey (e.g., "Traveling through Europe").
    *
-   * @return The destination of the general travel context.
+   * @return the destination of the general travel context
    */
   public String getDestination() {
     return destination;
@@ -150,7 +177,7 @@ public class DiaryEntry {
    * Updates the destination associated with this diary entry. This could also be a more general
    * description of the journey (e.g., "Traveling through Europe").
    *
-   * @param destination The destination of the general travel context..
+   * @param destination the destination of the general travel context
    */
   public void setDestination(String destination) {
     this.destination = destination;
@@ -159,7 +186,7 @@ public class DiaryEntry {
   /**
    * Returns the title of the diary entry.
    *
-   * @return The title of the diary entry.
+   * @return the title of the diary entry
    */
   public String getTitle() {
     return title;
@@ -168,7 +195,7 @@ public class DiaryEntry {
   /**
    * Updates the title of the diary entry.
    *
-   * @param title The title of the diary entry.
+   * @param title the title of the diary entry
    */
   public void setTitle(String title) {
     this.title = title;
@@ -178,7 +205,7 @@ public class DiaryEntry {
    * Returns the activity associated with this diary entry. Usually one descriptive word (e.g.,
    * "Bathing", "Hiking").
    *
-   * @return The activity associated with this diary entry.
+   * @return the activity associated with this diary entry
    */
   public String getActivity() {
     return activity;
@@ -188,7 +215,7 @@ public class DiaryEntry {
    * Updates the activity associated with this diary entry. Usually one descriptive word (e.g.,
    * "Bathing", "Hiking").
    *
-   * @param category The activity associated with this diary entry.
+   * @param category the activity associated with this diary entry
    */
   public void setActivity(String category) {
     this.activity = category;
@@ -197,7 +224,7 @@ public class DiaryEntry {
   /**
    * Returns the users rating of the activity or experience on a scale from 0 to 10.
    *
-   * @return The rating of the activity.
+   * @return the rating of the activity
    */
   public double getRating() {
     return rating;
@@ -206,7 +233,7 @@ public class DiaryEntry {
   /**
    * Updates the users' rating of the activity or experience on a scale from 0 to 10.
    *
-   * @param rating The rating of the activity.
+   * @param rating the rating of the activity
    */
   public void setRating(double rating) {
     this.rating = checkRating(rating);
@@ -216,7 +243,7 @@ public class DiaryEntry {
    * Returns the main content of the diary entry. This would usually be a description of the
    * activity, context and anything the user wants to add.
    *
-   * @return The diary entry text.
+   * @return the diary entry text
    */
   public String getText() {
     return text;
@@ -226,7 +253,7 @@ public class DiaryEntry {
    * Updates the main content of the diary entry. This would usually be a description of the
    * activity, context and anything the user wants to add.
    *
-   * @param text The main text of the diary entry.
+   * @param text the main text of the diary entry
    */
   public void setText(String text) {
     this.text = text;
@@ -235,7 +262,7 @@ public class DiaryEntry {
   /**
    * Returns a string representation of this diary entry.
    *
-   * @return A string representation of this diary entry.
+   * @return a string representation of this diary entry
    */
   @Override
   public String toString() {
