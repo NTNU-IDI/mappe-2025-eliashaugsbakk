@@ -2,6 +2,7 @@ package edu.ntnu.iir.bidata.model;
 
 import edu.ntnu.iir.bidata.storage.DiaryEntryStorageDto;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,12 +10,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class DiaryEntryTest {
 
   @Test
-  void testDiaryEntryToDtoBackTODiaryEntry() {
-    DiaryEntry original =
-        new DiaryEntry("AuthorName", "Destination", "Activity", 5.5, "EntryTitle", "Some text");
+  void should_RetainAllData_When_MappingToDtoAndBack() {
+    // Arrange: Create an original Entry object
+    DiaryEntry original = new DiaryEntry("AuthorName", "Destination",
+        "Activity", 5.5, "EntryTitle", "Some text");
+
+    // Act: Convert to DTO and back to an Entry
     DiaryEntryStorageDto dto = new DiaryEntryStorageDto(original);
     DiaryEntry recreated = new DiaryEntry(dto);
 
+    // Assert: Verify that all fields are identical (positive case)
     assertEquals(original.getTimeWritten(), recreated.getTimeWritten());
     assertEquals(original.getTimeEdited(), recreated.getTimeEdited());
     assertEquals(original.getAuthor(), recreated.getAuthor());
@@ -26,10 +31,12 @@ class DiaryEntryTest {
   }
 
   @Test
-  void testSettersUpdateFields() {
-    DiaryEntry diaryEntry =
-        new DiaryEntry("AuthorName", "Destination", "Activity", 5.5, "EntryTitle", "Some text");
+  void should_UpdateAllFields_When_SettersAreCalled() {
+    // Arrange: Create Entry with old values
+    DiaryEntry diaryEntry = new DiaryEntry("OldAuthor", "OldDestination",
+        "OldActivity", 5.5, "OldTitle", "Old text");
 
+    // Act: Set new values using the setters
     diaryEntry.setAuthor("NewAuthor");
     diaryEntry.setDestination("NewDestination");
     diaryEntry.setActivity("NewActivity");
@@ -37,6 +44,7 @@ class DiaryEntryTest {
     diaryEntry.setTitle("NewTitle");
     diaryEntry.setText("New text");
 
+    // Assert: Confirm that all fields were updated correctly
     assertEquals("NewAuthor", diaryEntry.getAuthor());
     assertEquals("NewDestination", diaryEntry.getDestination());
     assertEquals("NewActivity", diaryEntry.getActivity());
@@ -46,70 +54,129 @@ class DiaryEntryTest {
   }
 
   @Test
-  void testSetRatingAcceptsBounds() {
-    DiaryEntry diaryEntry =
-        new DiaryEntry("AuthorName", "Destination", "Activity", 5.5, "EntryTitle", "text");
+  void should_AcceptZeroAndTen_When_RatingIsZero() {
+    // Arrange: Create Entry
+    DiaryEntry diaryEntry = new DiaryEntry("A", "D", "Act",
+        5.5, "Title", "text");
 
+    // Act: Set rating
     diaryEntry.setRating(0);
-    assertEquals(0, diaryEntry.getRating());
 
+    // Assert: Zero is accepted
+    assertEquals(0, diaryEntry.getRating(), "Rating should accept 0.");
+  }
+
+  @Test
+  void should_AcceptLowerBoundary_When_RatingIsTen() {
+    // Arrange: Create Entry
+    DiaryEntry diaryEntry = new DiaryEntry("A", "D", "Act",
+        5.5, "Title", "text");
+
+    // Act: Set rating
     diaryEntry.setRating(10);
-    assertEquals(10, diaryEntry.getRating());
+
+    // Assert: Ten is accepted
+    assertEquals(10, diaryEntry.getRating(), "Rating should accept 10.");
   }
 
   @Test
-  void testSetRatingRejectsBelowZero() {
-    DiaryEntry diaryEntry =
-        new DiaryEntry("AuthorName", "Destination", "Activity", 5.5, "EntryTitle", "Some text");
+  void should_ThrowException_When_RatingIsBelowZero() {
+    // Arrange: Create Entry and define the invalid action (Act)
+    DiaryEntry diaryEntry = new DiaryEntry("A", "D", "Act",
+        5.5, "Title", "text");
 
-    assertThrows(IllegalArgumentException.class, () -> diaryEntry.setRating(-1));
+    // Act: Set rating under 0 should fail
+    Executable action = () -> diaryEntry.setRating(-1);
+
+    // Assert: Verify that the action throws the expected exception (negative case)
+    assertThrows(IllegalArgumentException.class, action,
+        "Should throw exception when rating is -1.");
   }
 
   @Test
-  void testSetRatingRejectsAboveTen() {
-    DiaryEntry diaryEntry =
-        new DiaryEntry("AuthorName", "Destination", "Activity", 5.5, "EntryTitle", "Some text");
+  void should_ThrowException_When_RatingIsAboveTen() {
+    // Arrange: Create Entry and define the invalid action (Act)
+    DiaryEntry diaryEntry = new DiaryEntry("A", "D", "Act",
+        5.5, "Title", "text");
 
-    assertThrows(IllegalArgumentException.class, () -> diaryEntry.setRating(11));
+    // Act: Set rating over 10 should fail
+    Executable action = () -> diaryEntry.setRating(11);
+
+    // Assert: Verify that the action throws the expected exception (negative case)
+    assertThrows(IllegalArgumentException.class, action,
+        "Should throw exception when rating is 11.");
   }
 
   @Test
-  void testTimeWrittenAndTimeEdited() {
+  void should_SetWrittenAndEditedTime_OnCreation() {
+    // Arrange: Capture time before and after creation
     LocalDateTime before = LocalDateTime.now();
-    DiaryEntry diaryEntry =
-        new DiaryEntry("AuthorName", "Destination", "Activity", 5.5, "EntryTitle", "Some text");
+
+    // Act: Create Entry
+    DiaryEntry diaryEntry = new DiaryEntry("A", "D", "Act",
+        5.5, "Title", "text");
+
+    // Capture time immediately after creation
     LocalDateTime after = LocalDateTime.now();
 
-    assertFalse(diaryEntry.getTimeWritten().isBefore(before));
-    assertFalse(diaryEntry.getTimeWritten().isAfter(after));
-    assertFalse(diaryEntry.getTimeEdited().isBefore(before));
-    assertFalse(diaryEntry.getTimeEdited().isAfter(after));
+    // Assert: Check that times fall within the captured bounds
+    assertFalse(diaryEntry.getTimeWritten().isBefore(before),
+        "TimeWritten should not be before the start time.");
+    assertFalse(diaryEntry.getTimeWritten().isAfter(after),
+        "TimeWritten should not be after the end time.");
+    assertFalse(diaryEntry.getTimeEdited().isBefore(before),
+        "TimeEdited should not be before the start time.");
+    assertFalse(diaryEntry.getTimeEdited().isAfter(after),
+        "TimeEdited should not be after the end time.");
   }
 
   @Test
-  void testSetTimeEditedUpdates() throws InterruptedException {
-    DiaryEntry diaryEntry =
-        new DiaryEntry("AuthorName", "Destination", "Activity", 5.5, "EntryTitle", "Some text");
+  void should_UpdateEditedTime_When_SetTimeEditedIsCalled() throws InterruptedException {
+    // Arrange: Create Entry and store the original time
+    DiaryEntry diaryEntry = new DiaryEntry("A", "D", "Act", 5.5,
+        "Title", "text");
     LocalDateTime beforeEdit = diaryEntry.getTimeEdited();
 
-    Thread.sleep(5); // small delay to ensure time changes
+    // Act: Ensure a time difference, then call setTimeEdited
+    Thread.sleep(5);
     diaryEntry.setTimeEdited();
 
-    assertTrue(diaryEntry.getTimeEdited().isAfter(beforeEdit));
+    // Assert: Verify that the new time is indeed later than the original time
+    assertTrue(diaryEntry.getTimeEdited().isAfter(beforeEdit),
+        "getTimeEdited should be updated to a later time.");
   }
 
   @Test
-  void testToStringContainsMainFields() {
-    DiaryEntry diaryEntry =
-        new DiaryEntry("AuthorName", "Destination", "Activity", 5.5, "EntryTitle", "Some text");
+  void should_UpdateEditedTime_When_AnySetterIsCalled() throws InterruptedException {
+    // Arrange: Create Entry and store the original time
+    DiaryEntry diaryEntry = new DiaryEntry("A", "D", "Act",
+        5.5, "Title", "text");
+    LocalDateTime beforeEdit = diaryEntry.getTimeEdited();
 
+    // Act: Ensure a time difference, then call setText
+    Thread.sleep(5);
+    diaryEntry.setText("new Text");
+
+    // Assert: Verify that the new time is indeed later than the original time
+    assertTrue(diaryEntry.getTimeEdited().isAfter(beforeEdit),
+        "Time edited should be updated to a later time when a setter is called.");
+  }
+
+  @Test
+  void should_IncludeAllMainFields_When_CallingToString() {
+    // Arrange: Create Entry with known values
+    DiaryEntry diaryEntry = new DiaryEntry("AuthorName", "Destination",
+        "Activity", 5.5, "EntryTitle", "Some text");
+
+    // Act: Get the toString result
     String result = diaryEntry.toString();
 
-    assertTrue(result.contains("AuthorName"));
-    assertTrue(result.contains("Destination"));
-    assertTrue(result.contains("Activity"));
-    assertTrue(result.contains("5.5"));
-    assertTrue(result.contains("EntryTitle"));
-    assertTrue(result.contains("Some text"));
+    // Assert: Verify that all main fields are present in the string
+    assertTrue(result.contains("AuthorName"), "String should contain Author.");
+    assertTrue(result.contains("Destination"), "String should contain Destination.");
+    assertTrue(result.contains("Activity"), "String should contain Activity.");
+    assertTrue(result.contains("5.5"), "String should contain Rating.");
+    assertTrue(result.contains("EntryTitle"), "String should contain Title.");
+    assertTrue(result.contains("Some text"), "String should contain Text.");
   }
 }

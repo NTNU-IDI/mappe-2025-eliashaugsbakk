@@ -7,158 +7,198 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class DiaryUtilsTest {
+
   @Test
-  void sortByRatingSortsByRating() {
-    DiaryEntry entry0 = new DiaryEntry("author0", "dest0", "act0", 2, "title0", "text0");
-    DiaryEntry entry1 = new DiaryEntry("author1", "dest1", "act1", 1, "title1", "text1");
-    DiaryEntry entry2 = new DiaryEntry("author0", "dest2", "act2", 3, "title2", "text2");
+  void should_SortAscending_When_SortByRatingIsCalled() {
+    // Arrange: Create three new entries in unsorted order by rating
+    DiaryEntry entry0 = new DiaryEntry("author0", "dest0", "act0",
+        2, "title0", "text0");
+    DiaryEntry entry1 = new DiaryEntry("author1", "dest1", "act1",
+        1, "title1", "text1");
+    DiaryEntry entry2 = new DiaryEntry("author0", "dest2", "act2",
+        3, "title2", "text2");
+
     ArrayList<DiaryEntry> entries = new ArrayList<>();
     entries.add(entry0);
     entries.add(entry1);
     entries.add(entry2);
 
-    Diary diary = new Diary();
-    diary.addDiaryEntries(entries);
-    assertEquals(3, diary.getAllDiaryEntries().size());
-
     DiaryUtils diaryUtils = new DiaryUtils();
+    // Arrange: Create a copy of the list to compare against
+    ArrayList<DiaryEntry> sortedByRating = new ArrayList<>(entries);
 
-    ArrayList<DiaryEntry> sortedByRating = diary.getAllDiaryEntries();
+    // Act: Call the sorting method
     diaryUtils.sortByRating(sortedByRating);
-    assertEquals(3, sortedByRating.size());
-    assertTrue(sortedByRating.get(0).getRating() <= sortedByRating.get(1).getRating());
-    assertTrue(sortedByRating.get(1).getRating() <= sortedByRating.get(2).getRating());
+
+    // Assert: Asserts that the list is now ordered ascending by rating
+    assertEquals(3, sortedByRating.size(), "List size should remain unchanged.");
+    assertTrue(sortedByRating.get(0).getRating() <= sortedByRating.get(1).getRating(),
+        "First two ratings should be sorted correctly.");
+    assertTrue(sortedByRating.get(1).getRating() <= sortedByRating.get(2).getRating(),
+        "Last two ratings should be sorted correctly.");
   }
 
   @Test
-  void sortByRatingSortsByTime() throws InterruptedException {
-    DiaryEntry entry0 = new DiaryEntry("author0", "dest0", "act0", 1, "title0", "text0");
-    Thread.sleep(5); // small delay to ensure time changes
-    DiaryEntry entry1 = new DiaryEntry("author1", "dest1", "act1", 2, "title1", "text1");
-    Thread.sleep(5); // small delay to ensure time changes
-    DiaryEntry entry2 = new DiaryEntry("author0", "dest2", "act2", 3, "title2", "text2");
+  void should_SortByTimeAscending_When_SortByTimeIsCalled() throws InterruptedException {
+    // Arrange: Create the entries with a small time delay in between
+    DiaryEntry entry0 = new DiaryEntry("author0", "dest0", "act0",
+        1, "title0", "text0");
+    Thread.sleep(5); // Small delay to ensure time changes
+    DiaryEntry entry1 = new DiaryEntry("author1", "dest1", "act1",
+        2, "title1", "text1");
+    Thread.sleep(5); // Small delay to ensure time changes
+    DiaryEntry entry2 = new DiaryEntry("author0", "dest2", "act2",
+        3, "title2", "text2");
+
+    // Add the entries in different order than creation
     ArrayList<DiaryEntry> entries = new ArrayList<>();
     entries.add(entry1);
     entries.add(entry0);
     entries.add(entry2);
 
-    Diary diary = new Diary();
-    diary.addDiaryEntries(entries);
-    assertEquals(3, diary.getAllDiaryEntries().size());
-
     DiaryUtils diaryUtils = new DiaryUtils();
 
-    ArrayList<DiaryEntry> sortedByTime = diary.getAllDiaryEntries();
-    diaryUtils.sortByTime(sortedByTime);
-    assertEquals(3, sortedByTime.size());
-    assertTrue(sortedByTime.get(0).getTimeWritten().isBefore(sortedByTime.get(1).getTimeWritten()));
-    assertTrue(sortedByTime.get(1).getTimeWritten().isBefore(sortedByTime.get(2).getTimeWritten()));
+    // Act: Sort the entries by time.
+    diaryUtils.sortByTime(entries);
+
+    // Assert: The list is now sorted by time written
+    assertEquals(3, entries.size(), "Size should remain unchanged.");
+    assertTrue(entries.get(0).getTimeWritten().isBefore(entries.get(1).getTimeWritten()),
+        "First entry should have been created before the second.");
+    assertTrue(entries.get(1).getTimeWritten().isBefore(entries.get(2).getTimeWritten()),
+        "Second entry should have been created before the third.");
+    assertEquals(entry0, entries.get(0), "Entry0 should be the oldest and first in the list.");
   }
 
   @Test
-  void filterByAuthorFiltersByAuthor() {
-    DiaryEntry entry0 = new DiaryEntry("author0", "dest0", "act0", 0, "title0", "text0");
-    DiaryEntry entry1 = new DiaryEntry("author1", "dest1", "act1", 1, "title1", "text1");
-    DiaryEntry entry2 = new DiaryEntry("author0", "dest2", "act2", 2, "title2", "text2");
+  void should_FilterListByAuthor_When_FilterByAuthorIsCalled() {
+    // Arrange: Create three entries (two by the chosen author, one different)
+    DiaryEntry entry0 = new DiaryEntry("author0", "dest0", "act0",
+        0, "title0", "text0");
+    DiaryEntry entry1 = new DiaryEntry("author1", "dest1", "act1",
+        1, "title1", "text1");
+    DiaryEntry entry2 = new DiaryEntry("author0", "dest2", "act2",
+        2, "title2", "text2");
+
     ArrayList<DiaryEntry> entries = new ArrayList<>();
     entries.add(entry0);
     entries.add(entry1);
     entries.add(entry2);
 
-    Diary diary = new Diary();
-    diary.addDiaryEntries(entries);
-    assertEquals(3, diary.getAllDiaryEntries().size());
-
     DiaryUtils diaryUtils = new DiaryUtils();
 
-    ArrayList<DiaryEntry> filteredListByAuthor = diary.getAllDiaryEntries();
-    diaryUtils.filterByAuthor(filteredListByAuthor, "author0");
-    assertEquals(2, filteredListByAuthor.size());
-    assertEquals(entry0, filteredListByAuthor.get(0));
-    assertEquals(entry2, filteredListByAuthor.get(1));
+    // Act: Filter the list
+    diaryUtils.filterByAuthor(entries, "author0");
+
+    // Assert: The remaining entries are the correct ones
+    assertEquals(2, entries.size(), "Two entries should remain after filtering.");
+    assertEquals(entry0, entries.get(0), "First remaining entry should be entry0.");
+    assertEquals(entry2, entries.get(1), "Second remaining entry should be entry2.");
+    assertFalse(entries.contains(entry1), "Entry1 should have been removed.");
   }
 
   @Test
-  void filterByDestinationFiltersByDestination() {
-    DiaryEntry entry0 = new DiaryEntry("author0", "dest0", "act0", 0, "title0", "text0");
-    DiaryEntry entry1 = new DiaryEntry("author1", "dest1", "act1", 1, "title1", "text1");
-    DiaryEntry entry2 = new DiaryEntry("author2", "dest0", "act2", 2, "title2", "text2");
+  void should_FilterListByDestination_When_FilterByDestinationIsCalled() {
+    // Arrange: Create three entries (two with the chosen destination, one different)
+    DiaryEntry entry0 = new DiaryEntry("author0", "dest0", "act0",
+        0, "title0", "text0");
+    DiaryEntry entry1 = new DiaryEntry("author1", "dest1", "act1",
+        1, "title1", "text1");
+    DiaryEntry entry2 = new DiaryEntry("author2", "dest0", "act2",
+        2, "title2", "text2");
+
     ArrayList<DiaryEntry> entries = new ArrayList<>();
     entries.add(entry0);
     entries.add(entry1);
     entries.add(entry2);
 
-    Diary diary = new Diary();
-    diary.addDiaryEntries(entries);
-    assertEquals(3, diary.getAllDiaryEntries().size());
-
     DiaryUtils diaryUtils = new DiaryUtils();
 
-    ArrayList<DiaryEntry> filteredListByDestination = diary.getAllDiaryEntries();
-    diaryUtils.filterByDestination(filteredListByDestination, "dest0");
-    assertEquals(2, filteredListByDestination.size());
-    assertEquals(entry0, filteredListByDestination.get(0));
-    assertEquals(entry2, filteredListByDestination.get(1));
+    // Act: Filter the list
+    diaryUtils.filterByDestination(entries, "dest0");
+
+    // Assert: The remaining entries are the correct ones
+    assertEquals(2, entries.size(), "Two entries should remain after filtering.");
+    assertEquals(entry0, entries.get(0), "First remaining entry should be entry0.");
+    assertEquals(entry2, entries.get(1), "Second remaining entry should be entry2.");
   }
 
   @Test
-  void filterByActivityFiltersByActivity() {
-    DiaryEntry entry0 = new DiaryEntry("author0", "dest0", "act0", 0, "title0", "text0");
-    DiaryEntry entry1 = new DiaryEntry("author1", "dest1", "act1", 1, "title1", "text1");
-    DiaryEntry entry2 = new DiaryEntry("author2", "dest2", "act0", 2, "title2", "text2");
+  void should_FilterListByActivity_When_FilterByActivityIsCalled() {
+    // Arrange: Create three entries (two with the chosen activity, one different)
+    DiaryEntry entry0 = new DiaryEntry("author0", "dest0", "act0",
+        0, "title0", "text0");
+    DiaryEntry entry1 = new DiaryEntry("author1", "dest1", "act1",
+        1, "title1", "text1");
+    DiaryEntry entry2 = new DiaryEntry("author2", "dest2", "act0",
+        2, "title2", "text2");
+
     ArrayList<DiaryEntry> entries = new ArrayList<>();
     entries.add(entry0);
     entries.add(entry1);
     entries.add(entry2);
 
-    Diary diary = new Diary();
-    diary.addDiaryEntries(entries);
-    assertEquals(3, diary.getAllDiaryEntries().size());
-
     DiaryUtils diaryUtils = new DiaryUtils();
 
-    ArrayList<DiaryEntry> filteredListByActivity = diary.getAllDiaryEntries();
-    diaryUtils.filterByActivity(filteredListByActivity, "act0");
-    assertEquals(2, filteredListByActivity.size());
-    assertEquals(entry0, filteredListByActivity.get(0));
-    assertEquals(entry2, filteredListByActivity.get(1));
+    // Act: Filter the list
+    diaryUtils.filterByActivity(entries, "act0");
+
+    // Assert: The remaining entries are the correct ones
+    assertEquals(2, entries.size(), "Two entries should remain after filtering.");
+    assertEquals(entry0, entries.get(0), "First remaining entry should be entry0.");
+    assertEquals(entry2, entries.get(1), "Second remaining entry should be entry2.");
   }
 
   @Test
-  void filterByTimeIntervalFiltersByTimeInterval() throws InterruptedException {
-    DiaryEntry entry0 = new DiaryEntry("author0", "dest0", "act0", 1, "title0", "text0");
-    Thread.sleep(5); // small delay to ensure time changes
+  void should_FilterListByTimeCreated_When_FilterByTimeCreatedIsCalled() throws InterruptedException {
+    // Arrange: Create entries before, inside, and after the interval
+    DiaryEntry entry0 = new DiaryEntry("author0", "dest0", "act0",
+        1, "title0", "text0"); // BEFORE
+    Thread.sleep(5);
 
-    LocalDateTime timeStart = LocalDateTime.now();
+    LocalDateTime timeStart = LocalDateTime.now(); // START
 
-    Thread.sleep(5); // small delay to ensure time changes
-    DiaryEntry entry1 = new DiaryEntry("author1", "dest1", "act1", 2, "title1", "text1");
-    Thread.sleep(5); // small delay to ensure time changes
-    DiaryEntry entry2 = new DiaryEntry("author2", "dest2", "act2", 3, "title2", "text2");
-    Thread.sleep(5); // small delay to ensure time changes
+    Thread.sleep(5);
+    DiaryEntry entry1 = new DiaryEntry("author1", "dest1", "act1",
+        2, "title1", "text1"); // INSIDE
+    Thread.sleep(5);
+    DiaryEntry entry2 = new DiaryEntry("author2", "dest2", "act2",
+        3, "title2", "text2"); // INSIDE
+    Thread.sleep(5);
 
-    LocalDateTime timeStop = LocalDateTime.now();
+    LocalDateTime timeStop = LocalDateTime.now(); // STOP
 
-    Thread.sleep(5); // small delay to ensure time changes
-    DiaryEntry entry3 = new DiaryEntry("author3", "dest3", "act3", 3, "title3", "text3");
-    ArrayList<DiaryEntry> entries = new ArrayList<>();
-    entries.add(entry0);
-    entries.add(entry1);
-    entries.add(entry2);
-    entries.add(entry3);
+    Thread.sleep(5);
+    DiaryEntry entry3 = new DiaryEntry("author3", "dest3", "act3",
+        3, "title3", "text3"); // AFTER
 
-    Diary diary = new Diary();
-    diary.addDiaryEntries(entries);
+    // Arrange: Setup list for filtering
+    ArrayList<DiaryEntry> filteredListByTimeInterval = new ArrayList<>();
+    filteredListByTimeInterval.add(entry0);
+    filteredListByTimeInterval.add(entry1);
+    filteredListByTimeInterval.add(entry2);
+    filteredListByTimeInterval.add(entry3);
 
     DiaryUtils diaryUtils = new DiaryUtils();
 
-    ArrayList<DiaryEntry> filteredListByTimeInterval = new ArrayList<>(entries);
+    // Act: Filter the list
     diaryUtils.filterByTimeCreated(filteredListByTimeInterval, timeStart, timeStop);
 
-    assertEquals(2, filteredListByTimeInterval.size());
-    assertEquals(filteredListByTimeInterval.get(0), entry1);
-    assertEquals(filteredListByTimeInterval.get(1), entry2);
+    // Assert: Check that only the 2 correct elements remain
+    assertEquals(2, filteredListByTimeInterval.size(),
+        "Should find 2 entries within the time interval.");
+    assertEquals(entry1, filteredListByTimeInterval.get(0),
+        "First entry should be entry1.");
+    assertEquals(entry2, filteredListByTimeInterval.get(1),
+        "Second entry should be entry2.");
+
+    // Assert: Check that entries outside the interval were removed
+    assertFalse(filteredListByTimeInterval.contains(entry0),
+        "Entry0 (before start) should have been removed.");
+    assertFalse(filteredListByTimeInterval.contains(entry3),
+        "Entry3 (after stop) should have been removed.");
   }
 }

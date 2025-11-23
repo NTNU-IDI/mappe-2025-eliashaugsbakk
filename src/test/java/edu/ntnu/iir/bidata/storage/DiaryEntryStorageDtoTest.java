@@ -2,39 +2,42 @@ package edu.ntnu.iir.bidata.storage;
 
 import edu.ntnu.iir.bidata.model.DiaryEntry;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-public class DiaryEntryStorageDtoTest {
+class DiaryEntryStorageDtoTest {
+
   @Test
-  void testConstructor() {
-    DiaryEntry diaryEntry =
-        new DiaryEntry("AuthorName", "Destination", "Activity", 5.5, "EntryTitle", "Some text");
+  void should_MapAllFieldsCorrectly_When_ConvertingFromEntryToDto() {
+    // Arrange: Create a standard DiaryEntry
+    DiaryEntry entry = new DiaryEntry("Author", "Dest", "Activity",
+        5, "Title", "Text");
 
-    DiaryEntryStorageDto dto = new DiaryEntryStorageDto(diaryEntry);
-    assertEquals(diaryEntry.getTimeWritten().toString(), dto.getTimeWritten());
-    assertEquals(diaryEntry.getTimeEdited().toString(), dto.getTimeEdited());
-    assertEquals("AuthorName", dto.getAuthor());
-    assertEquals("Destination", dto.getDestination());
-    assertEquals("Activity", dto.getActivity());
-    assertEquals(5.5, dto.getRating());
-    assertEquals("EntryTitle", dto.getTitle());
-    assertEquals("Some text", dto.getText());
+    // Act: Create the DTO
+    DiaryEntryStorageDto dto = new DiaryEntryStorageDto(entry);
+
+    // Assert: Verify that simple fields match exactly
+    assertEquals(entry.getAuthor(), dto.getAuthor(), "Author should match.");
+    assertEquals(entry.getDestination(), dto.getDestination(), "Destination should match.");
+    assertEquals(entry.getActivity(), dto.getActivity(), "Activity should match.");
+    assertEquals(entry.getRating(), dto.getRating(), "Rating should match.");
+    assertEquals(entry.getTitle(), dto.getTitle(), "Title should match.");
+    assertEquals(entry.getText(), dto.getText(), "Text should match.");
   }
 
   @Test
-  void testDiaryEntryToDtoBackTODiaryEntry() {
-    DiaryEntry original =
-        new DiaryEntry("AuthorName", "Destination", "Activity", 5.5, "EntryTitle", "Some text");
-    DiaryEntryStorageDto dto = new DiaryEntryStorageDto(original);
-    DiaryEntry recreated = new DiaryEntry(dto);
+  void should_ConvertDateTimesToStrings_When_CreatingDto() {
+    // Arrange: Create an entry (which automatically sets timeWritten and timeEdited)
+    DiaryEntry entry = new DiaryEntry("A", "D", "A",
+        5, "T", "Text");
 
-    assertEquals(original.getTimeWritten(), recreated.getTimeWritten());
-    assertEquals(original.getTimeEdited(), recreated.getTimeEdited());
-    assertEquals(original.getAuthor(), recreated.getAuthor());
-    assertEquals(original.getDestination(), recreated.getDestination());
-    assertEquals(original.getActivity(), recreated.getActivity());
-    assertEquals(original.getRating(), recreated.getRating());
-    assertEquals(original.getTitle(), recreated.getTitle());
-    assertEquals(original.getText(), recreated.getText());
+    // Act: Create DTO
+    DiaryEntryStorageDto dto = new DiaryEntryStorageDto(entry);
+
+    // Assert: Verify that the DTO's string timestamps match the Entry's
+    // LocalDateTime toString() representation
+    assertEquals(entry.getTimeWritten().toString(), dto.getTimeWritten(),
+        "TimeWritten should be converted to String.");
+    assertEquals(entry.getTimeEdited().toString(), dto.getTimeEdited(),
+        "TimeEdited should be converted to String.");
   }
 }

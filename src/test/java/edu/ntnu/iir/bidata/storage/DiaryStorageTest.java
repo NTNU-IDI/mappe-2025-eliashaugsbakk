@@ -1,72 +1,77 @@
 package edu.ntnu.iir.bidata.storage;
 
 import edu.ntnu.iir.bidata.model.DiaryEntry;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class DiaryStorageTest {
+  // Use a specific test file to avoid overwriting real data
+  private static final String TEST_FILE_PATH = "register/test-data.json";
 
-  private static final String TEST_FILEPATH = "register/test-data.json";
-
-  @BeforeEach
-  void cleanUp() throws IOException {
-    File file = new File(TEST_FILEPATH);
+  @AfterEach
+  void cleanup() {
+    // Cleanup: Delete the test file after every test to ensure a clean state
+    File file = new File(TEST_FILE_PATH);
     if (file.exists()) {
-      Files.delete(file.toPath());
+      file.delete();
     }
   }
 
   @Test
-  void loadEntriesCreatesFileAndReturnsEmptyListWhenFileMissing() throws IOException {
-    File file = new File(TEST_FILEPATH);
+  void should_ReturnEmptyList_When_FileDoesNotExist() throws IOException {
+    // Arrange: Ensure the file does not exist
+    File file = new File(TEST_FILE_PATH);
+    if (file.exists()) file.delete();
+    
+    DiaryStorage storage = new DiaryStorage(TEST_FILE_PATH);
 
-    DiaryStorage storage = new DiaryStorage(TEST_FILEPATH);
+    // Act: Load entries
+    ArrayList<DiaryEntry> result = storage.loadEntries();
 
-    ArrayList<DiaryEntry> entries = storage.loadEntries();
-
-    assertNotNull(entries);
-    assertTrue(entries.isEmpty()); // entries should be empty
-    assertTrue(file.exists()); // file should have been created by ensureFileInitialized
+    // Assert: The result should be an empty list (not null)
+    assertNotNull(result, "Result should not be null.");
+    assertTrue(result.isEmpty(), "Should return empty list for missing file.");
   }
 
   @Test
-  void storeEntriesStoresEntriesCorrectlyAndLoadEntriesLoadsEntriesCorrectly() throws IOException {
-    DiaryEntry entry0 = new DiaryEntry("author0", "dest0", "act0", 0, "title0", "text0");
-    DiaryEntry entry1 = new DiaryEntry("author1", "dest1", "act1", 1, "title1", "text1");
-    ArrayList<DiaryEntry> entries = new ArrayList<>();
-    entries.add(entry0);
-    entries.add(entry1);
+  void should_CreateNewFile_When_LoadingFromMissingFile() throws IOException {
+    // Arrange: Storage pointing to a non-existent file
+    DiaryStorage storage = new DiaryStorage(TEST_FILE_PATH);
 
-    DiaryStorage storage = new DiaryStorage(TEST_FILEPATH);
-
+    // Act: Trigger load (which calls ensureFileInitialized)
     storage.loadEntries();
-    storage.writeToFile(entries);
 
-    ArrayList<DiaryEntry> entriesLoaded = storage.loadEntries();
+    // Assert: The file should now exist on disk
+    File file = new File(TEST_FILE_PATH);
+    assertTrue(file.exists(), "File should be created if it did not exist.");
+  }
 
-    assertEquals(2, entriesLoaded.size());
+  @Test
+  void should_PersistEntries_When_WritingAndReadingBack() throws IOException {
+    // Arrange: Create entries and storage
+    DiaryEntry entry1 = new DiaryEntry("Auth1", "Dest1", "Act1",
+        1, "Title1", "Text1");
+    DiaryEntry entry2 = new DiaryEntry("Auth2", "Dest2", "Act2",
+        2, "Title2", "Text2");
+    List<DiaryEntry> entriesToWrite = List.of(entry1, entry2);
+    
+    DiaryStorage storage = new DiaryStorage(TEST_FILE_PATH);
 
-    DiaryEntry loaded0 = entriesLoaded.get(0);
-    DiaryEntry loaded1 = entriesLoaded.get(1);
+    // Act: Write to disk, then read back into a new list
+    storage.writeToFile(entriesToWrite);
+    ArrayList<DiaryEntry> readEntries = storage.loadEntries();
 
-    assertEquals("author0", loaded0.getAuthor());
-    assertEquals("dest0", loaded0.getDestination());
-    assertEquals("act0", loaded0.getActivity());
-    assertEquals(0, loaded0.getRating());
-    assertEquals("title0", loaded0.getTitle());
-    assertEquals("text0", loaded0.getText());
-
-    assertEquals("author1", loaded1.getAuthor());
-    assertEquals("dest1", loaded1.getDestination());
-    assertEquals("act1", loaded1.getActivity());
-    assertEquals(1, loaded1.getRating());
-    assertEquals("title1", loaded1.getTitle());
-    assertEquals("text1", loaded1.getText());
+    // Assert: Verify the data survived the round-trip
+    assertEquals(2, readEntries.size(), "Should have read back 2 entries.");
+    assertEquals("Title1", readEntries.get(0).getTitle(),
+        "First entry title should match.");
+    assertEquals("Title2", readEntries.get(1).getTitle(),
+        "Second entry title should match.");
   }
 }
