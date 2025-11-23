@@ -9,6 +9,20 @@ import java.util.List;
 public class FormatterTest {
 
   @Test
+  void lineCreatesALineOfTheCorrectLength() {
+    String message = "This string contains 34 characters";
+
+    assertEquals(34, message.length());
+
+    Formatter formatter = new Formatter();
+    String lineOfNumber = formatter.line(20);
+    String lineOfLengthMessage = formatter.line(message);
+
+    assertEquals(20 + "\n".length(), lineOfNumber.length());
+    assertEquals(34 + "\n".length(), lineOfLengthMessage.length());
+  }
+
+  @Test
   void formatStringListCreatesAFormattedListOfStrings() {
     // Simplified list creation
     List<String> list = List.of("string0", "string1", "string2");

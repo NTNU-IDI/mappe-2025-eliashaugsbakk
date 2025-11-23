@@ -2,6 +2,8 @@ package edu.ntnu.iir.bidata.ui;
 
 import edu.ntnu.iir.bidata.model.Diary;
 import edu.ntnu.iir.bidata.model.DiaryEntry;
+import edu.ntnu.iir.bidata.model.DiaryUtils;
+
 
 /**
  * Class to handle all user actions related to handling one instance of a diary entry.
@@ -21,6 +23,7 @@ public class EntryUI {
   private static final int EDIT_TEXT = 6;
 
   private final Diary diary;
+  private final DiaryUtils diaryUtils;
   private final Prompter prompter;
 
   /**
@@ -28,8 +31,9 @@ public class EntryUI {
    *
    * @param prompter to give output and take input from the user
    */
-  public EntryUI(Diary diary, Prompter prompter) {
+  public EntryUI(Diary diary, DiaryUtils diaryutils, Prompter prompter) {
     this.diary = diary;
+    this.diaryUtils = diaryutils;
     this.prompter = prompter;
   }
 
@@ -61,23 +65,36 @@ public class EntryUI {
    * @throws IllegalArgumentException if an entry with the same title already exists
    */
   public void writeEntry() {
-    String author = prompter.prompt("Enter an author.");
-    String destination = prompter.prompt("Enter the destination of your "
-        + "travels or the general traver context.");
+    String author = prompter.chooseFromListOrWriteNew("Enter the author",
+        diaryUtils.getDistinctAuthors(diary.getAllDiaryEntries()));
+    prompter.println("Author: " + author);
+
+    String destination = prompter.chooseFromListOrWriteNew("Enter the destination of your "
+        + "travels or the general traver context.",
+        diaryUtils.getDistinctDestinations(diary.getAllDiaryEntries()));
+    prompter.println("Destination: " + destination);
+
     double rating = setRating();
+    prompter.println("Rating: " + rating);
+
     String title = setTitle();
-    String activity = prompter.prompt("Enter the activity related to your entry.");
+    prompter.println("Title: " + title);
+
+    String activity = prompter.chooseFromListOrWriteNew("Enter the activity related to your entry.",
+        diaryUtils.getDistinctActivities(diary.getAllDiaryEntries()));
     activity = activity.toLowerCase();
+    prompter.println("Activity: " + activity);
 
     String text = prompter.multipleLinePrompt("Write the main body of your diary entry.");
     diary.addDiaryEntry(new DiaryEntry(author, destination, activity, rating, title, text));
+    prompter.message("DiaryEntry created successfully.");
   }
 
   private double setRating() {
     double rating;
     while (true) {
       try {
-        rating = Double.parseDouble(prompter.prompt("Enter your rating (0 - 10) of the activity"));
+        rating = prompter.promptDouble("Enter your rating (0 - 10) of the activity");
         if (rating < 0 || rating > 10) {
           prompter.warning("Rating must be between 0 and 10.");
         } else {
@@ -135,31 +152,41 @@ public class EntryUI {
 
   private void editAuthor(DiaryEntry entry) {
     prompter.println("Current author: " + entry.getAuthor());
-    entry.setAuthor(prompter.prompt("Enter new author: "));
+    entry.setAuthor(prompter.chooseFromListOrWriteNew("Enter or select new author: ",
+        diaryUtils.getDistinctAuthors(diary.getAllDiaryEntries())));
+    prompter.println("Author: " + entry.getAuthor());
   }
 
   private void editDestination(DiaryEntry entry) {
     prompter.println("Current destination: " + entry.getDestination());
-    entry.setDestination(prompter.prompt("Enter new destination: "));
+    entry.setDestination(prompter.chooseFromListOrWriteNew("Enter new destination: ",
+        diaryUtils.getDistinctDestinations(diary.getAllDiaryEntries())));
+    prompter.println("Destination: " + entry.getDestination());
   }
 
   private void editActivity(DiaryEntry entry) {
     prompter.println("Current activity: " + entry.getActivity());
-    entry.setActivity(prompter.prompt("Enter new activity: "));
+    entry.setActivity(prompter.chooseFromListOrWriteNew("Enter new activity: ",
+        diaryUtils.getDistinctActivities(diary.getAllDiaryEntries())));
+    prompter.println("Activity: " + entry.getActivity());
   }
 
   private void editRating(DiaryEntry entry) {
+    prompter.println("Current rating: " + entry.getRating());
     entry.setRating(setRating());
+    prompter.println("Rating: " + entry.getRating());
   }
 
   private void editTitle(DiaryEntry entry) {
     prompter.println("Current title: " + entry.getTitle());
     entry.setText(setTitle());
+    prompter.println("Title: " + entry.getTitle());
   }
 
   private void editText(DiaryEntry entry) {
     prompter.println("Current text:\n\n" + entry.getText());
     entry.setText(prompter.multipleLinePrompt("Write the new main body of your diary entry."));
+    prompter.message("Text has been updated");
   }
 
   /**

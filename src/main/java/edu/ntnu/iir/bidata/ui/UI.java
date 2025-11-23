@@ -26,7 +26,7 @@ public class UI {
       EntryUI entryUI) {
     this.prompter = prompter;
     this.collectionUI = new CollectionUI(diary, diaryUtils, entryUI, prompter);
-    this.entryUI = new EntryUI(diary, prompter);
+    this.entryUI = new EntryUI(diary, diaryUtils, prompter);
   }
 
   /**

@@ -105,7 +105,7 @@ public class DiaryUtils {
    * @param originalList the list to get authors from
    * @return the list of unique authors
    */
-  public List<String> getDistinctAuthors(ArrayList<DiaryEntry> originalList) {
+  public List<String> getDistinctAuthors(List<DiaryEntry> originalList) {
     HashSet<String> authors = new HashSet<>();
     for (DiaryEntry entry : originalList) {
       authors.add(entry.getAuthor());
@@ -121,7 +121,7 @@ public class DiaryUtils {
    * @param originalList the list to get activities from
    * @return the list of unique authors
    */
-  public List<String> getDistinctActivities(ArrayList<DiaryEntry> originalList) {
+  public List<String> getDistinctActivities(List<DiaryEntry> originalList) {
     HashSet<String> activities = new HashSet<>();
     for (DiaryEntry entry : originalList) {
       activities.add(entry.getActivity());
@@ -137,7 +137,7 @@ public class DiaryUtils {
    * @param originalList the list to get destinations from
    * @return the list of unique destinations
    */
-  public List<String> getDistinctDestinations(ArrayList<DiaryEntry> originalList) {
+  public List<String> getDistinctDestinations(List<DiaryEntry> originalList) {
     HashSet<String> destinations = new HashSet<>();
     for (DiaryEntry entry : originalList) {
       destinations.add(entry.getDestination());

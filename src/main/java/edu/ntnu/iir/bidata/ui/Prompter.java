@@ -4,7 +4,6 @@ import edu.ntnu.iir.bidata.model.DiaryEntry;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -45,14 +44,23 @@ public class Prompter {
   }
 
   /**
+   * Prints the string in red color.
+   *
+   * @param string the string to print in red
+   */
+  public void printlnRed(String string) {
+    println(formatter.redString(string));
+  }
+
+  /**
    * Shows a message in a framed box and waits for the user to press ENTER.
    *
    * @param message the message to display
    */
   public void message(String message) {
-    println("X=========================X");
+    println(formatter.redString("X=========================X"));
     println(message);
-    println("X=========================X");
+    println(formatter.redString("X=========================X"));
     print("Hit ENTER to continue...");
     sc.nextLine();
   }
@@ -63,11 +71,12 @@ public class Prompter {
    * @param message the warning text to display
    */
   public void warning(String message) {
-    println("!=========================!");
-    println(message);
-    println("!=========================!");
-    print("Hit ENTER to continue...");
-    sc.nextLine();
+    println(formatter.redString("""
+        !=============================!
+        %s
+        !=============================!
+        """).formatted(message));
+    prompt("Hit ENTER to continue...");
   }
 
   /**
@@ -80,6 +89,28 @@ public class Prompter {
     println(prompt);
     print("> ");
     return sc.nextLine();
+  }
+
+  /**
+   * Prompts the user for a double.
+   *
+   * @param message the prompt the user gets when choosing a double
+   * @return the double chosen by the user
+   */
+  public double promptDouble(String message) {
+    while (true) {
+      println(message);
+      print("> ");
+
+      try {
+        double choice = sc.nextDouble();
+        sc.nextLine(); // consume the rest of the line
+        return choice;
+      } catch (InputMismatchException e) {
+        sc.nextLine(); // consume invalid token
+        warning("Input must be a double. Please try again.");
+      }
+    }
   }
 
   /**
@@ -154,8 +185,12 @@ public class Prompter {
    * @param options the list of options to choose from
    * @return the option chosen
    */
-  public String chooseFromList(List<String> options) {
-    println(formatter.formatStringList(options));
+  public String chooseFromList(String message, List<String> options) {
+    print("""
+    %s
+    Select an option by typing the index, or typing the name.
+    %s
+    >\s""".formatted(message, formatter.formatStringList(options)));
 
     while (true) {
 
@@ -184,6 +219,46 @@ public class Prompter {
   }
 
   /**
+   * Prints out an indexed list for the user to choose an option from. Eather by typing the index
+   * or by writing the option.
+   * The user can also create a new option, i.e., write something that is not an option. This
+   * will also return a valid result. This makes it easy for the user to choose diary entry fields
+   * and also use previous ones. This lets the user avoid unnecessary duplicates
+   * if they don't want the distinction. (i.e., Bathing and Swimming)
+   *
+   * @param message the prompt the user gets when choosing a response
+   * @param options the options the user can choose from (if they want to)
+   * @return the String the user has chocen
+   */
+  public String chooseFromListOrWriteNew(String message, List<String> options) {
+    print("""
+    %s
+    Select an option by typing the index, or typing the name.
+    Create a new one by typing a new name.
+    %s
+    >\s""".formatted(message, formatter.formatStringList(options)));
+
+    while (true) {
+
+      int choiceInt;
+      String choiceString;
+      if (sc.hasNextInt()) {
+        choiceInt = sc.nextInt();
+        sc.nextLine(); // to soak up any extra input, after the int
+
+        try {
+          choiceString = options.get(choiceInt - 1);
+          return choiceString;
+        } catch (IndexOutOfBoundsException e) {
+          warning("Not a valid choice");
+        }
+      } else {
+        return sc.nextLine();
+      }
+    }
+  }
+
+  /**
    * Lets the user create a LocalDateTime object.
    *
    * @param prompt the prompt to give the user
@@ -192,13 +267,13 @@ public class Prompter {
   public LocalDateTime chooseTime(String prompt) {
     while (true) {
       print(prompt);
-      println(" (yyyy-MM-dd HH:mm)");
+      println(" (dd/MM/yyyy HH:mm)");
       print(">");
-      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+      DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
       String input = sc.nextLine();
 
       try {
-        return LocalDateTime.parse(input, formatter);
+        return LocalDateTime.parse(input, dateTimeFormatter);
       } catch (DateTimeException e) {
         warning("Invalid date");
       }
@@ -206,12 +281,14 @@ public class Prompter {
   }
 
   /**
-   * Prints out a formatted collection of diary entries.
+   * Pints out a list of diary entries. Makes it easy for the user to get an overview over
+   * all the diary entries in a list.
    *
-   * @param entries the entries to format and print
+   * @param entries the entries to print
    */
-  public void printListOfDiaries(ArrayList<DiaryEntry> entries) {
-    message(formatter.formatDiaryEntryList(entries));
+  public void printListOfEntries(List<DiaryEntry> entries) {
+    println(formatter.formatDiaryEntryList(entries));
+    prompt("Hit return to continue");
   }
 
   /**

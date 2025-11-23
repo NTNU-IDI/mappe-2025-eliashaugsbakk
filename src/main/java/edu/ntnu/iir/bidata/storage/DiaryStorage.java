@@ -11,6 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Handles loading and saving {@link DiaryEntry} objects to a JSON file on disk.
@@ -67,6 +68,7 @@ public class DiaryStorage {
    *
    * @return a list of diary entries, possibly empty. May be {@code null} if the file does not
    * contain a JSON array
+   *
    * @throws IOException if the file cannot be read
    */
   private ArrayList<DiaryEntry> readFromFile() throws IOException {
@@ -94,7 +96,7 @@ public class DiaryStorage {
    * @param entries the diary entries to persist; must not be {@code null}
    * @throws IOException if the file cannot be written
    */
-  public void writeToFile(ArrayList<DiaryEntry> entries) throws IOException {
+  public void writeToFile(List<DiaryEntry> entries) throws IOException {
     ArrayList<DiaryEntryStorageDto> dtoEntries = new ArrayList<>();
     for (DiaryEntry entry : entries) {
       DiaryEntryStorageDto dto = new DiaryEntryStorageDto(entry);

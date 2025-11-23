@@ -66,6 +66,7 @@ public class CollectionUI {
     ArrayList<DiaryEntry> collection = new ArrayList<>(diary.getAllDiaryEntries());
     collLoop:
     while (true) {
+
       int currentEntries = collection.size();
       String currentEntriesString = String.valueOf(currentEntries);
 
@@ -74,19 +75,20 @@ public class CollectionUI {
       } else if (currentEntries == diary.getAllDiaryEntries().size()) {
         currentEntriesString = "all";
       }
+      prompter.printlnRed("Your current collection contains %s entries."
+          .formatted(currentEntriesString));
       int choice = prompter.promptInt("""
-          Your current collection contains %s entries.
           \t%s - Print the current collection
           \t%s - Apply a filter to the collection
           \t%s - Sort the current collection
-          \t%s - Pick an entry to:\s
+          \t%s - Pick an entry from the collection to:\s
               \t\t Read, Edit or Delete an entry
           \t%s - Return to Main menu""".formatted(
-          currentEntriesString, COLL_PRINT_COLLECTION, COLL_APPLY_FILTER,
+          COLL_PRINT_COLLECTION, COLL_APPLY_FILTER,
           COLL_SORT_COLLECTION, COLL_CHOOSE_ENTRY, EXIT_MENU));
 
       switch (choice) {
-        case COLL_PRINT_COLLECTION -> prompter.printListOfDiaries(collection);
+        case COLL_PRINT_COLLECTION -> prompter.printListOfEntries(collection);
         case COLL_APPLY_FILTER ->   applyFilter(collection);
         case COLL_SORT_COLLECTION -> sortCollection(collection);
         case COLL_CHOOSE_ENTRY -> chooseEntry(collection);
@@ -114,22 +116,29 @@ public class CollectionUI {
 
       switch (choice) {
         case FILTER_AUTHOR -> {
-          String author = prompter.chooseFromList(diaryUtils.getDistinctAuthors(entries));
+          String author = prompter.chooseFromList("Author to sort by", diaryUtils.getDistinctAuthors(entries));
           diaryUtils.filterByAuthor(entries, author);
+          prompter.println("Filter applied successfully.");
         }
         case FILTER_ACTIVITY -> {
-          String activity = prompter.chooseFromList(diaryUtils.getDistinctActivities(entries));
+          String activity = prompter.chooseFromList("Activity to sort by", diaryUtils.getDistinctActivities(entries));
           diaryUtils.filterByActivity(entries, activity);
+          prompter.println("Filter applied successfully.");
         }
         case FILTER_DESTINATION -> {
-          String destination = prompter.chooseFromList(diaryUtils.getDistinctDestinations(entries));
+          String destination = prompter.chooseFromList("Destination to sort by", diaryUtils.getDistinctDestinations(entries));
           diaryUtils.filterByDestination(entries, destination);
+          prompter.println("Filter applied successfully.");
         }
         case FILTER_TIME_CREATED -> {
-          LocalDateTime timeStart = prompter.chooseTime("Start time");
-          LocalDateTime timeStop = prompter.chooseTime("End time");
-
+          LocalDateTime timeStart = prompter.chooseTime("Start date");
+          LocalDateTime timeStop = prompter.chooseTime("End date");
+          if (timeStart.isAfter(timeStop)) {
+            prompter.warning("Start date must come before stop date");
+            break;
+          }
           diaryUtils.filterByTimeCreated(entries, timeStart, timeStop);
+          prompter.println("Filter applied successfully.");
         }
         case EXIT_MENU -> {
           break filterLoop;
