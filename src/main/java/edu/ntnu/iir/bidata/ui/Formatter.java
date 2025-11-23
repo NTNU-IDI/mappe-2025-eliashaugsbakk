@@ -60,7 +60,6 @@ public class Formatter {
    */
   public String formatStringList(List<String> list) {
     StringBuilder sb = new StringBuilder();
-    sb.append(clear());
     for (int i = 0; i < list.size(); i++) {
       sb
           .append(redString(String.valueOf(i + 1)))
