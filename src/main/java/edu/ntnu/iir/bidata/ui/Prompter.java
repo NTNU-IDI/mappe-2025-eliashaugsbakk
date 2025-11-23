@@ -186,16 +186,20 @@ public class Prompter {
    * @return the option chosen
    */
   public String chooseFromList(String message, List<String> options) {
-    print("""
-    %s
-    Select an option by typing the index, or typing the name.
-    %s
-    >\s""".formatted(message, formatter.formatStringList(options)));
+
 
     while (true) {
 
+      print("""
+        %s
+        Select an option by typing the index, or typing the name.
+        %s
+        >\s""".formatted(message, formatter.formatStringList(options)));
+
+
       int choiceInt;
-      String choiceString = "";
+      String choiceString = null;
+
       if (sc.hasNextInt()) {
         choiceInt = sc.nextInt();
         sc.nextLine(); // to soak up any extra input, after the int
@@ -211,10 +215,9 @@ public class Prompter {
       for (String option : options) {
         if (option.equalsIgnoreCase(choiceString)) {
           return choiceString;
-        } else {
-          warning("Invalid input");
         }
       }
+      warning("Invalid input");
     }
   }
 
