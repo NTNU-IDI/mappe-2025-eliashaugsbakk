@@ -95,7 +95,7 @@ public class Prompter {
     int line = 0;
 
     while (true) {
-      print(String.format("%3d", line));
+      print(String.format("%3d : ", line));
       line++;
       String inputText = sc.nextLine();
       if (inputText.equals("bye")) {
@@ -227,7 +227,7 @@ public class Prompter {
       print("> ");
       DiaryEntry choiceEntry;
       int choiceInt;
-      String choiceString = "";
+      String choiceString;
       if (sc.hasNextInt()) {
         choiceInt = sc.nextInt();
         sc.nextLine(); // to soak up any extra input, after the int
