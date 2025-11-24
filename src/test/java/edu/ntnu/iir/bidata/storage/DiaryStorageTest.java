@@ -5,8 +5,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -32,7 +32,7 @@ class DiaryStorageTest {
     DiaryStorage storage = new DiaryStorage(TEST_FILE_PATH);
 
     // Act: Load entries
-    ArrayList<DiaryEntry> result = storage.loadEntries();
+    Map<String, DiaryEntry> result = storage.loadEntries();
 
     // Assert: The result should be an empty list (not null)
     assertNotNull(result, "Result should not be null.");
@@ -59,19 +59,21 @@ class DiaryStorageTest {
         1, "Title1", "Text1");
     DiaryEntry entry2 = new DiaryEntry("Auth2", "Dest2", "Act2",
         2, "Title2", "Text2");
-    List<DiaryEntry> entriesToWrite = List.of(entry1, entry2);
-    
+    Map<String, DiaryEntry> entriesToWrite = new HashMap<>();
+    entriesToWrite.put(entry1.getTitle(), entry1);
+    entriesToWrite.put(entry2.getTitle(), entry2);
+
     DiaryStorage storage = new DiaryStorage(TEST_FILE_PATH);
 
     // Act: Write to disk, then read back into a new list
     storage.writeToFile(entriesToWrite);
-    ArrayList<DiaryEntry> readEntries = storage.loadEntries();
+    Map<String, DiaryEntry> readEntries = storage.loadEntries();
 
     // Assert: Verify the data survived the round-trip
     assertEquals(2, readEntries.size(), "Should have read back 2 entries.");
-    assertEquals("Title1", readEntries.get(0).getTitle(),
+    assertEquals("Title1", readEntries.get("Title1").getTitle(),
         "First entry title should match.");
-    assertEquals("Title2", readEntries.get(1).getTitle(),
+    assertEquals("Title2", readEntries.get("Title2").getTitle(),
         "Second entry title should match.");
   }
 }
