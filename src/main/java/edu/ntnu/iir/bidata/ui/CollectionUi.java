@@ -40,14 +40,12 @@ public class CollectionUi {
 
 
   private final Diary diary;
-  private final DiaryUtils diaryUtils;
   private final EntryUi entryUi;
   private final Prompter prompter;
 
-  CollectionUi(Diary diary, DiaryUtils diaryUtils, EntryUi entryUi,
+  CollectionUi(Diary diary, EntryUi entryUi,
       Prompter prompter) {
     this.diary = diary;
-    this.diaryUtils = diaryUtils;
     this.entryUi = entryUi;
     this.prompter = prompter;
   }
@@ -116,18 +114,18 @@ public class CollectionUi {
 
       switch (choice) {
         case FILTER_AUTHOR -> {
-          String author = prompter.chooseFromList("Author to sort by", diaryUtils.getDistinctAuthors(entries));
-          diaryUtils.filterByAuthor(entries, author);
+          String author = prompter.chooseFromList("Author to sort by", DiaryUtils.getDistinctAuthors(entries));
+          DiaryUtils.filterByAuthor(entries, author);
           prompter.println("Filter applied successfully.");
         }
         case FILTER_ACTIVITY -> {
-          String activity = prompter.chooseFromList("Activity to sort by", diaryUtils.getDistinctActivities(entries));
-          diaryUtils.filterByActivity(entries, activity);
+          String activity = prompter.chooseFromList("Activity to sort by", DiaryUtils.getDistinctActivities(entries));
+          DiaryUtils.filterByActivity(entries, activity);
           prompter.println("Filter applied successfully.");
         }
         case FILTER_DESTINATION -> {
-          String destination = prompter.chooseFromList("Destination to sort by", diaryUtils.getDistinctDestinations(entries));
-          diaryUtils.filterByDestination(entries, destination);
+          String destination = prompter.chooseFromList("Destination to sort by", DiaryUtils.getDistinctDestinations(entries));
+          DiaryUtils.filterByDestination(entries, destination);
           prompter.println("Filter applied successfully.");
         }
         case FILTER_TIME_CREATED -> {
@@ -137,7 +135,7 @@ public class CollectionUi {
             prompter.warning("Start date must come before stop date");
             break;
           }
-          diaryUtils.filterByTimeCreated(entries, timeStart, timeStop);
+          DiaryUtils.filterByTimeCreated(entries, timeStart, timeStop);
           prompter.println("Filter applied successfully.");
         }
         case EXIT_MENU -> {
@@ -154,8 +152,8 @@ public class CollectionUi {
         \t%s. Rating
         \t%s. Time written""".formatted(BY_RATING, BY_TIME_WRITTEN));
     switch (choice) {
-      case 1 -> diaryUtils.sortByRating(entries);
-      case 2 -> diaryUtils.sortByTime(entries);
+      case 1 -> DiaryUtils.sortByRating(entries);
+      case 2 -> DiaryUtils.sortByTime(entries);
       default -> prompter.warning("Invalid option");
     }
   }

@@ -1,7 +1,6 @@
 package edu.ntnu.iir.bidata.ui;
 
 import edu.ntnu.iir.bidata.model.Diary;
-import edu.ntnu.iir.bidata.model.DiaryUtils;
 
 /**
  * Handles the main menu loop of the program, presenting options to
@@ -22,11 +21,11 @@ public class Ui {
    * @param prompter the Prompter object used for console interaction
    * @param diary the Diary object to manage diary entries
    */
-  public Ui(Prompter prompter, Diary diary, DiaryUtils diaryUtils,
+  public Ui(Prompter prompter, Diary diary,
       EntryUi entryUi) {
     this.prompter = prompter;
-    this.collectionUi = new CollectionUi(diary, diaryUtils, entryUi, prompter);
-    this.entryUi = new EntryUi(diary, diaryUtils, prompter);
+    this.collectionUi = new CollectionUi(diary, entryUi, prompter);
+    this.entryUi = new EntryUi(diary, prompter);
   }
 
   /**

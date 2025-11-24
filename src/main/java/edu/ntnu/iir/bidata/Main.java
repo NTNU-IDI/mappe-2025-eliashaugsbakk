@@ -1,7 +1,6 @@
 package edu.ntnu.iir.bidata;
 
 import edu.ntnu.iir.bidata.model.Diary;
-import edu.ntnu.iir.bidata.model.DiaryUtils;
 import edu.ntnu.iir.bidata.storage.DiaryStorage;
 import edu.ntnu.iir.bidata.ui.EntryUi;
 import edu.ntnu.iir.bidata.ui.Formatter;
@@ -40,10 +39,9 @@ public class Main {
     // create an Ui instance to handle the main program loop
     // with Prompter and Formatter as arguments
     Formatter formatter = new Formatter();
-    DiaryUtils diaryUtils = new DiaryUtils();
     Prompter prompter = new Prompter(formatter);
-    EntryUi entryUi = new EntryUi(diary, diaryUtils, prompter);
-    Ui ui = new Ui(prompter, diary, diaryUtils, entryUi);
+    EntryUi entryUi = new EntryUi(diary, prompter);
+    Ui ui = new Ui(prompter, diary, entryUi);
 
     // run the main program loop
     ui.run();

@@ -7,12 +7,13 @@ import java.util.*;
  * General class to do operations on collections of Diary Entries.
  */
 public class DiaryUtils {
+
   /**
    * Sorts a list of diary entries by the time it was created. The oldest entry first.
    *
    * @param entriesToSort the list of Diary Entries to sort
    */
-  public void sortByTime(List<DiaryEntry> entriesToSort) {
+  public static void sortByTime(List<DiaryEntry> entriesToSort) {
     entriesToSort.sort(Comparator.comparing(DiaryEntry::getTimeWritten));
   }
 
@@ -21,7 +22,7 @@ public class DiaryUtils {
    *
    * @param entriesToSort the list of Diary Entries to sort
    */
-  public void sortByRating(List<DiaryEntry> entriesToSort) {
+  public static void sortByRating(List<DiaryEntry> entriesToSort) {
     entriesToSort.sort(Comparator.comparing(DiaryEntry::getRating));
   }
 
@@ -31,7 +32,7 @@ public class DiaryUtils {
    * @param originalList the unfiltered ArrayList
    * @param author the author whose diary entries are to be retrieved.
    */
-  public void filterByAuthor(ArrayList<DiaryEntry> originalList, String author) {
+  public static void filterByAuthor(ArrayList<DiaryEntry> originalList, String author) {
     ArrayList<DiaryEntry> filteredList = new ArrayList<>();
     for (DiaryEntry entry : originalList) {
       if (entry.getAuthor().equals(author)) {
@@ -48,7 +49,7 @@ public class DiaryUtils {
    * @param originalList the unfiltered ArrayList
    * @param activity the activity to filter entries by.
    */
-  public void filterByActivity(Collection<DiaryEntry> originalList, String activity) {
+  public static void filterByActivity(Collection<DiaryEntry> originalList, String activity) {
     ArrayList<DiaryEntry> filteredList = new ArrayList<>();
     for (DiaryEntry entry : originalList) {
       if (entry.getActivity().equalsIgnoreCase(activity)) {
@@ -65,7 +66,7 @@ public class DiaryUtils {
    * @param originalList the unfiltered ArrayList
    * @param destination the destination to filter entries by.
    */
-  public void filterByDestination(Collection<DiaryEntry> originalList, String destination) {
+  public static void filterByDestination(Collection<DiaryEntry> originalList, String destination) {
     List<DiaryEntry> filteredList = new ArrayList<>();
     for (DiaryEntry entry : originalList) {
       if (entry.getDestination().equalsIgnoreCase(destination)) {
@@ -83,7 +84,7 @@ public class DiaryUtils {
    * @param timeStart the creation time from witch to allow entries through
    * @param timeStop the creation time to which entries are allowed
    */
-  public void filterByTimeCreated(Collection<DiaryEntry> originalList, LocalDateTime timeStart,
+  public static void filterByTimeCreated(Collection<DiaryEntry> originalList, LocalDateTime timeStart,
       LocalDateTime timeStop) {
     ArrayList<DiaryEntry> filteredList = new ArrayList<>();
     for (DiaryEntry entry : originalList) {
@@ -101,7 +102,7 @@ public class DiaryUtils {
    * @param originalList the list to get authors from
    * @return the list of unique authors
    */
-  public List<String> getDistinctAuthors(Collection<DiaryEntry> originalList) {
+  public static List<String> getDistinctAuthors(Collection<DiaryEntry> originalList) {
     // use TreeSet to ensure uniqueness and alphabetical sorting
     Set<String> authors = new TreeSet<>();
     for (DiaryEntry entry : originalList) {
@@ -116,7 +117,7 @@ public class DiaryUtils {
    * @param originalList the list to get activities from
    * @return the list of unique authors
    */
-  public List<String> getDistinctActivities(Collection<DiaryEntry> originalList) {
+  public static List<String> getDistinctActivities(Collection<DiaryEntry> originalList) {
     // use TreeSet to ensure uniqueness and alphabetical sorting
     Set<String> activities = new TreeSet<>();
     for (DiaryEntry entry : originalList) {
@@ -131,7 +132,7 @@ public class DiaryUtils {
    * @param originalList the list to get destinations from
    * @return the list of unique destinations
    */
-  public List<String> getDistinctDestinations(Collection<DiaryEntry> originalList) {
+  public static List<String> getDistinctDestinations(Collection<DiaryEntry> originalList) {
     // use TreeSet to ensure uniqueness and alphabetical sorting
     Set<String> destinations = new TreeSet<>();
     for (DiaryEntry entry : originalList) {
