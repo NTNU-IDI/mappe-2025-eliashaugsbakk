@@ -5,9 +5,7 @@ import edu.ntnu.iir.bidata.storage.DiaryStorage;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Class to create dummy diary entries. It uses its own main function
@@ -21,8 +19,8 @@ public class EntryFactory {
   private final static List<String> DESTINATIONS = new ArrayList<>(List.of("Oslo", "Bergen", "Stockholm", "Narvik"));
 
 
-  private List<DiaryEntry> createEntries() {
-    List<DiaryEntry> createdEntries = new ArrayList<>();
+  private static Map<String ,DiaryEntry> createEntries() {
+    Map<String, DiaryEntry> createdEntries = new HashMap<>();
     int counter = 0;
     for (String author : AUTHORS) {
       for (String dest : DESTINATIONS) {
@@ -41,8 +39,8 @@ public class EntryFactory {
 
           double rating = (double) RANDOM.nextInt(101) / 10;
           String title = "title" + counter;
-          String text = "dummy text";
-          createdEntries.add(
+          String text = "Dummy text";
+          createdEntries.put(title,
               new DiaryEntry(randomDateTime, author, dest, act, rating, title, text));
         }
       }
@@ -50,10 +48,10 @@ public class EntryFactory {
     return createdEntries;
   }
 
-  void main() throws IOException {
+  public static void main(String[] args) throws IOException {
     DiaryStorage storage = new DiaryStorage("register/data.json");
 
-    List<DiaryEntry> entries = new ArrayList<>(createEntries());
+    Map<String, DiaryEntry> entries = new HashMap<>(createEntries());
     storage.writeToFile(entries);
   }
 }
