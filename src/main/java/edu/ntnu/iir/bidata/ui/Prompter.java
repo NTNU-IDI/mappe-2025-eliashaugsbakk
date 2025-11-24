@@ -186,8 +186,6 @@ public class Prompter {
    * @return the option chosen
    */
   public String chooseFromList(String message, List<String> options) {
-
-
     while (true) {
 
       print("""

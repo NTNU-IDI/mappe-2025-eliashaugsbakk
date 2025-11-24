@@ -37,7 +37,7 @@ public class Main {
     Diary diary = new Diary();
     diary.addDiaryEntries(storage.loadEntries());
 
-    // create a Ui instance to handle the main program loop
+    // create an Ui instance to handle the main program loop
     // with Prompter and Formatter as arguments
     Formatter formatter = new Formatter();
     DiaryUtils diaryUtils = new DiaryUtils();

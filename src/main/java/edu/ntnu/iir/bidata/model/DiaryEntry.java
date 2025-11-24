@@ -47,9 +47,10 @@ public class DiaryEntry {
    * @param fabricatedCreationTime the fabricated time of creation
    * @param author      the name of the author
    * @param destination the destination of the trip, or a more general travel (Traveling through
-   *                    Europe)
+   *                      Europe)
    * @param activity    the activity this entry is describing
-   * @param rating      a rating the user assigns to the activity, on a scale from 0 to 10
+   * @param rating      a rating the user assigns to the activity, on a scale from 0 to 10. This
+   *                      is stored as a double to allow the user more
    * @param title       the title of the entry
    * @param text        the main entry text, usually describing the activity
    */
@@ -83,11 +84,14 @@ public class DiaryEntry {
   }
 
   /**
-   * Creates a new diary entry, describing an activity during a trip.
+   * Creates a new diary entry, describing an activity during a trip. This constructor is
+   *     for the user to create new entries. Assigns the time created and edited to the
+   *     current local time. Rating is stored as a double to allow the user to choose freely.
+   *     All other object variables are stored as Strings.
    *
    * @param author      the name of the author
    * @param destination the destination of the trip, or a more general travel (Traveling through
-   *                    turope)
+   *                    Europe)
    * @param activity    the activity this entry is describing
    * @param rating      a rating the user assigns to the activity, on a scale from 0 to 10
    * @param title       the title of the entry
@@ -95,14 +99,14 @@ public class DiaryEntry {
    */
   public DiaryEntry(String author, String destination, String activity, double rating, String title,
       String text) {
-    this.timeWritten = LocalDateTime.now();
-    this.timeEdited = LocalDateTime.now();
-    this.author = author;
-    this.destination = destination;
-    this.activity = activity;
-    this.rating = checkRating(rating);
-    this.title = title;
-    this.text = text;
+    this.timeWritten = LocalDateTime.now(); // set the time of creation to now
+    this.timeEdited = LocalDateTime.now(); // set the time of the last edit to now
+    this.author = author; // the string representation of an author, usually a name
+    this.destination = destination; // the destination or general travel context of the diary entry
+    this.activity = activity; // the activity associated with the diary entry
+    this.rating = checkRating(rating); // the user chosen rating of the activity
+    this.title = title; // a unique title given by the user
+    this.text = text; // the main text of the entry
   }
 
   /**
