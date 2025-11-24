@@ -1,30 +1,33 @@
 package edu.ntnu.iir.bidata.model;
 
-import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The Diary class represents a collection of diary entries. It provides functionality to manage and
  * retrieve these entries.
  */
 public class Diary {
-  private final ArrayList<DiaryEntry> entries = new ArrayList<>();
+
+  // store the entries in a hash map to enforce no duplicates and for fast comparisons
+  private final Map<String ,DiaryEntry> entries = new HashMap<>();
 
   /**
    * Adds a new diary entry to the diary.
    *
    * @param entry The diary entry to be added. This should be a valid instance of
-   *              {@code DiaryEntry}, containing details such as the author, destination, activity,
-   *              rating, title, and main content.
+   *     {@code DiaryEntry}, containing details such as the author, destination, activity,
+   *     rating, title, and main content. The title must be unique. It is case-sensitive:
+   *     EntryTitle and entryTitle will be treated as two separate titles.
+   *
    * @throws IllegalArgumentException if an entry with the same title already exists
    */
   public void addDiaryEntry(DiaryEntry entry) {
-    for (DiaryEntry e : entries) {
-      if (e.getTitle().equalsIgnoreCase(entry.getTitle())) {
-        throw new IllegalArgumentException("duplicate titles are not allowed");
-      }
+    String key = entry.getTitle();
+    if (entries.containsKey(key)) {
+      throw new IllegalArgumentException("duplicate titles are not allowed");
     }
-    entries.add(entry);
+    entries.put(key, entry);
   }
 
   /**
@@ -37,49 +40,38 @@ public class Diary {
    * @param entriesToAdd the list of diary entries to be added.
    * @throws IllegalArgumentException if duplicate titles are found
    */
-  public void addDiaryEntries(ArrayList<DiaryEntry> entriesToAdd) {
-    // Titles of entries already in the diary
-    HashSet<String> existingTitles = new HashSet<>();
-    for (DiaryEntry entry : entries) {
-      existingTitles.add(entry.getTitle().toLowerCase());
-    }
+  public void addDiaryEntries(Map<String ,DiaryEntry> entriesToAdd) {
+    // Local set to check for duplicates within the incoming batch itself
 
-    // Titles within this batch to catch duplicates inside entriesToAdd
-    HashSet<String> entriesToAddTitles = new HashSet<>();
+    for (DiaryEntry entry : entriesToAdd.values()) {
+      String title = entry.getTitle();
 
-    // Checks for duplicates
-    for (DiaryEntry entryToAdd : entriesToAdd) {
-      String title = entryToAdd.getTitle().toLowerCase();
-
-      if (existingTitles.contains(title.toLowerCase())) {
-        throw new IllegalArgumentException("duplicate titles are not allowed");
-      }
-
-      // add() returns false if the title already is in entriesToAddTitles
-      if (!entriesToAddTitles.add(title)) {
+      // Check if the title exists in storage
+      if (entries.containsKey(title)) {
         throw new IllegalArgumentException("duplicate titles are not allowed");
       }
     }
-    // Only add after validation passes for all
-    entries.addAll(entriesToAdd);
+
+    // validations passed, add them to the map
+    entries.putAll(entriesToAdd);
   }
 
   /**
    * Retrieves all diary entries stored in the diary.
    *
-   * @return A list of all diary entries.
+   * @return A map of all diary entries.
    */
-  public ArrayList<DiaryEntry> getAllDiaryEntries() {
+  public Map<String, DiaryEntry> getAllDiaryEntries() {
     return entries;
   }
 
   /**
-   * Methode for deleting a diary entry from the list stored in Diary. This deletes it permenantly
-   * after the program exits normally.
+   * Methode for deleting a diary entry from the map stored in Diary. This deletes it permanently
+   * when the program is exited normally.
    *
    * @param entry the entry to delete
    */
   public void deleteEntry(DiaryEntry entry) {
-    entries.remove(entry);
+    entries.remove(entry.getTitle());
   }
 }
