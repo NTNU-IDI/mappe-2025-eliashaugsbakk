@@ -10,8 +10,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Handles loading and saving {@link DiaryEntry} objects to a JSON file on disk.
@@ -35,14 +35,14 @@ public class DiaryStorage {
   }
 
   /**
-   * Loads all diary entries from disk.
+   * Loads all diary entries from the disk.
    *
    * <p>If the file does not exist or is empty, an empty list is returned.
    *
-   * @return an {@link ArrayList} containing all the diary entries stored in the file
+   * @return an {@link Map} containing all the diary entries stored in the file
    * @throws IOException if the file cannot be created or read
    */
-  public ArrayList<DiaryEntry> loadEntries() throws IOException {
+  public Map<String, DiaryEntry> loadEntries() throws IOException {
     ensureFileInitialized();
     return readFromFile();
   }
@@ -58,7 +58,7 @@ public class DiaryStorage {
     File file = new File(filepath);
     if (!file.exists() || file.length() == 0) {
       try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-        writer.write("[]");
+        writer.write("{}");
       }
     }
   }
@@ -66,42 +66,49 @@ public class DiaryStorage {
   /**
    * Reads the JSON file and returns the list of diary entries.
    *
-   * @return a list of diary entries, possibly empty. May be {@code null} if the file does not
+   * @return a map of diary entries, possibly empty. May be {@code null} if the file does not
    *     contain a JSON array
    *
    * @throws IOException if the file cannot be read
    */
-  private ArrayList<DiaryEntry> readFromFile() throws IOException {
+  private Map<String ,DiaryEntry> readFromFile() throws IOException {
     try (FileReader reader = new FileReader(filepath)) {
-      Type listType = new TypeToken<ArrayList<DiaryEntryStorageDto>>() {
+      Type mapType = new TypeToken<Map<String, DiaryEntryStorageDto>>() {
       }.getType();
 
-      ArrayList<DiaryEntryStorageDto> dtoEntries = GSON.fromJson(reader, listType);
-      ArrayList<DiaryEntry> entries = new ArrayList<>();
+      Map<String, DiaryEntryStorageDto> dtoEntries = GSON.fromJson(reader, mapType);
+
+      Map<String, DiaryEntry> entries = new HashMap<>();
 
       if (dtoEntries != null) {
-        for (DiaryEntryStorageDto dto : dtoEntries) {
-          DiaryEntry entry = new DiaryEntry(dto);
-          entries.add(entry);
+        for (Map.Entry<String, DiaryEntryStorageDto> entry : dtoEntries.entrySet()) {
+
+          // 1. Convert the DTO back into a DiaryEntry object
+          DiaryEntry diaryEntry = new DiaryEntry(entry.getValue());
+
+          // 2. Use the map's key (entry.getKey()), which is the title, to store the object
+          // This maintains the Map<Title, DiaryEntry> structure.
+          entries.put(entry.getKey(), diaryEntry);
         }
       }
-
       return entries;
     }
   }
 
   /**
-   * Writes the given list of diary entries to the JSON file.
+   * Writes the given map of diary entries to the JSON file.
    *
    * @param entries the diary entries to persist; must not be {@code null}
    * @throws IOException if the file cannot be written
    */
-  public void writeToFile(List<DiaryEntry> entries) throws IOException {
-    ArrayList<DiaryEntryStorageDto> dtoEntries = new ArrayList<>();
-    for (DiaryEntry entry : entries) {
-      DiaryEntryStorageDto dto = new DiaryEntryStorageDto(entry);
-      dtoEntries.add(dto);
+  public void writeToFile(Map<String, DiaryEntry> entries) throws IOException {
+    Map<String, DiaryEntryStorageDto> dtoEntries = new HashMap<>();
+
+    for (Map.Entry<String, DiaryEntry> entry : entries.entrySet()) {
+      DiaryEntryStorageDto dto = new DiaryEntryStorageDto(entry.getValue());
+      dtoEntries.put(entry.getKey(), dto);
     }
+
     try (FileWriter writer = new FileWriter(filepath)) {
       GSON.toJson(dtoEntries, writer);
     }
