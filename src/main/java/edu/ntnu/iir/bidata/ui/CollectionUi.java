@@ -63,8 +63,8 @@ public class CollectionUi {
    */
   public void collection() {
     // creates a list with all diary entries for the user to filter and sort
-    ArrayList<DiaryEntry> collection = new ArrayList<>(diary.getAllDiaryEntries());
-    collLoop:
+    ArrayList<DiaryEntry> collection = new ArrayList<>(diary.getAllDiaryEntries().values());
+    collectionLoop:
     while (true) {
 
       int currentEntries = collection.size();
@@ -94,7 +94,7 @@ public class CollectionUi {
         case COLL_CHOOSE_ENTRY -> chooseEntry(collection);
         case EXIT_MENU -> {
           if (prompter.confirmAction("This action will reset your current collection.")) {
-            break collLoop;
+            break collectionLoop;
           }
         }
         default -> prompter.warning("Not a valid option");
