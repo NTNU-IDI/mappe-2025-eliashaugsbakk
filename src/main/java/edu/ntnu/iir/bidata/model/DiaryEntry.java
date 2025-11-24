@@ -1,6 +1,5 @@
 package edu.ntnu.iir.bidata.model;
 
-import edu.ntnu.iir.bidata.storage.DiaryEntryStorageDto;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -41,46 +40,20 @@ public class DiaryEntry {
 
 
   /**
-   * Constructor to create fabricated diary entries. Takes fabricatedCreationTime to allow for
-   * any creation time. This is useful when showcasing the functionality of the program.
-   *
-   * @param fabricatedCreationTime the fabricated time of creation
-   * @param author      the name of the author
-   * @param destination the destination of the trip, or a more general travel (Traveling through
-   *                      Europe)
-   * @param activity    the activity this entry is describing
-   * @param rating      a rating the user assigns to the activity, on a scale from 0 to 10. This
-   *                      is stored as a double to allow the user more
-   * @param title       the title of the entry
-   * @param text        the main entry text, usually describing the activity
+   * General constructor for reconstructing a diary entry (e.g. from storage) where all
+   * fields including timestamps are known. Or when fabricating entries from EntryFactory
    */
-  public DiaryEntry(LocalDateTime fabricatedCreationTime, String author, String destination,
+  public DiaryEntry(LocalDateTime timeWritten, LocalDateTime timeEdited, String author, String destination,
       String activity, double rating, String title,
       String text) {
-    this.timeWritten = fabricatedCreationTime;
-    this.timeEdited = fabricatedCreationTime;
+    this.timeWritten = timeWritten;
+    this.timeEdited = timeEdited;
     this.author = author;
     this.destination = destination;
     this.activity = activity;
     this.rating = checkRating(rating);
     this.title = title;
     this.text = text;
-  }
-
-  /**
-   * Creates a DiaryEntry from a data transfer object: DiaryEntryStorageDto.
-   *
-   * @param dto data transfer object.
-   */
-  public DiaryEntry(DiaryEntryStorageDto dto) {
-    timeWritten = LocalDateTime.parse(dto.getTimeWritten());
-    timeEdited = LocalDateTime.parse(dto.getTimeEdited());
-    author = dto.getAuthor();
-    destination = dto.getDestination();
-    activity = dto.getActivity();
-    rating = dto.getRating();
-    title = dto.getTitle();
-    text = dto.getText();
   }
 
   /**

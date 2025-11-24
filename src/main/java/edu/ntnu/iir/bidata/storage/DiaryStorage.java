@@ -82,12 +82,7 @@ public class DiaryStorage {
 
       if (dtoEntries != null) {
         for (Map.Entry<String, DiaryEntryStorageDto> entry : dtoEntries.entrySet()) {
-
-          // 1. Convert the DTO back into a DiaryEntry object
-          DiaryEntry diaryEntry = new DiaryEntry(entry.getValue());
-
-          // 2. Use the map's key (entry.getKey()), which is the title, to store the object
-          // This maintains the Map<Title, DiaryEntry> structure.
+          DiaryEntry diaryEntry = entry.getValue().toDiaryEntry();
           entries.put(entry.getKey(), diaryEntry);
         }
       }

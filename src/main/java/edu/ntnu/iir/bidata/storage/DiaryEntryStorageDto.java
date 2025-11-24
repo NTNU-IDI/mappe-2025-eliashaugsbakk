@@ -40,6 +40,24 @@ public class DiaryEntryStorageDto {
   }
 
   /**
+   * Converts this DTO back into a domain model DiaryEntry object.
+   *
+   * @return a new DiaryEntry instance with data from this DTO.
+   */
+  public DiaryEntry toDiaryEntry() {
+    return new DiaryEntry(
+        LocalDateTime.parse(this.timeWritten),
+        LocalDateTime.parse(this.timeEdited),
+        this.author,
+        this.destination,
+        this.activity,
+        this.rating,
+        this.title,
+        this.text
+    );
+  }
+
+  /**
    * Returns the timestamp when the diary entry was first written, stored as an ISO-8601 formatted
    * string.
    *

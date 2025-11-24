@@ -41,7 +41,7 @@ public class EntryFactory {
           String title = "title" + counter;
           String text = "Dummy text";
           createdEntries.put(title,
-              new DiaryEntry(randomDateTime, author, dest, act, rating, title, text));
+              new DiaryEntry(randomDateTime, randomDateTime, author, dest, act, rating, title, text));
         }
       }
     }
