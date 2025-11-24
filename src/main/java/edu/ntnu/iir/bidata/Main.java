@@ -29,7 +29,7 @@ public class Main {
 
   private void init() throws IOException {
     // create a DiaryStorage instance to load and save diary entries
-    DiaryStorage storage = new DiaryStorage("register/data.json");
+    DiaryStorage storage = new DiaryStorage();
 
     // create a Diary instance to store diary entries in memory and do operations on the
     // collection of diary entries

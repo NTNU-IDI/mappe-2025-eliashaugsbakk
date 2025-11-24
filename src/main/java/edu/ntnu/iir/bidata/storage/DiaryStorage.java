@@ -21,6 +21,7 @@ import java.util.Map;
  */
 public class DiaryStorage {
   private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+  private static final String DEFAULT_FILE_PATH = "register/data.json";
   private final String filepath;
 
   /**
@@ -32,6 +33,14 @@ public class DiaryStorage {
    */
   public DiaryStorage(String filepath) {
     this.filepath = filepath;
+  }
+
+  /**
+   * Constructs a {@code DiaryStorage} instance for managing the storage of diary entries in the
+   * default JSON file storage location (register/data.json).
+   */
+  public DiaryStorage() {
+    this.filepath = DEFAULT_FILE_PATH;
   }
 
   /**
