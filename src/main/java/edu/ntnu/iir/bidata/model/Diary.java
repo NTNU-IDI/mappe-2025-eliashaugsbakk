@@ -10,7 +10,7 @@ import java.util.Map;
 public class Diary {
 
   // store the entries in a hash map to enforce no duplicates and for fast comparisons
-  private final Map<String ,DiaryEntry> entries = new HashMap<>();
+  private final Map<String ,DiaryEntry> diaryEntries = new HashMap<>();
 
   /**
    * Adds a new diary entry to the diary.
@@ -24,10 +24,10 @@ public class Diary {
    */
   public void addDiaryEntry(DiaryEntry entry) {
     String key = entry.getTitle();
-    if (entries.containsKey(key)) {
+    if (diaryEntries.containsKey(key)) {
       throw new IllegalArgumentException("duplicate titles are not allowed");
     }
-    entries.put(key, entry);
+    diaryEntries.put(key, entry);
   }
 
   /**
@@ -47,22 +47,22 @@ public class Diary {
       String title = entry.getTitle();
 
       // Check if the title exists in storage
-      if (entries.containsKey(title)) {
+      if (diaryEntries.containsKey(title)) {
         throw new IllegalArgumentException("duplicate titles are not allowed");
       }
     }
 
     // validations passed, add them to the map
-    entries.putAll(entriesToAdd);
+    diaryEntries.putAll(entriesToAdd);
   }
 
   /**
    * Retrieves all diary entries stored in the diary.
    *
-   * @return A map of all diary entries.
+   * @return A copy map of all diary entries.
    */
   public Map<String, DiaryEntry> getAllDiaryEntries() {
-    return entries;
+    return new HashMap<>(diaryEntries);
   }
 
   /**
@@ -72,6 +72,6 @@ public class Diary {
    * @param entry the entry to delete
    */
   public void deleteEntry(DiaryEntry entry) {
-    entries.remove(entry.getTitle());
+    diaryEntries.remove(entry.getTitle());
   }
 }
