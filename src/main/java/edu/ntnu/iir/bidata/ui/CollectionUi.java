@@ -5,12 +5,11 @@ import edu.ntnu.iir.bidata.model.DiaryEntry;
 import edu.ntnu.iir.bidata.model.DiaryUtils;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
  * Handles the creation and editing of a collection of {@link DiaryEntry} holding them in an
- * {@link ArrayList}.
+ * {@link ArrayList} to allow for sorting and for fast random accessibility.
  * Also provides the user with options to interact with one of the entries in their collection.
  */
 public class CollectionUi {
@@ -62,7 +61,7 @@ public class CollectionUi {
    */
   public void collection() {
     // creates a list with all diary entries for the user to filter and sort
-    ArrayList<DiaryEntry> collection = new ArrayList<>(diary.getAllDiaryEntries().values());
+    List<DiaryEntry> collection = new ArrayList<>(diary.getAllDiaryEntries().values());
     collectionLoop:
     while (true) {
 
@@ -88,8 +87,8 @@ public class CollectionUi {
 
       switch (choice) {
         case COLL_PRINT_COLLECTION -> prompter.printListOfEntries(collection);
-        case COLL_APPLY_FILTER ->   applyFilter(collection);
-        case COLL_SORT_COLLECTION -> sortCollection(collection);
+        case COLL_APPLY_FILTER ->   collection = applyFilter(collection);
+        case COLL_SORT_COLLECTION -> collection = sortCollection(collection);
         case COLL_CHOOSE_ENTRY -> chooseEntry(collection);
         case EXIT_MENU -> {
           if (prompter.confirmAction("This action will reset your current collection.")) {
@@ -101,7 +100,7 @@ public class CollectionUi {
     }
   }
 
-  private void applyFilter(Collection<DiaryEntry> entries) {
+  private List<DiaryEntry> applyFilter(List<DiaryEntry> entries) {
     filterLoop:
     while (true) {
       int choice = prompter.promptInt("""
@@ -116,17 +115,17 @@ public class CollectionUi {
       switch (choice) {
         case FILTER_AUTHOR -> {
           String author = prompter.chooseFromList("Author to sort by", DiaryUtils.getDistinctAuthors(entries));
-          DiaryUtils.filterByAuthor(entries, author);
+          entries = DiaryUtils.filterByAuthor(entries, author);
           prompter.println("Filter applied successfully.");
         }
         case FILTER_ACTIVITY -> {
           String activity = prompter.chooseFromList("Activity to sort by", DiaryUtils.getDistinctActivities(entries));
-          DiaryUtils.filterByActivity(entries, activity);
+          entries = DiaryUtils.filterByActivity(entries, activity);
           prompter.println("Filter applied successfully.");
         }
         case FILTER_DESTINATION -> {
           String destination = prompter.chooseFromList("Destination to sort by", DiaryUtils.getDistinctDestinations(entries));
-          DiaryUtils.filterByDestination(entries, destination);
+          entries = DiaryUtils.filterByDestination(entries, destination);
           prompter.println("Filter applied successfully.");
         }
         case FILTER_TIME_CREATED -> {
@@ -136,7 +135,7 @@ public class CollectionUi {
             prompter.warning("Start date must come before stop date");
             break;
           }
-          DiaryUtils.filterByTimeCreated(entries, timeStart, timeStop);
+          entries = DiaryUtils.filterByTimeCreated(entries, timeStart, timeStop);
           prompter.println("Filter applied successfully.");
         }
         case EXIT_MENU -> {
@@ -145,24 +144,32 @@ public class CollectionUi {
         default -> prompter.warning("Not a valid option");
       }
     }
+    return entries;
   }
 
-  private void sortCollection(List<DiaryEntry> entries) {
+  private List<DiaryEntry> sortCollection(List<DiaryEntry> entries) {
     int choice = prompter.promptInt("""
         Sort entries by:
         \t%s. Rating
         \t%s. Time written""".formatted(BY_RATING, BY_TIME_WRITTEN));
     switch (choice) {
-      case 1 -> DiaryUtils.sortByRating(entries);
-      case 2 -> DiaryUtils.sortByTime(entries);
-      default -> prompter.warning("Invalid option");
+      case 1 -> {
+        return DiaryUtils.sortByRating(entries);
+      }
+      case 2 -> {
+        return DiaryUtils.sortByTime(entries);
+      }
+      default -> {
+        prompter.warning("Invalid option");
+        return entries;
+      }
     }
   }
 
 
   private void chooseEntry(List<DiaryEntry> entries) {
     DiaryEntry chosenDiaryEntry = null;
-    entriyLoop:
+    entryLoop:
     while (true) {
       if (chosenDiaryEntry == null) {
         chosenDiaryEntry = prompter.chooseFromListOfEntries(entries);
@@ -180,11 +187,11 @@ public class CollectionUi {
           case EDIT_ENTRY -> entryUi.editEntry(chosenDiaryEntry);
           case DELETE_ENTRY -> {
             if (entryUi.deleteEntry(chosenDiaryEntry)) {
-              break entriyLoop;
+              break entryLoop;
             }
           }
           case EXIT_MENU -> {
-            break entriyLoop;
+            break entryLoop;
           }
           default -> prompter.warning("Invalid option");
         }

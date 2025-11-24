@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -26,12 +27,11 @@ public class DiaryUtilsTest {
     entries.add(entry1);
     entries.add(entry2);
 
-    DiaryUtils diaryUtils = new DiaryUtils();
     // Arrange: Create a copy of the list to compare against
-    ArrayList<DiaryEntry> sortedByRating = new ArrayList<>(entries);
+    List<DiaryEntry> sortedByRating = new ArrayList<>(entries);
 
     // Act: Call the sorting method
-    diaryUtils.sortByRating(sortedByRating);
+    sortedByRating = DiaryUtils.sortByRating(sortedByRating);
 
     // Assert: Asserts that the list is now ordered ascending by rating
     assertEquals(3, sortedByRating.size(), "List size should remain unchanged.");
@@ -54,15 +54,14 @@ public class DiaryUtilsTest {
         3, "title2", "text2");
 
     // Add the entries in different order than creation
-    ArrayList<DiaryEntry> entries = new ArrayList<>();
+    List<DiaryEntry> entries = new ArrayList<>();
     entries.add(entry1);
     entries.add(entry0);
     entries.add(entry2);
 
-    DiaryUtils diaryUtils = new DiaryUtils();
 
     // Act: Sort the entries by time.
-    diaryUtils.sortByTime(entries);
+    entries = DiaryUtils.sortByTime(entries);
 
     // Assert: The list is now sorted by time written
     assertEquals(3, entries.size(), "Size should remain unchanged.");
@@ -83,15 +82,14 @@ public class DiaryUtilsTest {
     DiaryEntry entry2 = new DiaryEntry("author0", "dest2", "act2",
         2, "title2", "text2");
 
-    ArrayList<DiaryEntry> entries = new ArrayList<>();
+    List<DiaryEntry> entries = new ArrayList<>();
     entries.add(entry0);
     entries.add(entry1);
     entries.add(entry2);
 
-    DiaryUtils diaryUtils = new DiaryUtils();
 
     // Act: Filter the list
-    diaryUtils.filterByAuthor(entries, "author0");
+    entries = DiaryUtils.filterByAuthor(entries, "author0");
 
     // Assert: The remaining entries are the correct ones
     assertEquals(2, entries.size(), "Two entries should remain after filtering.");
@@ -110,15 +108,14 @@ public class DiaryUtilsTest {
     DiaryEntry entry2 = new DiaryEntry("author2", "dest0", "act2",
         2, "title2", "text2");
 
-    ArrayList<DiaryEntry> entries = new ArrayList<>();
+    List<DiaryEntry> entries = new ArrayList<>();
     entries.add(entry0);
     entries.add(entry1);
     entries.add(entry2);
 
-    DiaryUtils diaryUtils = new DiaryUtils();
 
     // Act: Filter the list
-    diaryUtils.filterByDestination(entries, "dest0");
+    entries = DiaryUtils.filterByDestination(entries, "dest0");
 
     // Assert: The remaining entries are the correct ones
     assertEquals(2, entries.size(), "Two entries should remain after filtering.");
@@ -136,15 +133,14 @@ public class DiaryUtilsTest {
     DiaryEntry entry2 = new DiaryEntry("author2", "dest2", "act0",
         2, "title2", "text2");
 
-    ArrayList<DiaryEntry> entries = new ArrayList<>();
+    List<DiaryEntry> entries = new ArrayList<>();
     entries.add(entry0);
     entries.add(entry1);
     entries.add(entry2);
 
-    DiaryUtils diaryUtils = new DiaryUtils();
 
     // Act: Filter the list
-    diaryUtils.filterByActivity(entries, "act0");
+    entries = DiaryUtils.filterByActivity(entries, "act0");
 
     // Assert: The remaining entries are the correct ones
     assertEquals(2, entries.size(), "Two entries should remain after filtering.");
@@ -176,16 +172,15 @@ public class DiaryUtilsTest {
         3, "title3", "text3"); // AFTER
 
     // Arrange: Setup list for filtering
-    ArrayList<DiaryEntry> filteredListByTimeInterval = new ArrayList<>();
+    List<DiaryEntry> filteredListByTimeInterval = new ArrayList<>();
     filteredListByTimeInterval.add(entry0);
     filteredListByTimeInterval.add(entry1);
     filteredListByTimeInterval.add(entry2);
     filteredListByTimeInterval.add(entry3);
 
-    DiaryUtils diaryUtils = new DiaryUtils();
 
     // Act: Filter the list
-    diaryUtils.filterByTimeCreated(filteredListByTimeInterval, timeStart, timeStop);
+    filteredListByTimeInterval = DiaryUtils.filterByTimeCreated(filteredListByTimeInterval, timeStart, timeStop);
 
     // Assert: Check that only the 2 correct elements remain
     assertEquals(2, filteredListByTimeInterval.size(),

@@ -12,19 +12,25 @@ public class DiaryUtils {
   /**
    * Sorts a list of diary entries by the time it was created. The oldest entry first.
    *
-   * @param entriesToSort the list of Diary Entries to sort
+   * @param entriesToSort the collection of Diary Entries to sort
+   * @return a new list sorted by time written
    */
-  public static void sortByTime(List<DiaryEntry> entriesToSort) {
-    entriesToSort.sort(Comparator.comparing(DiaryEntry::getTimeWritten));
+  public static List<DiaryEntry> sortByTime(Collection<DiaryEntry> entriesToSort) {
+    List<DiaryEntry> sortedList = new ArrayList<>(entriesToSort);
+    sortedList.sort(Comparator.comparing(DiaryEntry::getTimeWritten));
+    return sortedList;
   }
 
   /**
    * Sorts a list of diary entries by the rating it assigned to it.
    *
-   * @param entriesToSort the list of Diary Entries to sort
+   * @param entriesToSort the collection of Diary Entries to sort
+   * @return a new list sorted by rating
    */
-  public static void sortByRating(List<DiaryEntry> entriesToSort) {
-    entriesToSort.sort(Comparator.comparing(DiaryEntry::getRating));
+  public static List<DiaryEntry> sortByRating(Collection<DiaryEntry> entriesToSort) {
+    List<DiaryEntry> sortedList = new ArrayList<>(entriesToSort);
+    sortedList.sort(Comparator.comparing(DiaryEntry::getRating));
+    return sortedList;
   }
 
   /**
@@ -32,16 +38,16 @@ public class DiaryUtils {
    *
    * @param originalCollection the unfiltered collection of entries
    * @param author the author whose diary entries are to be retrieved.
+   * @return a list of entries with the specified author
    */
-  public static void filterByAuthor(Collection<DiaryEntry> originalCollection, String author) {
-    ArrayList<DiaryEntry> filteredList = new ArrayList<>();
+  public static List<DiaryEntry> filterByAuthor(Collection<DiaryEntry> originalCollection, String author) {
+    List <DiaryEntry> filteredList = new ArrayList<>();
     for (DiaryEntry entry : originalCollection) {
       if (entry.getAuthor().equals(author)) {
         filteredList.add(entry);
       }
     }
-    originalCollection.clear();
-    originalCollection.addAll(filteredList);
+    return filteredList;
   }
 
   /**
@@ -49,16 +55,16 @@ public class DiaryUtils {
    *
    * @param originalCollection the unfiltered collection of entries
    * @param activity the activity to filter entries by.
+   * @return a list of entries with the specified activity
    */
-  public static void filterByActivity(Collection<DiaryEntry> originalCollection, String activity) {
+  public static List<DiaryEntry> filterByActivity(Collection<DiaryEntry> originalCollection, String activity) {
     ArrayList<DiaryEntry> filteredList = new ArrayList<>();
     for (DiaryEntry entry : originalCollection) {
       if (entry.getActivity().equalsIgnoreCase(activity)) {
         filteredList.add(entry);
       }
     }
-    originalCollection.clear();
-    originalCollection.addAll(filteredList);
+    return filteredList;
   }
 
   /**
@@ -66,16 +72,16 @@ public class DiaryUtils {
    *
    * @param originalCollection the unfiltered collection of entries
    * @param destination the destination to filter entries by.
+   * @return a list of entries with the specified destination
    */
-  public static void filterByDestination(Collection<DiaryEntry> originalCollection, String destination) {
+  public static List<DiaryEntry> filterByDestination(Collection<DiaryEntry> originalCollection, String destination) {
     List<DiaryEntry> filteredList = new ArrayList<>();
     for (DiaryEntry entry : originalCollection) {
       if (entry.getDestination().equalsIgnoreCase(destination)) {
         filteredList.add(entry);
       }
     }
-    originalCollection.clear();
-    originalCollection.addAll(filteredList);
+    return filteredList;
   }
 
   /**
@@ -84,8 +90,9 @@ public class DiaryUtils {
    * @param originalCollection the unfiltered collection of entries
    * @param timeStart the creation time from witch to allow entries through
    * @param timeStop the creation time to which entries are allowed
+   * @return a list of entries within the specified time interval
    */
-  public static void filterByTimeCreated(Collection<DiaryEntry> originalCollection, LocalDateTime timeStart,
+  public static List<DiaryEntry> filterByTimeCreated(Collection<DiaryEntry> originalCollection, LocalDateTime timeStart,
       LocalDateTime timeStop) {
     ArrayList<DiaryEntry> filteredList = new ArrayList<>();
     for (DiaryEntry entry : originalCollection) {
@@ -93,8 +100,7 @@ public class DiaryUtils {
         filteredList.add(entry);
       }
     }
-    originalCollection.clear();
-    originalCollection.addAll(filteredList);
+    return filteredList;
   }
 
   /**
