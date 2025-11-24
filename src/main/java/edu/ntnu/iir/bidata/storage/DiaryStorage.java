@@ -37,7 +37,7 @@ public class DiaryStorage {
   /**
    * Loads all diary entries from the disk.
    *
-   * <p>If the file does not exist or is empty, an empty list is returned.
+   * <p>If the file does not exist or is empty, an empty map is returned.
    *
    * @return an {@link Map} containing all the diary entries stored in the file
    * @throws IOException if the file cannot be created or read
@@ -64,7 +64,7 @@ public class DiaryStorage {
   }
 
   /**
-   * Reads the JSON file and returns the list of diary entries.
+   * Reads the JSON file and returns the map of diary entries.
    *
    * @return a map of diary entries, possibly empty. May be {@code null} if the file does not
    *     contain a JSON array

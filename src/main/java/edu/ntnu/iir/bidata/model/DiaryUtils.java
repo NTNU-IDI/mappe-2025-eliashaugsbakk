@@ -5,6 +5,7 @@ import java.util.*;
 
 /**
  * General class to do operations on collections of Diary Entries.
+ * This mutates the inputted list directly.
  */
 public class DiaryUtils {
 
@@ -29,113 +30,113 @@ public class DiaryUtils {
   /**
    * Filters the inputted list of diary entries by the specified author.
    *
-   * @param originalList the unfiltered ArrayList
+   * @param originalCollection the unfiltered collection of entries
    * @param author the author whose diary entries are to be retrieved.
    */
-  public static void filterByAuthor(ArrayList<DiaryEntry> originalList, String author) {
+  public static void filterByAuthor(Collection<DiaryEntry> originalCollection, String author) {
     ArrayList<DiaryEntry> filteredList = new ArrayList<>();
-    for (DiaryEntry entry : originalList) {
+    for (DiaryEntry entry : originalCollection) {
       if (entry.getAuthor().equals(author)) {
         filteredList.add(entry);
       }
     }
-    originalList.clear();
-    originalList.addAll(filteredList);
+    originalCollection.clear();
+    originalCollection.addAll(filteredList);
   }
 
   /**
    * Filters the list of inputted diary entries by the specified activity.
    *
-   * @param originalList the unfiltered ArrayList
+   * @param originalCollection the unfiltered collection of entries
    * @param activity the activity to filter entries by.
    */
-  public static void filterByActivity(Collection<DiaryEntry> originalList, String activity) {
+  public static void filterByActivity(Collection<DiaryEntry> originalCollection, String activity) {
     ArrayList<DiaryEntry> filteredList = new ArrayList<>();
-    for (DiaryEntry entry : originalList) {
+    for (DiaryEntry entry : originalCollection) {
       if (entry.getActivity().equalsIgnoreCase(activity)) {
         filteredList.add(entry);
       }
     }
-    originalList.clear();
-    originalList.addAll(filteredList);
+    originalCollection.clear();
+    originalCollection.addAll(filteredList);
   }
 
   /**
    * Filters the inputted list of diary entries by the specified destination.
    *
-   * @param originalList the unfiltered ArrayList
+   * @param originalCollection the unfiltered collection of entries
    * @param destination the destination to filter entries by.
    */
-  public static void filterByDestination(Collection<DiaryEntry> originalList, String destination) {
+  public static void filterByDestination(Collection<DiaryEntry> originalCollection, String destination) {
     List<DiaryEntry> filteredList = new ArrayList<>();
-    for (DiaryEntry entry : originalList) {
+    for (DiaryEntry entry : originalCollection) {
       if (entry.getDestination().equalsIgnoreCase(destination)) {
         filteredList.add(entry);
       }
     }
-    originalList.clear();
-    originalList.addAll(filteredList);
+    originalCollection.clear();
+    originalCollection.addAll(filteredList);
   }
 
   /**
    * Filters the inputted list of diary entries by time interval.
    *
-   * @param originalList the unfiltered ArrayList
+   * @param originalCollection the unfiltered collection of entries
    * @param timeStart the creation time from witch to allow entries through
    * @param timeStop the creation time to which entries are allowed
    */
-  public static void filterByTimeCreated(Collection<DiaryEntry> originalList, LocalDateTime timeStart,
+  public static void filterByTimeCreated(Collection<DiaryEntry> originalCollection, LocalDateTime timeStart,
       LocalDateTime timeStop) {
     ArrayList<DiaryEntry> filteredList = new ArrayList<>();
-    for (DiaryEntry entry : originalList) {
+    for (DiaryEntry entry : originalCollection) {
       if (entry.getTimeWritten().isAfter(timeStart) && entry.getTimeWritten().isBefore(timeStop)) {
         filteredList.add(entry);
       }
     }
-    originalList.clear();
-    originalList.addAll(filteredList);
+    originalCollection.clear();
+    originalCollection.addAll(filteredList);
   }
 
   /**
-   * Returns a list of the unique authors from a list of Diary Entries.
+   * Returns a list of the unique authors from a collection of Diary Entries.
    *
-   * @param originalList the list to get authors from
+   * @param originalCollection the collection to get authors from
    * @return the list of unique authors
    */
-  public static List<String> getDistinctAuthors(Collection<DiaryEntry> originalList) {
+  public static List<String> getDistinctAuthors(Collection<DiaryEntry> originalCollection) {
     // use TreeSet to ensure uniqueness and alphabetical sorting
     Set<String> authors = new TreeSet<>();
-    for (DiaryEntry entry : originalList) {
+    for (DiaryEntry entry : originalCollection) {
       authors.add(entry.getAuthor());
     }
     return new ArrayList<>(authors);
   }
 
   /**
-   * Returns a list of the unique activities from a list of Diary Entries.
+   * Returns a list of the unique activities from a collection of Diary Entries.
    *
-   * @param originalList the list to get activities from
-   * @return the list of unique authors
+   * @param originalCollection the collection to get activities from
+   * @return the list of unique activities
    */
-  public static List<String> getDistinctActivities(Collection<DiaryEntry> originalList) {
+  public static List<String> getDistinctActivities(Collection<DiaryEntry> originalCollection) {
     // use TreeSet to ensure uniqueness and alphabetical sorting
     Set<String> activities = new TreeSet<>();
-    for (DiaryEntry entry : originalList) {
+    for (DiaryEntry entry : originalCollection) {
       activities.add(entry.getActivity());
     }
     return new ArrayList<>(activities);
   }
 
   /**
-   * Returns a list of the unique destinations from a list of Diary Entries.
+   * Returns a list of the unique destinations from a collection of Diary Entries.
    *
-   * @param originalList the list to get destinations from
+   * @param originalCollection the collection to get destinations from
    * @return the list of unique destinations
    */
-  public static List<String> getDistinctDestinations(Collection<DiaryEntry> originalList) {
+  public static List<String> getDistinctDestinations(Collection<DiaryEntry> originalCollection) {
     // use TreeSet to ensure uniqueness and alphabetical sorting
     Set<String> destinations = new TreeSet<>();
-    for (DiaryEntry entry : originalList) {
+    for (DiaryEntry entry : originalCollection) {
       destinations.add(entry.getDestination());
     }
     return new ArrayList<>(destinations);

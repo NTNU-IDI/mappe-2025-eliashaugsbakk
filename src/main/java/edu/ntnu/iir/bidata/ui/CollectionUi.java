@@ -5,6 +5,7 @@ import edu.ntnu.iir.bidata.model.DiaryEntry;
 import edu.ntnu.iir.bidata.model.DiaryUtils;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -100,7 +101,7 @@ public class CollectionUi {
     }
   }
 
-  private void applyFilter(ArrayList<DiaryEntry> entries) {
+  private void applyFilter(Collection<DiaryEntry> entries) {
     filterLoop:
     while (true) {
       int choice = prompter.promptInt("""
