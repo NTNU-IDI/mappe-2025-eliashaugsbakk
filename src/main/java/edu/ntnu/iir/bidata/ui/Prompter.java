@@ -319,12 +319,10 @@ public class Prompter {
         choiceString = sc.nextLine();
         for (DiaryEntry entry : entries) {
           if (entry.getTitle().equalsIgnoreCase(choiceString)) {
-            choiceEntry = entry;
-            return choiceEntry;
-          } else {
-            warning("Invalid input");
+            return entry;
           }
         }
+        warning("Invalid input");
       }
     }
   }

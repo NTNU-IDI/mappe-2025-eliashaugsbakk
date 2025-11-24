@@ -105,14 +105,22 @@ public class EntryUi {
   }
 
   private String setTitle() {
-    String title = prompter.prompt("Write the title of your entry");
-    for (DiaryEntry entry : diary.getAllDiaryEntries().values()) {
-      if (entry.getTitle().equalsIgnoreCase(title)) {
-        prompter.warning("Diary entry title has to be unique.");
-        setTitle();
+    while (true) {
+      String title = prompter.prompt("Write the title of your entry");
+
+      boolean duplicate = false;
+      for (DiaryEntry entry : diary.getAllDiaryEntries().values()) {
+        if (entry.getTitle().equals(title)) {
+          prompter.warning("Diary entry title has to be unique.");
+          duplicate = true;
+          break;
+        }
+      }
+
+      if (!duplicate) {
+        return title;
       }
     }
-    return title;
   }
 
   /**
@@ -177,7 +185,7 @@ public class EntryUi {
 
   private void editTitle(DiaryEntry entry) {
     prompter.println("Current title: " + entry.getTitle());
-    entry.setText(setTitle());
+    entry.setTitle(setTitle());
     prompter.println("Title: " + entry.getTitle());
   }
 
