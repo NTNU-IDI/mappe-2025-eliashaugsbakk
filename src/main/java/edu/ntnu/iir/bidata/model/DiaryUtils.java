@@ -99,7 +99,7 @@ public class DiaryUtils {
    * Returns a list of the unique authors from a list of Diary Entries.
    *
    * @param originalList the list to get authors from
-   * @return the set of unique authors
+   * @return the list of unique authors
    */
   public List<String> getDistinctAuthors(Collection<DiaryEntry> originalList) {
     // use TreeSet to ensure uniqueness and alphabetical sorting
