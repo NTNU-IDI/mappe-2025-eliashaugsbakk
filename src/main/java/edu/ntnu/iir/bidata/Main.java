@@ -40,8 +40,8 @@ public class Main {
     // with Prompter and Formatter as arguments
     Formatter formatter = new Formatter();
     Prompter prompter = new Prompter(formatter);
-    EntryUi entryUi = new EntryUi(diary, prompter);
-    Ui ui = new Ui(prompter, diary, entryUi);
+    EntryUi entryUi = new EntryUi(diary, prompter, formatter);
+    Ui ui = new Ui(prompter, diary, entryUi, formatter);
 
     // run the main program loop
     ui.run();

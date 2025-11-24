@@ -1,7 +1,6 @@
 package edu.ntnu.iir.bidata.model;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a single diary entry for a travel diary. Each entry contains information about the
@@ -240,31 +239,5 @@ public class DiaryEntry {
   public void setText(String text) {
     this.text = text;
     setTimeEdited();
-  }
-
-  /**
-   * Returns a string representation of this diary entry.
-   *
-   * @return a string representation of this diary entry
-   */
-  @Override
-  public String toString() {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    String formattedWritten = timeWritten.format(formatter);
-    String formattedEdited = timeEdited.format(formatter);
-    return """
-        Written: %s
-        Last edit: %s
-        
-        Author: %s
-        Destination: %s
-        Activity: %s
-        Rating: %.1f
-        Title: %s
-        
-        Main entry:
-        %s
-        """.formatted(formattedWritten, formattedEdited, author, destination, activity, rating,
-        title, text);
   }
 }

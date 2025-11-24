@@ -22,10 +22,10 @@ public class Ui {
    * @param diary the Diary object to manage diary entries
    */
   public Ui(Prompter prompter, Diary diary,
-      EntryUi entryUi) {
+      EntryUi entryUi, Formatter formatter) {
     this.prompter = prompter;
     this.collectionUi = new CollectionUi(diary, entryUi, prompter);
-    this.entryUi = new EntryUi(diary, prompter);
+    this.entryUi = new EntryUi(diary, prompter, formatter);
   }
 
   /**

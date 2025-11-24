@@ -10,17 +10,6 @@ import java.util.List;
 public class Formatter {
   private static final String COLOR_RED = "\u001B[31m";
   private static final String COLOR_RESET = "\u001B[0m";
-  private static final String CLEAR_SCREEN = "\u001B[H\u001B[2J";
-
-  /**
-   * Clears the screen by printing a number of newlines.
-   * NOTE: May not work in all terminals.
-   *
-   * @return the String containing the newlines
-   */
-  public String clear() {
-    return CLEAR_SCREEN;
-  }
 
   /**
    * Returns the string encapsulated by the ANSI codes for red and back to normal.
@@ -71,6 +60,33 @@ public class Formatter {
   }
 
   /**
+   * Formats a single diary entry for display.
+   *
+   * @param entry the entry to format
+   * @return a formatted string representation
+   */
+  public String formatDiaryEntry(DiaryEntry entry) {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    String formattedWritten = entry.getTimeWritten().format(formatter);
+    String formattedEdited = entry.getTimeEdited().format(formatter);
+    return """
+        Written: %s
+        Last edit: %s
+        
+        Author: %s
+        Destination: %s
+        Activity: %s
+        Rating: %.1f
+        Title: %s
+        
+        Main entry:
+        %s
+        """.formatted(formattedWritten, formattedEdited, entry.getAuthor(),
+        entry.getDestination(), entry.getActivity(), entry.getRating(),
+        entry.getTitle(), entry.getText());
+  }
+
+  /**
    * Creates a string representation of a collection of Diary Entries.
    *
    * @param entries list of Diary Entries
@@ -116,7 +132,6 @@ public class Formatter {
 
     StringBuilder sb = new StringBuilder();
 
-    sb.append(clear());
     sb.append(line(105));
 
     for (int i = 0; i < entries.size(); i++) {

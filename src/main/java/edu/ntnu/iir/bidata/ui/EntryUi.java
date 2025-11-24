@@ -24,15 +24,17 @@ public class EntryUi {
 
   private final Diary diary;
   private final Prompter prompter;
+  private final Formatter formatter;
 
   /**
    * Constructor to let EntryUi to interact with {@link Prompter}.
    *
    * @param prompter to give output and take input from the user
    */
-  public EntryUi(Diary diary, Prompter prompter) {
+  public EntryUi(Diary diary, Prompter prompter, Formatter formatter) {
     this.diary = diary;
     this.prompter = prompter;
+    this.formatter = formatter;
   }
 
   /**
@@ -45,7 +47,7 @@ public class EntryUi {
         // no entry was selected, probably because the diary is empty
         return;
       }
-      prompter.message(entry.toString());
+      prompter.message(formatter.formatDiaryEntry(entry));
     } catch (RuntimeException e) {
       prompter.warning(e.getMessage());
     }
@@ -131,7 +133,7 @@ public class EntryUi {
   public void editEntry(DiaryEntry entry) {
     editLoop:
     while (true) {
-      prompter.println(entry.toString());
+      prompter.println(formatter.formatDiaryEntry(entry));
       int choice = prompter.promptInt("""
           \t%s - edit Author
           \t%s - edit Destination
