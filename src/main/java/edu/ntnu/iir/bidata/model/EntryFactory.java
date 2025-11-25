@@ -18,7 +18,7 @@ public class EntryFactory {
   private static final List<String> AUTHORS = new ArrayList<>(
       List.of("Einar", "Kevin", "Kristian", "Synne"));
   private static final List<String> ACTIVITIES = new ArrayList<>(
-      List.of("Stroll", "Bathing", "Dining", "Hike"));
+      List.of("Climbing", "Bathing", "Dining", "Hiking"));
   private static final List<String> DESTINATIONS = new ArrayList<>(
       List.of("Oslo", "Bergen", "Stockholm", "Narvik"));
 
@@ -49,8 +49,10 @@ public class EntryFactory {
           }
 
           double rating = (double) RANDOM.nextInt(101) / 10;
+          String text = "I was %s in %s.\nI would rate the experience a: %s"
+              .formatted(act, dest, rating);
+
           String title = "title" + counter;
-          String text = "Dummy text";
           createdEntries.put(title,
               new DiaryEntry(randomDateTime, randomDateTime, author,
                   dest, act, rating, title, text));

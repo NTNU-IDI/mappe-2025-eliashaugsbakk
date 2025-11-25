@@ -30,6 +30,7 @@ public class CollectionUi {
   private static final int FILTER_ACTIVITY = 2;
   private static final int FILTER_DESTINATION = 3;
   private static final int FILTER_TIME_CREATED = 4;
+  private static final int FILTER_TEXT_CONTAINS = 5;
 
   // sort entries
   private static final int BY_RATING = 1;
@@ -111,8 +112,9 @@ public class CollectionUi {
           \t%s - Activity
           \t%s - Destination
           \t%s - Time created
+          \t%s - Main text contains...
           \t%s - Done""".formatted(FILTER_AUTHOR, FILTER_ACTIVITY, FILTER_DESTINATION,
-          FILTER_TIME_CREATED, EXIT_MENU));
+          FILTER_TIME_CREATED, FILTER_TEXT_CONTAINS, EXIT_MENU));
 
       switch (choice) {
         case FILTER_AUTHOR -> {
@@ -139,6 +141,11 @@ public class CollectionUi {
           }
           entries = DiaryFilters.filterByTimeCreated(entries, timeStart, timeStop);
           prompter.println("Filter applied successfully.");
+        }
+        case FILTER_TEXT_CONTAINS -> {
+          String searchText = prompter.prompt("Enter the text you want to filter by."
+              + " The search ignores whitespace and capitalization.");
+          entries = DiaryFilters.filterByContent(entries, searchText);
         }
         case EXIT_MENU -> {
           break filterLoop;

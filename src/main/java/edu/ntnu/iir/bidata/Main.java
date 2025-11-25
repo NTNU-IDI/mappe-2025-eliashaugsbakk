@@ -44,7 +44,7 @@ public class Main {
     // if the Diary is empty, prompt the user to ask if they want to add fabricated entries
     if (diary.getAllDiaryEntries().isEmpty()) {
       if (prompter.confirmAction(
-          "It seems your diary is empty."
+          "It seems your diary is empty. "
           + "Do you want to generate sample data to test out the program?")) {
         diary.addDiaryEntries(EntryFactory.fabricateEntries());
       }
