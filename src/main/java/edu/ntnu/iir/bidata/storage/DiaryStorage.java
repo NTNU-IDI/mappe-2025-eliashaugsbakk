@@ -57,14 +57,19 @@ public class DiaryStorage {
   }
 
   /**
-   * Ensures that the storage file exists and contains at least an empty JSON array {@code []}.
+   * Ensures that the storage file exists and contains at least an empty JSON array {@code {}}.
    *
-   * <p>If the file does not exist or is empty, it is created and initialized with {@code []}.
+   * <p>If the file does not exist or is empty, it is created and initialized with {@code {}}.
    *
    * @throws IOException if the file cannot be created or written to
    */
   private void ensureFileInitialized() throws IOException {
     File file = new File(filepath);
+    File parent = file.getParentFile();
+    if (parent != null && !parent.exists()) {
+      parent.mkdirs();
+    }
+
     if (!file.exists() || file.length() == 0) {
       try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
         writer.write("{}");

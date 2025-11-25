@@ -14,7 +14,7 @@ import java.util.*;
 public class EntryFactory {
   private static final Random RANDOM = new Random();
 
-  private final static List<String> AUTHORS = new ArrayList<>(List.of("Jonas", "Vilde", "Synne", "Knut"));
+  private final static List<String> AUTHORS = new ArrayList<>(List.of("Einar", "Kevin", "Kristian", "Knut"));
   private final static List<String> ACTIVITIES = new ArrayList<>(List.of("Stroll", "Bathing", "Dining", "Hike"));
   private final static List<String> DESTINATIONS = new ArrayList<>(List.of("Oslo", "Bergen", "Stockholm", "Narvik"));
 

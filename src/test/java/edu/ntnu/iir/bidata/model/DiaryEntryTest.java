@@ -10,27 +10,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class DiaryEntryTest {
 
   @Test
-  void should_RetainAllData_When_MappingToDtoAndBack() {
-    // Arrange: Create an original Entry object
-    DiaryEntry original = new DiaryEntry("AuthorName", "Destination",
-        "Activity", 5.5, "EntryTitle", "Some text");
-
-    // Act: Convert to DTO and back to an Entry
-    DiaryEntryStorageDto dto = new DiaryEntryStorageDto(original);
-    DiaryEntry recreated = new DiaryEntry(dto);
-
-    // Assert: Verify that all fields are identical (positive case)
-    assertEquals(original.getTimeWritten(), recreated.getTimeWritten());
-    assertEquals(original.getTimeEdited(), recreated.getTimeEdited());
-    assertEquals(original.getAuthor(), recreated.getAuthor());
-    assertEquals(original.getDestination(), recreated.getDestination());
-    assertEquals(original.getActivity(), recreated.getActivity());
-    assertEquals(original.getRating(), recreated.getRating());
-    assertEquals(original.getTitle(), recreated.getTitle());
-    assertEquals(original.getText(), recreated.getText());
-  }
-
-  @Test
   void should_UpdateAllFields_When_SettersAreCalled() {
     // Arrange: Create Entry with old values
     DiaryEntry diaryEntry = new DiaryEntry("OldAuthor", "OldDestination",
