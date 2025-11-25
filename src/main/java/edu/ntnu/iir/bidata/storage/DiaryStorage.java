@@ -59,7 +59,8 @@ public class DiaryStorage {
   /**
    * Ensures that the storage file exists and contains at least an empty JSON array {@code {}}.
    *
-   * <p>If the file does not exist or is empty, it is created and initialized with {@code {}}.
+   * <p>If the file or directory does not exist or is empty,
+   * it is created and initialized with {@code {}}.
    *
    * @throws IOException if the file cannot be created or written to
    */
