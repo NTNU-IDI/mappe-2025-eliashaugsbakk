@@ -42,9 +42,8 @@ public class DiaryEntry {
    * General constructor for reconstructing a diary entry (e.g. from storage) where all
    * fields including timestamps are known. Or when fabricating entries from EntryFactory
    */
-  public DiaryEntry(LocalDateTime timeWritten, LocalDateTime timeEdited, String author, String destination,
-      String activity, double rating, String title,
-      String text) {
+  public DiaryEntry(LocalDateTime timeWritten, LocalDateTime timeEdited, String author,
+      String destination, String activity, double rating, String title, String text) {
     this.timeWritten = timeWritten;
     this.timeEdited = timeEdited;
     this.author = author;

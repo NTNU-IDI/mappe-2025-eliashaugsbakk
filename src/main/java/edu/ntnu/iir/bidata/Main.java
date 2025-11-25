@@ -1,6 +1,7 @@
 package edu.ntnu.iir.bidata;
 
 import edu.ntnu.iir.bidata.model.Diary;
+import edu.ntnu.iir.bidata.model.EntryFactory;
 import edu.ntnu.iir.bidata.storage.DiaryStorage;
 import edu.ntnu.iir.bidata.ui.EntryUi;
 import edu.ntnu.iir.bidata.ui.Formatter;
@@ -36,10 +37,20 @@ public class Main {
     Diary diary = new Diary();
     diary.addDiaryEntries(storage.loadEntries());
 
-    // create an Ui instance to handle the main program loop
-    // with Prompter and Formatter as arguments
+
     Formatter formatter = new Formatter();
     Prompter prompter = new Prompter(formatter);
+    // if the Diary is empty, prompt the user to ask if they want to add fabricated entries
+    if (diary.getAllDiaryEntries().isEmpty()) {
+      if (prompter.confirmAction(
+          "It seems your diary is empty. "
+          + "Do you want to generate sample data to test out the program?")) {
+        diary.addDiaryEntries(EntryFactory.fabricateEntries());
+      }
+    }
+
+    // create an Ui instance to handle the main program loop
+    // with Prompter, Diary, EntryUi and Formatter as arguments
     EntryUi entryUi = new EntryUi(diary, prompter, formatter);
     Ui ui = new Ui(prompter, diary, entryUi, formatter);
 

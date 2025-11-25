@@ -151,7 +151,7 @@ public class Prompter {
     println("X=========================X");
     println(message);
     println("X=========================X");
-    println("Write yes to confirm, no to return");
+    print("Type \"yes\" to confirm, or hit \"RETURN\" to cancel.\n> ");
     String answer = sc.nextLine();
     return answer.trim().equalsIgnoreCase("yes");
   }

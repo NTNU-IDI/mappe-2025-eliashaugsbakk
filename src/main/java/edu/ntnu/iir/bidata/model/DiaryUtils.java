@@ -1,7 +1,12 @@
 package edu.ntnu.iir.bidata.model;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * General class to do operations on collections of Diary Entries.
@@ -40,8 +45,9 @@ public class DiaryUtils {
    * @param author the author whose diary entries are to be retrieved.
    * @return a list of entries with the specified author
    */
-  public static List<DiaryEntry> filterByAuthor(Collection<DiaryEntry> originalCollection, String author) {
-    List <DiaryEntry> filteredList = new ArrayList<>();
+  public static List<DiaryEntry> filterByAuthor(
+      Collection<DiaryEntry> originalCollection, String author) {
+    List<DiaryEntry> filteredList = new ArrayList<>();
     for (DiaryEntry entry : originalCollection) {
       if (entry.getAuthor().equals(author)) {
         filteredList.add(entry);
@@ -57,7 +63,8 @@ public class DiaryUtils {
    * @param activity the activity to filter entries by.
    * @return a list of entries with the specified activity
    */
-  public static List<DiaryEntry> filterByActivity(Collection<DiaryEntry> originalCollection, String activity) {
+  public static List<DiaryEntry> filterByActivity(
+      Collection<DiaryEntry> originalCollection, String activity) {
     ArrayList<DiaryEntry> filteredList = new ArrayList<>();
     for (DiaryEntry entry : originalCollection) {
       if (entry.getActivity().equalsIgnoreCase(activity)) {
@@ -74,7 +81,8 @@ public class DiaryUtils {
    * @param destination the destination to filter entries by.
    * @return a list of entries with the specified destination
    */
-  public static List<DiaryEntry> filterByDestination(Collection<DiaryEntry> originalCollection, String destination) {
+  public static List<DiaryEntry> filterByDestination(
+      Collection<DiaryEntry> originalCollection, String destination) {
     List<DiaryEntry> filteredList = new ArrayList<>();
     for (DiaryEntry entry : originalCollection) {
       if (entry.getDestination().equalsIgnoreCase(destination)) {
@@ -92,7 +100,8 @@ public class DiaryUtils {
    * @param timeStop the creation time to which entries are allowed
    * @return a list of entries within the specified time interval
    */
-  public static List<DiaryEntry> filterByTimeCreated(Collection<DiaryEntry> originalCollection, LocalDateTime timeStart,
+  public static List<DiaryEntry> filterByTimeCreated(
+      Collection<DiaryEntry> originalCollection, LocalDateTime timeStart,
       LocalDateTime timeStop) {
     ArrayList<DiaryEntry> filteredList = new ArrayList<>();
     for (DiaryEntry entry : originalCollection) {

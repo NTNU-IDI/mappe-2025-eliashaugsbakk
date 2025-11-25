@@ -86,7 +86,7 @@ public class DiaryStorage {
    *
    * @throws IOException if the file cannot be read
    */
-  private Map<String ,DiaryEntry> readFromFile() throws IOException {
+  private Map<String, DiaryEntry> readFromFile() throws IOException {
     try (FileReader reader = new FileReader(filepath)) {
       Type mapType = new TypeToken<Map<String, DiaryEntryStorageDto>>() {
       }.getType();

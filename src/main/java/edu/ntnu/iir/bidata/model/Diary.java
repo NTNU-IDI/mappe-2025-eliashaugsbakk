@@ -10,7 +10,7 @@ import java.util.Map;
 public class Diary {
 
   // store the entries in a hash map to enforce no duplicates and for fast comparisons
-  private final Map<String ,DiaryEntry> diaryEntries = new HashMap<>();
+  private final Map<String, DiaryEntry> diaryEntries = new HashMap<>();
 
   /**
    * Adds a new diary entry to the diary.
@@ -40,7 +40,7 @@ public class Diary {
    * @param entriesToAdd the list of diary entries to be added.
    * @throws IllegalArgumentException if duplicate titles are found
    */
-  public void addDiaryEntries(Map<String ,DiaryEntry> entriesToAdd) {
+  public void addDiaryEntries(Map<String, DiaryEntry> entriesToAdd) {
     // Local set to check for duplicates within the incoming batch itself
 
     for (DiaryEntry entry : entriesToAdd.values()) {
@@ -66,12 +66,18 @@ public class Diary {
   }
 
   /**
-   * Methode for deleting a diary entry from the map stored in Diary. This deletes it permanently
-   * when the program is exited normally.
+   * Methode for deleting a diary entry from the map stored in Diary.
    *
    * @param entry the entry to delete
    */
   public void deleteEntry(DiaryEntry entry) {
     diaryEntries.remove(entry.getTitle());
+  }
+
+  /**
+   * Deletes all diary entries in from the map stored in Diary.
+   */
+  public void deleteAllEntries() {
+    diaryEntries.clear();
   }
 }
