@@ -4,3 +4,6 @@
 
 # build output
 target/
+
+# user data
+/register/data.json

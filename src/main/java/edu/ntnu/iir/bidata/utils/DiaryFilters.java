@@ -1,43 +1,16 @@
-package edu.ntnu.iir.bidata.model;
+package edu.ntnu.iir.bidata.utils;
 
+import edu.ntnu.iir.bidata.model.DiaryEntry;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 /**
- * General class to do operations on collections of Diary Entries.
- * This mutates the inputted list directly.
+ * Methods to return a filtered list of DiaryEntries by a specific object variable
+ * from a collection of DiaryEntries.
  */
-public class DiaryUtils {
-
-  /**
-   * Sorts a list of diary entries by the time it was created. The oldest entry first.
-   *
-   * @param entriesToSort the collection of Diary Entries to sort
-   * @return a new list sorted by time written
-   */
-  public static List<DiaryEntry> sortByTime(Collection<DiaryEntry> entriesToSort) {
-    List<DiaryEntry> sortedList = new ArrayList<>(entriesToSort);
-    sortedList.sort(Comparator.comparing(DiaryEntry::getTimeWritten));
-    return sortedList;
-  }
-
-  /**
-   * Sorts a list of diary entries by the rating it assigned to it.
-   *
-   * @param entriesToSort the collection of Diary Entries to sort
-   * @return a new list sorted by rating
-   */
-  public static List<DiaryEntry> sortByRating(Collection<DiaryEntry> entriesToSort) {
-    List<DiaryEntry> sortedList = new ArrayList<>(entriesToSort);
-    sortedList.sort(Comparator.comparing(DiaryEntry::getRating));
-    return sortedList;
-  }
-
+public class DiaryFilters {
   /**
    * Filters the inputted list of diary entries by the specified author.
    *
@@ -134,50 +107,5 @@ public class DiaryUtils {
       }
     }
     return filteredList;
-  }
-
-  /**
-   * Returns a list of the unique authors from a collection of Diary Entries.
-   *
-   * @param originalCollection the collection to get authors from
-   * @return the list of unique authors
-   */
-  public static List<String> getDistinctAuthors(Collection<DiaryEntry> originalCollection) {
-    // use TreeSet to ensure uniqueness and alphabetical sorting
-    Set<String> authors = new TreeSet<>();
-    for (DiaryEntry entry : originalCollection) {
-      authors.add(entry.getAuthor());
-    }
-    return new ArrayList<>(authors);
-  }
-
-  /**
-   * Returns a list of the unique activities from a collection of Diary Entries.
-   *
-   * @param originalCollection the collection to get activities from
-   * @return the list of unique activities
-   */
-  public static List<String> getDistinctActivities(Collection<DiaryEntry> originalCollection) {
-    // use TreeSet to ensure uniqueness and alphabetical sorting
-    Set<String> activities = new TreeSet<>();
-    for (DiaryEntry entry : originalCollection) {
-      activities.add(entry.getActivity());
-    }
-    return new ArrayList<>(activities);
-  }
-
-  /**
-   * Returns a list of the unique destinations from a collection of Diary Entries.
-   *
-   * @param originalCollection the collection to get destinations from
-   * @return the list of unique destinations
-   */
-  public static List<String> getDistinctDestinations(Collection<DiaryEntry> originalCollection) {
-    // use TreeSet to ensure uniqueness and alphabetical sorting
-    Set<String> destinations = new TreeSet<>();
-    for (DiaryEntry entry : originalCollection) {
-      destinations.add(entry.getDestination());
-    }
-    return new ArrayList<>(destinations);
   }
 }

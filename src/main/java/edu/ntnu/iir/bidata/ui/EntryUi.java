@@ -2,7 +2,7 @@ package edu.ntnu.iir.bidata.ui;
 
 import edu.ntnu.iir.bidata.model.Diary;
 import edu.ntnu.iir.bidata.model.DiaryEntry;
-import edu.ntnu.iir.bidata.model.DiaryUtils;
+import edu.ntnu.iir.bidata.utils.DiaryDistinct;
 
 
 /**
@@ -66,12 +66,12 @@ public class EntryUi {
    */
   public void writeEntry() {
     String author = prompter.chooseFromListOrWriteNew("Enter the author",
-        DiaryUtils.getDistinctAuthors(diary.getAllDiaryEntries().values()));
+        DiaryDistinct.getDistinctAuthors(diary.getAllDiaryEntries().values()));
     prompter.println("Author: " + author);
 
     String destination = prompter.chooseFromListOrWriteNew("Enter the destination of your "
         + "travels or the general traver context.",
-        DiaryUtils.getDistinctDestinations(diary.getAllDiaryEntries().values()));
+        DiaryDistinct.getDistinctDestinations(diary.getAllDiaryEntries().values()));
     prompter.println("Destination: " + destination);
 
     double rating = setRating();
@@ -81,7 +81,7 @@ public class EntryUi {
     prompter.println("Title: " + title);
 
     String activity = prompter.chooseFromListOrWriteNew("Enter the activity related to your entry.",
-        DiaryUtils.getDistinctActivities(diary.getAllDiaryEntries().values()));
+        DiaryDistinct.getDistinctActivities(diary.getAllDiaryEntries().values()));
     activity = activity.toLowerCase();
     prompter.println("Activity: " + activity);
 
@@ -161,21 +161,21 @@ public class EntryUi {
   private void editAuthor(DiaryEntry entry) {
     prompter.println("Current author: " + entry.getAuthor());
     entry.setAuthor(prompter.chooseFromListOrWriteNew("Enter or select new author: ",
-        DiaryUtils.getDistinctAuthors(diary.getAllDiaryEntries().values())));
+        DiaryDistinct.getDistinctAuthors(diary.getAllDiaryEntries().values())));
     prompter.println("Author: " + entry.getAuthor());
   }
 
   private void editDestination(DiaryEntry entry) {
     prompter.println("Current destination: " + entry.getDestination());
     entry.setDestination(prompter.chooseFromListOrWriteNew("Enter new destination: ",
-        DiaryUtils.getDistinctDestinations(diary.getAllDiaryEntries().values())));
+        DiaryDistinct.getDistinctDestinations(diary.getAllDiaryEntries().values())));
     prompter.println("Destination: " + entry.getDestination());
   }
 
   private void editActivity(DiaryEntry entry) {
     prompter.println("Current activity: " + entry.getActivity());
     entry.setActivity(prompter.chooseFromListOrWriteNew("Enter new activity: ",
-        DiaryUtils.getDistinctActivities(diary.getAllDiaryEntries().values())));
+        DiaryDistinct.getDistinctActivities(diary.getAllDiaryEntries().values())));
     prompter.println("Activity: " + entry.getActivity());
   }
 
