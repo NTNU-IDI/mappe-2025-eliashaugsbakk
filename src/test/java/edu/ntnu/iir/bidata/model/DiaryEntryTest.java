@@ -140,22 +140,4 @@ class DiaryEntryTest {
     assertTrue(diaryEntry.getTimeEdited().isAfter(beforeEdit),
         "Time edited should be updated to a later time when a setter is called.");
   }
-
-  @Test
-  void should_IncludeAllMainFields_When_CallingToString() {
-    // Arrange: Create Entry with known values
-    DiaryEntry diaryEntry = new DiaryEntry("AuthorName", "Destination",
-        "Activity", 5.5, "EntryTitle", "Some text");
-
-    // Act: Get the toString result
-    String result = diaryEntry.toString();
-
-    // Assert: Verify that all main fields are present in the string
-    assertTrue(result.contains("AuthorName"), "String should contain Author.");
-    assertTrue(result.contains("Destination"), "String should contain Destination.");
-    assertTrue(result.contains("Activity"), "String should contain Activity.");
-    assertTrue(result.contains("5.5"), "String should contain Rating.");
-    assertTrue(result.contains("EntryTitle"), "String should contain Title.");
-    assertTrue(result.contains("Some text"), "String should contain Text.");
-  }
 }

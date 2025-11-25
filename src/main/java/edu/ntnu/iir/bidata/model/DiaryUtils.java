@@ -65,7 +65,7 @@ public class DiaryUtils {
    */
   public static List<DiaryEntry> filterByActivity(
       Collection<DiaryEntry> originalCollection, String activity) {
-    ArrayList<DiaryEntry> filteredList = new ArrayList<>();
+    List<DiaryEntry> filteredList = new ArrayList<>();
     for (DiaryEntry entry : originalCollection) {
       if (entry.getActivity().equalsIgnoreCase(activity)) {
         filteredList.add(entry);
@@ -103,9 +103,33 @@ public class DiaryUtils {
   public static List<DiaryEntry> filterByTimeCreated(
       Collection<DiaryEntry> originalCollection, LocalDateTime timeStart,
       LocalDateTime timeStop) {
-    ArrayList<DiaryEntry> filteredList = new ArrayList<>();
+    List<DiaryEntry> filteredList = new ArrayList<>();
     for (DiaryEntry entry : originalCollection) {
       if (entry.getTimeWritten().isAfter(timeStart) && entry.getTimeWritten().isBefore(timeStop)) {
+        filteredList.add(entry);
+      }
+    }
+    return filteredList;
+  }
+
+  /**
+   * Filters the inputted list of diary entries by looking for matching
+   * text in the main text of the diary entry.
+   *
+   * @param originalCollection the unfiltered collection
+   * @param searchTerm the term to filter by
+   * @return the filered list
+   */
+  public static List<DiaryEntry> filterByContent(
+      Collection<DiaryEntry> originalCollection, String searchTerm) {
+    // normalize the searchTerm
+    searchTerm = searchTerm.toLowerCase().replaceAll("\\s+", "");
+
+    List<DiaryEntry> filteredList = new ArrayList<>();
+    for (DiaryEntry entry : originalCollection) {
+      // normalize the entry text
+      String text = entry.getText().toLowerCase().replaceAll("\\s+", "");
+      if (text.contains(searchTerm)) {
         filteredList.add(entry);
       }
     }

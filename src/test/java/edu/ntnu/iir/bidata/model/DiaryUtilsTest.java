@@ -196,4 +196,24 @@ public class DiaryUtilsTest {
     assertFalse(filteredListByTimeInterval.contains(entry3),
         "Entry3 (after stop) should have been removed.");
   }
+
+  @Test
+  void should_FilterListByContent_When_FilterByContentIsCalled() {
+    // Arrange: Create entries with text to filter by
+    DiaryEntry entry0 = new DiaryEntry("author0", "dest0", "act0",
+        0, "title0", "This TEXT contains the word TEXT");
+    DiaryEntry entry1 = new DiaryEntry("author1", "dest1", "act1",
+        1, "title1", "This text contains the word text");
+    DiaryEntry entry2 = new DiaryEntry("author2", "dest2", "act2",
+        2, "title2", "ThisShouldBeFilteredAway");
+    List<DiaryEntry> filterByContent = new ArrayList<>(List.of(entry0, entry1, entry2));
+
+    // Act: filter the list by content
+    filterByContent = DiaryUtils.filterByContent(filterByContent, "text");
+
+    // Assert: Check to see that the entries are the expected once.
+    assertEquals(2, filterByContent.size());
+    assertEquals(entry0, filterByContent.getFirst());
+    assertEquals(entry1, filterByContent.getLast());
+  }
 }
