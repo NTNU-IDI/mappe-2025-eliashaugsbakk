@@ -8,6 +8,7 @@ import java.util.List;
  * Used to format something ready for printing to the terminal. Usually a list.
  */
 public class Formatter {
+  // Defining ANSI codes
   private static final String COLOR_RED = "\u001B[31m";
   private static final String COLOR_GREEN = "\u001b[32m";
   private static final String COLOR_RESET = "\u001B[0m";
@@ -28,7 +29,10 @@ public class Formatter {
    * @param string the string to turn green
    * @return the green string
    */
-  public String greenString(String string) { return COLOR_GREEN + string + COLOR_RESET; }
+  public String greenString(String string) {
+    return COLOR_GREEN + string + COLOR_RESET;
+  }
+
   /**
    * Creates line to print.
    *
@@ -48,6 +52,7 @@ public class Formatter {
   public String line(String message) {
     return "-".repeat(message.length()) + "\n";
   }
+
 
   /**
    * Creates an indexed list of strings.
@@ -95,6 +100,22 @@ public class Formatter {
   }
 
   /**
+   * Helper to color the rating of a diary from green at 10, and red at 0. Yellow in between.
+   * This color is using RGB values.
+   *
+   * @param entry the diary entry to color the rating of
+   * @param text the text to color
+   * @return the colored text
+   */
+  private String colorRating(DiaryEntry entry, String text) {
+    int red = (int) Math.round(255 - entry.getRating() * 25.5);
+    int green = (int) Math.round(entry.getRating() * 25.5);
+    int blue = 50;
+    String colored = "\u001B[38;2;%d;%d;%dm".formatted(red, green, blue);
+    return colored + text + COLOR_RESET;
+  }
+
+  /**
    * Creates a string representation of a collection of Diary Entries.
    *
    * @param entries list of Diary Entries
@@ -109,9 +130,16 @@ public class Formatter {
     sb.append(line(105));
 
     for (DiaryEntry entry : entries) {
+
+      // formatt the rating
+      String formattedRating = String.format("%-10s", entry.getRating());
+
+      // color the rating
+      String coloredRating = colorRating(entry, formattedRating);
+
       sb.append(String.format(
           rowFormat,
-          entry.getRating(),
+          coloredRating,
           entry.getAuthor(),
           entry.getTitle(),
           entry.getDestination(),
@@ -120,6 +148,7 @@ public class Formatter {
       ));
     }
     sb.append(line(105));
+
     sb.append(greenString(String.format(
         rowFormat,
         "Rating", "Author", "Title", "Destination", "Activity", "Written"
@@ -135,7 +164,7 @@ public class Formatter {
    * @return the String containing the formatted list with indexes
    */
   public String formatDiaryEntryIndexedList(List<DiaryEntry> entries) {
-    String rowFormat = "%s %-10s %-15s %-20s %-20s %-15s %-16s%n";
+    String rowFormat = "%-10s %-10s %-20s %-20s %-20s %-15s %-16s%n";
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     StringBuilder sb = new StringBuilder();
@@ -145,16 +174,18 @@ public class Formatter {
     for (int i = 0; i < entries.size(); i++) {
       DiaryEntry entry = entries.get(i);
 
-      // formatt the index
-      String formattedIndex = String.format("%-6s", (i + 1));
+      // formatt the index and rating
+      String formattedIndex = String.format("%-10s", (i + 1));
+      String formattedRating = String.format("%-10s", entry.getRating());
 
-      // color the index
+      // color the index and rating
       String coloredIndex = redString(formattedIndex);
+      String coloredRating = colorRating(entry, formattedRating);
 
       sb.append(String.format(
           rowFormat,
           coloredIndex,
-          entry.getRating(),
+          coloredRating,
           entry.getAuthor(),
           entry.getTitle(),
           entry.getDestination(),
@@ -163,11 +194,15 @@ public class Formatter {
       ));
     }
     sb.append(line(105));
+
+    // formatt the index
+    String formattedIndex = redString(String.format("%-10s", "Index"));
+
     sb.append(String.format(
         rowFormat,
-        redString("Index"), "Rating", "Author", "Title", "Destination", "Activity", "Written"
+        formattedIndex,
+        "Rating", "Author", "Title", "Destination", "Activity", "Written"
     ));
-
     return sb.toString();
   }
 }

@@ -57,14 +57,18 @@ public class Prompter {
    *
    * @param string the string to print in green
    */
-  public void printlnGreen(String string) { println(formatter.greenString(string)); }
+  public void printlnGreen(String string) {
+    println(formatter.greenString(string));
+  }
 
   /**
    * Prints the string in green color.
    *
    * @param string the string to print in green
    */
-  public void printGreen(String string) { println(formatter.greenString(string)); }
+  public void printGreen(String string) {
+    println(formatter.greenString(string));
+  }
 
   /**
    * Shows a message in a framed box and waits for the user to press ENTER.
@@ -87,7 +91,7 @@ public class Prompter {
   public void warning(String message) {
     println(formatter.redString("!=============================!"));
     println(message);
-    println(formatter.redString("=============================!"));
+    println(formatter.redString("!=============================!"));
     prompt("Hit ENTER to continue...");
   }
 
