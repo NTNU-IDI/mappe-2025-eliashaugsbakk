@@ -9,6 +9,7 @@ import java.util.List;
  */
 public class Formatter {
   private static final String COLOR_RED = "\u001B[31m";
+  private static final String COLOR_GREEN = "\u001b[32m";
   private static final String COLOR_RESET = "\u001B[0m";
 
   /**
@@ -21,6 +22,13 @@ public class Formatter {
     return COLOR_RED + string + COLOR_RESET;
   }
 
+  /**
+   * Returns the string encapsulated by the ANSI codes for green and back to normal.
+   *
+   * @param string the string to turn green
+   * @return the green string
+   */
+  public String greenString(String string) { return COLOR_GREEN + string + COLOR_RESET; }
   /**
    * Creates line to print.
    *
@@ -51,7 +59,7 @@ public class Formatter {
     StringBuilder sb = new StringBuilder();
     for (int i = 0; i < list.size(); i++) {
       sb
-          .append(redString(String.valueOf(i + 1)))
+          .append(greenString(String.valueOf(i + 1)))
           .append(" : ")
           .append(list.get(i))
           .append("\n");
@@ -112,7 +120,7 @@ public class Formatter {
       ));
     }
     sb.append(line(105));
-    sb.append(redString(String.format(
+    sb.append(greenString(String.format(
         rowFormat,
         "Rating", "Author", "Title", "Destination", "Activity", "Written"
     )));

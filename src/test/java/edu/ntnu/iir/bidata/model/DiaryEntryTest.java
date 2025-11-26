@@ -1,6 +1,5 @@
 package edu.ntnu.iir.bidata.model;
 
-import edu.ntnu.iir.bidata.storage.DiaryEntryStorageDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import java.time.LocalDateTime;
@@ -33,7 +32,7 @@ class DiaryEntryTest {
   }
 
   @Test
-  void should_AcceptZeroAndTen_When_RatingIsZero() {
+  void should_AcceptLowerBoundary_When_RatingIsZero() {
     // Arrange: Create Entry
     DiaryEntry diaryEntry = new DiaryEntry("A", "D", "Act",
         5.5, "Title", "text");

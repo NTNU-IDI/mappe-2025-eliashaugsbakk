@@ -53,14 +53,28 @@ public class Prompter {
   }
 
   /**
+   * Prints the string in green color then a new line.
+   *
+   * @param string the string to print in green
+   */
+  public void printlnGreen(String string) { println(formatter.greenString(string)); }
+
+  /**
+   * Prints the string in green color.
+   *
+   * @param string the string to print in green
+   */
+  public void printGreen(String string) { println(formatter.greenString(string)); }
+
+  /**
    * Shows a message in a framed box and waits for the user to press ENTER.
    *
    * @param message the message to display
    */
   public void message(String message) {
-    println(formatter.redString("X=========================X"));
+    println(formatter.greenString("X=========================X"));
     println(message);
-    println(formatter.redString("X=========================X"));
+    println(formatter.greenString("X=========================X"));
     print("Hit ENTER to continue...");
     sc.nextLine();
   }
@@ -71,11 +85,9 @@ public class Prompter {
    * @param message the warning text to display
    */
   public void warning(String message) {
-    println(formatter.redString("""
-        !=============================!
-        %s
-        !=============================!
-        """).formatted(message));
+    println(formatter.redString("!=============================!"));
+    println(message);
+    println(formatter.redString("=============================!"));
     prompt("Hit ENTER to continue...");
   }
 
@@ -151,7 +163,9 @@ public class Prompter {
     println("X=========================X");
     println(message);
     println("X=========================X");
-    print("Type \"yes\" to confirm, or hit \"RETURN\" to cancel.\n> ");
+    print("Type \"");
+    printGreen("yes");
+    print("\" to confirm, or hit \"RETURN\" to cancel.\n> ");
     String answer = sc.nextLine();
     return answer.trim().equalsIgnoreCase("yes");
   }
