@@ -41,7 +41,6 @@ public class CollectionUi {
   private static final int EDIT_ENTRY = 2;
   private static final int DELETE_ENTRY = 3;
 
-
   private final Diary diary;
   private final EntryUi entryUi;
   private final Prompter prompter;

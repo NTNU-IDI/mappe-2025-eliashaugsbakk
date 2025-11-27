@@ -15,8 +15,6 @@ import java.time.LocalDateTime;
  * <p>Example usage:</p>
  * <pre>
  * DiaryEntry entry = new DiaryEntry(
- *     LocalDateTime.now(),
- *     LocalDateTime.now(),
  *     "Alice",
  *     "Backpacking Europe",
  *     "Hiking",
