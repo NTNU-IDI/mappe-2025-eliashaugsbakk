@@ -1,7 +1,6 @@
 package edu.ntnu.iir.bidata.utils;
 
 import edu.ntnu.iir.bidata.model.DiaryEntry;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;

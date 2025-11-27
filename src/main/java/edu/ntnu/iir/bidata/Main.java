@@ -3,8 +3,11 @@ package edu.ntnu.iir.bidata;
 import edu.ntnu.iir.bidata.model.Diary;
 import edu.ntnu.iir.bidata.model.EntryFactory;
 import edu.ntnu.iir.bidata.storage.DiaryStorage;
-import edu.ntnu.iir.bidata.ui.*;
-
+import edu.ntnu.iir.bidata.ui.CollectionUi;
+import edu.ntnu.iir.bidata.ui.EntryUi;
+import edu.ntnu.iir.bidata.ui.Formatter;
+import edu.ntnu.iir.bidata.ui.Prompter;
+import edu.ntnu.iir.bidata.ui.Ui;
 import java.io.IOException;
 
 /**

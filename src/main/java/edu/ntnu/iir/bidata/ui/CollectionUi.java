@@ -46,6 +46,13 @@ public class CollectionUi {
   private final EntryUi entryUi;
   private final Prompter prompter;
 
+  /**
+   * Constructor to create instence of collectionUi.
+   *
+   * @param diary the diary containing all diary entries
+   * @param entryUi entryUi to handle the user interaction with one diary entry
+   * @param prompter used to write and read from and to terminal
+   */
   public CollectionUi(Diary diary, EntryUi entryUi,
       Prompter prompter) {
     this.diary = diary;
