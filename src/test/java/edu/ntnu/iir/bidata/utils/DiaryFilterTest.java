@@ -136,7 +136,7 @@ public class DiaryFilterTest {
     List<DiaryEntry> filterByContent = new ArrayList<>(List.of(entry0, entry1, entry2));
 
     // Act: filter the list by content
-    filterByContent = DiaryFilter.filterBy(filterByContent, "text");
+    filterByContent = DiaryFilter.filterBy(filterByContent, "t e x t");
 
     // Assert: Check to see that the entries are the expected once.
     assertEquals(2, filterByContent.size());

@@ -86,6 +86,28 @@ public class DiaryTest {
         "Diary should contain only one entry after deletion.");
   }
 
+  @Test
+  void should_RemoveAllEntry_When_DeleteAllEntryIsCalled() {
+    // Arrange: Setup diary with two entries
+    DiaryEntry entry0 = new DiaryEntry("author0", "dest0", "act0",
+        0, "title0", "text0");
+    DiaryEntry entry1 = new DiaryEntry("author1", "dest1", "act1",
+        1, "title1", "text1");
+
+    Map<String, DiaryEntry> entries = new HashMap<>();
+    entries.put(entry0.getTitle(), entry0);
+    entries.put(entry1.getTitle(), entry1);
+
+    Diary diary = new Diary();
+    diary.addDiaryEntries(entries);
+
+    // Act: Delete one entry
+    diary.deleteAllEntries();
+
+    // Assert: Verify size and that the remaining entry is correct
+    assertEquals(0, diary.getAllDiaryEntries().size(),
+        "Diary should contain no entry after deletion.");
+  }
 
   @Test
   void should_ThrowException_When_AddingEntryWithDuplicateTitle() {
