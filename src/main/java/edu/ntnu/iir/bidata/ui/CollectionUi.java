@@ -202,6 +202,7 @@ public class CollectionUi {
           case EDIT_ENTRY -> entryUi.editEntry(chosenDiaryEntry);
           case DELETE_ENTRY -> {
             if (entryUi.deleteEntry(chosenDiaryEntry)) {
+              entries.remove(chosenDiaryEntry);
               break entryLoop;
             }
           }
