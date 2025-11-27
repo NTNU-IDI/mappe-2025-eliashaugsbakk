@@ -1,10 +1,10 @@
 package edu.ntnu.iir.bidata.utils;
 
 import edu.ntnu.iir.bidata.model.DiaryEntry;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Method to return a sorted collection of DiaryEntries by an object variable.
@@ -18,9 +18,9 @@ public class DiarySort {
    * @return a new list sorted by time written
    */
   public static List<DiaryEntry> sortByTime(Collection<DiaryEntry> entriesToSort) {
-    List<DiaryEntry> sortedList = new ArrayList<>(entriesToSort);
-    sortedList.sort(Comparator.comparing(DiaryEntry::getTimeWritten));
-    return sortedList;
+    return entriesToSort.stream()
+        .sorted(Comparator.comparing(DiaryEntry::getTimeWritten))
+        .collect(Collectors.toList());
   }
 
   /**
@@ -30,8 +30,8 @@ public class DiarySort {
    * @return a new list sorted by rating
    */
   public static List<DiaryEntry> sortByRating(Collection<DiaryEntry> entriesToSort) {
-    List<DiaryEntry> sortedList = new ArrayList<>(entriesToSort);
-    sortedList.sort(Comparator.comparing(DiaryEntry::getRating));
-    return sortedList;
+    return entriesToSort.stream()
+        .sorted(Comparator.comparing(DiaryEntry::getRating))
+        .collect(Collectors.toList());
   }
 }

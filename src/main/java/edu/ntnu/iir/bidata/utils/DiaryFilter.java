@@ -2,9 +2,9 @@ package edu.ntnu.iir.bidata.utils;
 
 import edu.ntnu.iir.bidata.model.DiaryEntry;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Methods to return a filtered list of DiaryEntries by a specific object variable
@@ -20,14 +20,11 @@ public class DiaryFilter {
    */
   public static List<DiaryEntry> filterByAuthor(
       Collection<DiaryEntry> originalCollection, String author) {
-    List<DiaryEntry> filteredList = new ArrayList<>();
-    for (DiaryEntry entry : originalCollection) {
-      if (entry.getAuthor().equals(author)) {
-        filteredList.add(entry);
-      }
-    }
-    return filteredList;
+    return originalCollection.stream()
+        .filter(entry -> entry.getAuthor().equals(author))
+        .collect(Collectors.toList());
   }
+
 
   /**
    * Filters the list of inputted diary entries by the specified activity.
@@ -38,13 +35,9 @@ public class DiaryFilter {
    */
   public static List<DiaryEntry> filterByActivity(
       Collection<DiaryEntry> originalCollection, String activity) {
-    List<DiaryEntry> filteredList = new ArrayList<>();
-    for (DiaryEntry entry : originalCollection) {
-      if (entry.getActivity().equalsIgnoreCase(activity)) {
-        filteredList.add(entry);
-      }
-    }
-    return filteredList;
+    return originalCollection.stream()
+        .filter(entry -> entry.getActivity().equals(activity))
+        .collect(Collectors.toList());
   }
 
   /**
@@ -56,13 +49,9 @@ public class DiaryFilter {
    */
   public static List<DiaryEntry> filterByDestination(
       Collection<DiaryEntry> originalCollection, String destination) {
-    List<DiaryEntry> filteredList = new ArrayList<>();
-    for (DiaryEntry entry : originalCollection) {
-      if (entry.getDestination().equalsIgnoreCase(destination)) {
-        filteredList.add(entry);
-      }
-    }
-    return filteredList;
+    return originalCollection.stream()
+        .filter(entry -> entry.getDestination().equals(destination))
+        .collect(Collectors.toList());
   }
 
   /**
@@ -76,13 +65,10 @@ public class DiaryFilter {
   public static List<DiaryEntry> filterByTimeCreated(
       Collection<DiaryEntry> originalCollection, LocalDateTime timeStart,
       LocalDateTime timeStop) {
-    List<DiaryEntry> filteredList = new ArrayList<>();
-    for (DiaryEntry entry : originalCollection) {
-      if (entry.getTimeWritten().isAfter(timeStart) && entry.getTimeWritten().isBefore(timeStop)) {
-        filteredList.add(entry);
-      }
-    }
-    return filteredList;
+    return originalCollection.stream()
+        .filter(entry -> entry.getTimeWritten().isAfter(timeStart)
+        && entry.getTimeWritten().isBefore(timeStop))
+        .collect(Collectors.toList());
   }
 
   /**
@@ -96,16 +82,12 @@ public class DiaryFilter {
   public static List<DiaryEntry> filterByContent(
       Collection<DiaryEntry> originalCollection, String searchTerm) {
     // normalize the searchTerm
-    searchTerm = searchTerm.toLowerCase().replaceAll("\\s+", "");
+    String normasizedSearchTerm = searchTerm.toLowerCase().replaceAll("\\s+", "");
 
-    List<DiaryEntry> filteredList = new ArrayList<>();
-    for (DiaryEntry entry : originalCollection) {
-      // normalize the entry text
-      String text = entry.getText().toLowerCase().replaceAll("\\s+", "");
-      if (text.contains(searchTerm)) {
-        filteredList.add(entry);
-      }
-    }
-    return filteredList;
+    return originalCollection.stream().filter(
+        entry -> entry.getText().toLowerCase()
+            .replaceAll("\\s+", "")
+            .contains(normasizedSearchTerm))
+            .collect(Collectors.toList());
   }
 }
