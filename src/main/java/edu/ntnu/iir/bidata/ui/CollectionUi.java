@@ -3,7 +3,7 @@ package edu.ntnu.iir.bidata.ui;
 import edu.ntnu.iir.bidata.model.Diary;
 import edu.ntnu.iir.bidata.model.DiaryEntry;
 import edu.ntnu.iir.bidata.utils.DiaryDistinct;
-import edu.ntnu.iir.bidata.utils.DiaryFilters;
+import edu.ntnu.iir.bidata.utils.DiaryFilter;
 import edu.ntnu.iir.bidata.utils.DiarySort;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -119,17 +119,17 @@ public class CollectionUi {
       switch (choice) {
         case FILTER_AUTHOR -> {
           String author = prompter.chooseFromList("Author to sort by", DiaryDistinct.getDistinctAuthors(entries));
-          entries = DiaryFilters.filterByAuthor(entries, author);
+          entries = DiaryFilter.filterByAuthor(entries, author);
           prompter.printlnGreen("Filter applied successfully.");
         }
         case FILTER_ACTIVITY -> {
           String activity = prompter.chooseFromList("Activity to sort by", DiaryDistinct.getDistinctActivities(entries));
-          entries = DiaryFilters.filterByActivity(entries, activity);
+          entries = DiaryFilter.filterByActivity(entries, activity);
           prompter.printlnGreen("Filter applied successfully.");
         }
         case FILTER_DESTINATION -> {
           String destination = prompter.chooseFromList("Destination to sort by", DiaryDistinct.getDistinctDestinations(entries));
-          entries = DiaryFilters.filterByDestination(entries, destination);
+          entries = DiaryFilter.filterByDestination(entries, destination);
           prompter.printlnGreen("Filter applied successfully.");
         }
         case FILTER_TIME_CREATED -> {
@@ -139,13 +139,13 @@ public class CollectionUi {
             prompter.warning("Start date must come before stop date");
             break;
           }
-          entries = DiaryFilters.filterByTimeCreated(entries, timeStart, timeStop);
+          entries = DiaryFilter.filterByTimeCreated(entries, timeStart, timeStop);
           prompter.printlnGreen("Filter applied successfully.");
         }
         case FILTER_TEXT_CONTAINS -> {
           String searchText = prompter.prompt("Enter the text you want to filter by."
               + " The search ignores whitespace and capitalization.");
-          entries = DiaryFilters.filterByContent(entries, searchText);
+          entries = DiaryFilter.filterByContent(entries, searchText);
         }
         case EXIT_MENU -> {
           break filterLoop;

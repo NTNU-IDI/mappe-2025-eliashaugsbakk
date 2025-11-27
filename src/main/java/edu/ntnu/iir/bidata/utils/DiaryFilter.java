@@ -10,7 +10,7 @@ import java.util.List;
  * Methods to return a filtered list of DiaryEntries by a specific object variable
  * from a collection of DiaryEntries.
  */
-public class DiaryFilters {
+public class DiaryFilter {
   /**
    * Filters the inputted list of diary entries by the specified author.
    *

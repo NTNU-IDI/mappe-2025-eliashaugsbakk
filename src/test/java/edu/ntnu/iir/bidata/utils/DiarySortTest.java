@@ -1,0 +1,72 @@
+package edu.ntnu.iir.bidata.utils;
+
+import edu.ntnu.iir.bidata.model.DiaryEntry;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class DiarySortTest {
+  @Test
+  void should_SortByRating_When_SortByRatingIsCalled() {
+    // Arrange: Create three new entries in unsorted order by rating
+    DiaryEntry entry0 = new DiaryEntry("author0", "dest0", "act0",
+        2, "title0", "text0");
+    DiaryEntry entry1 = new DiaryEntry("author1", "dest1", "act1",
+        1, "title1", "text1");
+    DiaryEntry entry2 = new DiaryEntry("author0", "dest2", "act2",
+        3, "title2", "text2");
+
+    ArrayList<DiaryEntry> entries = new ArrayList<>();
+    entries.add(entry0);
+    entries.add(entry1);
+    entries.add(entry2);
+
+    // Arrange: Create a copy of the list to compare against
+    List<DiaryEntry> sortedByRating = new ArrayList<>(entries);
+
+    // Act: Call the sorting method
+    sortedByRating = DiarySort.sortByRating(sortedByRating);
+
+    // Assert: Asserts that the list is now ordered ascending by rating
+    assertEquals(3, sortedByRating.size(), "List size should remain unchanged.");
+    assertTrue(sortedByRating.get(0).getRating() <= sortedByRating.get(1).getRating(),
+        "First two ratings should be sorted correctly.");
+    assertTrue(sortedByRating.get(1).getRating() <= sortedByRating.get(2).getRating(),
+        "Last two ratings should be sorted correctly.");
+  }
+
+  @Test
+  void should_SortByTimeAscending_When_SortByTimeIsCalled() throws InterruptedException {
+    // Arrange: Create the entries with a small time delay in between
+    DiaryEntry entry0 = new DiaryEntry("author0", "dest0", "act0",
+        1, "title0", "text0");
+    Thread.sleep(5); // Small delay to ensure time changes
+    DiaryEntry entry1 = new DiaryEntry("author1", "dest1", "act1",
+        2, "title1", "text1");
+    Thread.sleep(5); // Small delay to ensure time changes
+    DiaryEntry entry2 = new DiaryEntry("author0", "dest2", "act2",
+        3, "title2", "text2");
+
+    // Add the entries in different order than creation
+    List<DiaryEntry> entries = new ArrayList<>();
+    entries.add(entry1);
+    entries.add(entry0);
+    entries.add(entry2);
+
+
+    // Act: Sort the entries by time.
+    entries = DiarySort.sortByTime(entries);
+
+    // Assert: The list is now sorted by time written
+    assertEquals(3, entries.size(), "Size should remain unchanged.");
+    assertTrue(entries.get(0).getTimeWritten().isBefore(entries.get(1).getTimeWritten()),
+        "First entry should have been created before the second.");
+    assertTrue(entries.get(1).getTimeWritten().isBefore(entries.get(2).getTimeWritten()),
+        "Second entry should have been created before the third.");
+    assertEquals(entry0, entries.get(0), "Entry0 should be the oldest and first in the list.");
+  }
+}
