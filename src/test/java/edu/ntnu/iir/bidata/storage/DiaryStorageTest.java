@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DiaryStorageTest {
   // Use a specific test file to avoid overwriting real data
-  private static final String TEST_FILE_PATH = "register/test-data.json";
+  private static final String TEST_FILE_PATH = "test-data.json";
 
   @AfterEach
   void cleanup() {

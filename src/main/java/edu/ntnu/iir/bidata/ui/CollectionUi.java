@@ -46,7 +46,7 @@ public class CollectionUi {
   private final EntryUi entryUi;
   private final Prompter prompter;
 
-  CollectionUi(Diary diary, EntryUi entryUi,
+  public CollectionUi(Diary diary, EntryUi entryUi,
       Prompter prompter) {
     this.diary = diary;
     this.entryUi = entryUi;

@@ -52,8 +52,10 @@ public class Diary {
       }
     }
 
-    // validations passed, add them to the map
-    diaryEntries.putAll(entriesToAdd);
+    // validations passed, add them to the map ensuring keys match titles
+    for (DiaryEntry entry : entriesToAdd.values()) {
+      diaryEntries.put(entry.getTitle(), entry);
+    }
   }
 
   /**
@@ -66,7 +68,7 @@ public class Diary {
   }
 
   /**
-   * Methode for deleting a diary entry from the map stored in Diary.
+   * Method for deleting a diary entry from the map stored in Diary.
    *
    * @param entry the entry to delete
    */

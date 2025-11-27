@@ -24,11 +24,11 @@ public class Ui {
    * @param diary the Diary object to manage diary entries
    */
   public Ui(Prompter prompter, Diary diary,
-      EntryUi entryUi, Formatter formatter) {
+      EntryUi entryUi, CollectionUi collectionUi) {
     this.diary = diary;
     this.prompter = prompter;
-    this.collectionUi = new CollectionUi(diary, entryUi, prompter);
-    this.entryUi = new EntryUi(diary, prompter, formatter);
+    this.collectionUi = collectionUi;
+    this.entryUi = entryUi;
   }
 
   /**

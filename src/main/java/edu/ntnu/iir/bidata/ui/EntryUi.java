@@ -70,7 +70,7 @@ public class EntryUi {
     prompter.println("Author: " + author);
 
     String destination = prompter.chooseFromListOrWriteNew("Enter the destination of your "
-        + "travels or the general traver context.",
+        + "travels or the general travel context.",
         DiaryDistinct.getDistinct(diary.getAllDiaryEntries().values(), DiaryEntry::getDestination));
     prompter.println("Destination: " + destination);
 

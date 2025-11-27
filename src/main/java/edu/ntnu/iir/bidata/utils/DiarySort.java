@@ -1,6 +1,8 @@
 package edu.ntnu.iir.bidata.utils;
 
 import edu.ntnu.iir.bidata.model.DiaryEntry;
+
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -22,6 +24,6 @@ public class DiarySort {
       Collection<DiaryEntry> originalCollection, Comparator<DiaryEntry> comparator) {
     return originalCollection.stream()
         .sorted(comparator)
-        .collect(Collectors.toList());
+        .collect(Collectors.toCollection(ArrayList::new));
   }
 }

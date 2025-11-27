@@ -3,10 +3,8 @@ package edu.ntnu.iir.bidata;
 import edu.ntnu.iir.bidata.model.Diary;
 import edu.ntnu.iir.bidata.model.EntryFactory;
 import edu.ntnu.iir.bidata.storage.DiaryStorage;
-import edu.ntnu.iir.bidata.ui.EntryUi;
-import edu.ntnu.iir.bidata.ui.Formatter;
-import edu.ntnu.iir.bidata.ui.Prompter;
-import edu.ntnu.iir.bidata.ui.Ui;
+import edu.ntnu.iir.bidata.ui.*;
+
 import java.io.IOException;
 
 /**
@@ -57,7 +55,8 @@ public class Main {
     // create an instance of Ui to handle the main program loop
     // with Prompter, Diary, EntryUi and Formatter as arguments
     EntryUi entryUi = new EntryUi(diary, prompter, formatter);
-    Ui ui = new Ui(prompter, diary, entryUi, formatter);
+    CollectionUi collectionUi = new CollectionUi(diary, entryUi, prompter);
+    Ui ui = new Ui(prompter, diary, entryUi, collectionUi);
 
     // run the main program
     run(diary, ui, storage);
