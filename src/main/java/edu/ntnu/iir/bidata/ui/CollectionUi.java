@@ -7,6 +7,7 @@ import edu.ntnu.iir.bidata.utils.DiaryFilter;
 import edu.ntnu.iir.bidata.utils.DiarySort;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -117,18 +118,24 @@ public class CollectionUi {
 
       switch (choice) {
         case FILTER_AUTHOR -> {
-          String author = prompter.chooseFromList("Author to sort by", DiaryDistinct.getDistinctAuthors(entries));
-          entries = DiaryFilter.filterByAuthor(entries, author);
+          String author = prompter.chooseFromList("Author to sort by",
+              DiaryDistinct.getDistinct(entries, DiaryEntry::getAuthor));
+          entries = DiaryFilter.filterBy(
+              entries, entry -> entry.getAuthor().equals(author));
           prompter.printlnGreen("Filter applied successfully.");
         }
         case FILTER_ACTIVITY -> {
-          String activity = prompter.chooseFromList("Activity to sort by", DiaryDistinct.getDistinctActivities(entries));
-          entries = DiaryFilter.filterByActivity(entries, activity);
+          String activity = prompter.chooseFromList("Activity to sort by",
+              DiaryDistinct.getDistinct(entries, DiaryEntry::getActivity));
+          entries = DiaryFilter.filterBy(
+              entries, entry -> entry.getActivity().equals(activity));
           prompter.printlnGreen("Filter applied successfully.");
         }
         case FILTER_DESTINATION -> {
-          String destination = prompter.chooseFromList("Destination to sort by", DiaryDistinct.getDistinctDestinations(entries));
-          entries = DiaryFilter.filterByDestination(entries, destination);
+          String destination = prompter.chooseFromList("Destination to sort by",
+              DiaryDistinct.getDistinct(entries, DiaryEntry::getDestination));
+          entries = DiaryFilter.filterBy(
+              entries, entry -> entry.getDestination().equals(destination));
           prompter.printlnGreen("Filter applied successfully.");
         }
         case FILTER_TIME_CREATED -> {
@@ -138,13 +145,13 @@ public class CollectionUi {
             prompter.warning("Start date must come before stop date");
             break;
           }
-          entries = DiaryFilter.filterByTimeCreated(entries, timeStart, timeStop);
+          entries = DiaryFilter.filterBy(entries, timeStart, timeStop);
           prompter.printlnGreen("Filter applied successfully.");
         }
         case FILTER_TEXT_CONTAINS -> {
           String searchText = prompter.prompt("Enter the text you want to filter by."
               + " The search ignores whitespace and capitalization.");
-          entries = DiaryFilter.filterByContent(entries, searchText);
+          entries = DiaryFilter.filterBy(entries, searchText);
         }
         case EXIT_MENU -> {
           break filterLoop;
@@ -162,10 +169,10 @@ public class CollectionUi {
         \t%s. Time written""".formatted(BY_RATING, BY_TIME_WRITTEN));
     switch (choice) {
       case 1 -> {
-        return DiarySort.sortByRating(entries);
+        return DiarySort.sort(entries, Comparator.comparing(DiaryEntry::getRating));
       }
       case 2 -> {
-        return DiarySort.sortByTime(entries);
+        return DiarySort.sort(entries, Comparator.comparing(DiaryEntry::getTimeWritten));
       }
       default -> {
         prompter.warning("Invalid option");

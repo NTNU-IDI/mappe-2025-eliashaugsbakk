@@ -12,26 +12,16 @@ import java.util.stream.Collectors;
 public class DiarySort {
 
   /**
-   * Sorts a list of diary entries by the time it was created. The oldest entry first.
+   * Sorts a collection into a new list using the provided comparator.
    *
-   * @param entriesToSort the collection of Diary Entries to sort
-   * @return a new list sorted by time written
+   * @param originalCollection the original collection of diary entries to sort
+   * @param comparator the object variable to sort by
+   * @return the sorted list
    */
-  public static List<DiaryEntry> sortByTime(Collection<DiaryEntry> entriesToSort) {
-    return entriesToSort.stream()
-        .sorted(Comparator.comparing(DiaryEntry::getTimeWritten))
-        .collect(Collectors.toList());
-  }
-
-  /**
-   * Sorts a list of diary entries by the rating it assigned to it.
-   *
-   * @param entriesToSort the collection of Diary Entries to sort
-   * @return a new list sorted by rating
-   */
-  public static List<DiaryEntry> sortByRating(Collection<DiaryEntry> entriesToSort) {
-    return entriesToSort.stream()
-        .sorted(Comparator.comparing(DiaryEntry::getRating))
+  public static List<DiaryEntry> sort(
+      Collection<DiaryEntry> originalCollection, Comparator<DiaryEntry> comparator) {
+    return originalCollection.stream()
+        .sorted(comparator)
         .collect(Collectors.toList());
   }
 }

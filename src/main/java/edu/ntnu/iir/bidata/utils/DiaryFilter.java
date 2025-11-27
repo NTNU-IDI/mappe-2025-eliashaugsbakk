@@ -4,6 +4,7 @@ import edu.ntnu.iir.bidata.model.DiaryEntry;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -11,83 +12,57 @@ import java.util.stream.Collectors;
  * from a collection of DiaryEntries.
  */
 public class DiaryFilter {
-  /**
-   * Filters the inputted list of diary entries by the specified author.
-   *
-   * @param originalCollection the unfiltered collection of entries
-   * @param author the author whose diary entries are to be retrieved.
-   * @return a list of entries with the specified author
-   */
-  public static List<DiaryEntry> filterByAuthor(
-      Collection<DiaryEntry> originalCollection, String author) {
-    return originalCollection.stream()
-        .filter(entry -> entry.getAuthor().equals(author))
-        .collect(Collectors.toList());
-  }
-
 
   /**
-   * Filters the list of inputted diary entries by the specified activity.
+   * Filters the given collection of diary entries using a custom Predicate.
    *
-   * @param originalCollection the unfiltered collection of entries
-   * @param activity the activity to filter entries by.
-   * @return a list of entries with the specified activity
+   * @param originalCollection the collection of DiaryEntry objects to filter
+   * @param filter the Predicate that defines the filtering condition
+   * @return a List of DiaryEntry objects that satisfy the given Predicate
    */
-  public static List<DiaryEntry> filterByActivity(
-      Collection<DiaryEntry> originalCollection, String activity) {
+  public static List<DiaryEntry> filterBy(
+      Collection<DiaryEntry> originalCollection,
+      Predicate<DiaryEntry> filter) {
     return originalCollection.stream()
-        .filter(entry -> entry.getActivity().equals(activity))
+        .filter(filter)
         .collect(Collectors.toList());
   }
 
   /**
-   * Filters the inputted list of diary entries by the specified destination.
+   * Filters the given collection of diary entries by a time interval.
    *
-   * @param originalCollection the unfiltered collection of entries
-   * @param destination the destination to filter entries by.
-   * @return a list of entries with the specified destination
+   * @param originalCollection the collection of DiaryEntry objects to filter
+   * @param timeStart the start of the time interval (exclusive)
+   * @param timeStop the end of the time interval (exclusive)
+   * @return a List of DiaryEntry objects whose timeWritten is after timeStart and before timeStop
    */
-  public static List<DiaryEntry> filterByDestination(
-      Collection<DiaryEntry> originalCollection, String destination) {
-    return originalCollection.stream()
-        .filter(entry -> entry.getDestination().equals(destination))
-        .collect(Collectors.toList());
-  }
-
-  /**
-   * Filters the inputted list of diary entries by time interval.
-   *
-   * @param originalCollection the unfiltered collection of entries
-   * @param timeStart the creation time from witch to allow entries through
-   * @param timeStop the creation time to which entries are allowed
-   * @return a list of entries within the specified time interval
-   */
-  public static List<DiaryEntry> filterByTimeCreated(
-      Collection<DiaryEntry> originalCollection, LocalDateTime timeStart,
+  public static List<DiaryEntry> filterBy(
+      Collection<DiaryEntry> originalCollection,
+      LocalDateTime timeStart,
       LocalDateTime timeStop) {
     return originalCollection.stream()
         .filter(entry -> entry.getTimeWritten().isAfter(timeStart)
-        && entry.getTimeWritten().isBefore(timeStop))
+            && entry.getTimeWritten().isBefore(timeStop))
         .collect(Collectors.toList());
   }
 
   /**
-   * Filters the inputted list of diary entries by looking for matching
-   * text in the main text of the diary entry.
+   * Filters the given collection of diary entries by a search term in their text.
+   * The search is case-insensitive and ignores whitespace differences.
    *
-   * @param originalCollection the unfiltered collection
-   * @param searchTerm the term to filter by
-   * @return the filered list
+   * @param originalCollection the collection of DiaryEntry objects to filter
+   * @param searchTerm the term to search for in the text of each DiaryEntry
+   * @return a List of DiaryEntry objects whose text contains the given search term
    */
-  public static List<DiaryEntry> filterByContent(
+  public static List<DiaryEntry> filterBy(
       Collection<DiaryEntry> originalCollection, String searchTerm) {
     // normalize the searchTerm
-    String normasizedSearchTerm = searchTerm.toLowerCase().replaceAll("\\s+", "");
+    String normalizedSearchTerm = searchTerm.toLowerCase().replaceAll("\\s+", "");
 
     return originalCollection.stream().filter(
-        entry -> entry.getText().toLowerCase()
-            .replaceAll("\\s+", "")
-            .contains(normasizedSearchTerm))
-            .collect(Collectors.toList());
+            entry -> entry.getText().toLowerCase()
+                .replaceAll("\\s+", "")
+                .contains(normalizedSearchTerm))
+        .collect(Collectors.toList());
   }
 }

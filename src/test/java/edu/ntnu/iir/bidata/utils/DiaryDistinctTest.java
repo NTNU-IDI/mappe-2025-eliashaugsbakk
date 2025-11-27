@@ -22,7 +22,7 @@ public class DiaryDistinctTest {
     entries.add(entry2);
 
     // Act
-    List<String> distinct = DiaryDistinct.getDistinctAuthors(entries);
+    List<String> distinct = DiaryDistinct.getDistinct(entries, DiaryEntry::getAuthor);
 
     // Assert
     assertEquals(2, distinct.size());
@@ -42,7 +42,7 @@ public class DiaryDistinctTest {
     entries.add(entry2);
 
     // Act
-    List<String> distinct = DiaryDistinct.getDistinctActivities(entries);
+    List<String> distinct = DiaryDistinct.getDistinct(entries, DiaryEntry::getActivity);
 
     // Assert
     assertEquals(2, distinct.size());
@@ -62,7 +62,7 @@ public class DiaryDistinctTest {
     entries.add(entry2);
 
     // Act
-    List<String> distinct = DiaryDistinct.getDistinctDestinations(entries);
+    List<String> distinct = DiaryDistinct.getDistinct(entries, DiaryEntry::getDestination);
 
     // Assert
     assertEquals(2, distinct.size());

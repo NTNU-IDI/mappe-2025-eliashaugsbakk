@@ -4,6 +4,7 @@ import edu.ntnu.iir.bidata.model.DiaryEntry;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -25,11 +26,8 @@ public class DiarySortTest {
     entries.add(entry1);
     entries.add(entry2);
 
-    // Arrange: Create a copy of the list to compare against
-    List<DiaryEntry> sortedByRating = new ArrayList<>(entries);
-
     // Act: Call the sorting method
-    sortedByRating = DiarySort.sortByRating(sortedByRating);
+    List<DiaryEntry> sortedByRating = DiarySort.sort(entries, Comparator.comparing(DiaryEntry::getRating));
 
     // Assert: Asserts that the list is now ordered ascending by rating
     assertEquals(3, sortedByRating.size(), "List size should remain unchanged.");
@@ -59,7 +57,7 @@ public class DiarySortTest {
 
 
     // Act: Sort the entries by time.
-    entries = DiarySort.sortByTime(entries);
+    entries = DiarySort.sort(entries, Comparator.comparing(DiaryEntry::getTimeWritten));
 
     // Assert: The list is now sorted by time written
     assertEquals(3, entries.size(), "Size should remain unchanged.");
