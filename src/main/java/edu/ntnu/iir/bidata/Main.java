@@ -1,6 +1,7 @@
 package edu.ntnu.iir.bidata;
 
 import edu.ntnu.iir.bidata.model.Diary;
+import edu.ntnu.iir.bidata.model.DiaryEntry;
 import edu.ntnu.iir.bidata.model.EntryFactory;
 import edu.ntnu.iir.bidata.storage.DiaryStorage;
 import edu.ntnu.iir.bidata.ui.EntryUi;
@@ -24,8 +25,12 @@ public class Main {
    * @throws IOException loading and saving entries may cause an error
    */
   public static void main(String[] args) throws IOException {
-    Main main = new Main();
-    main.init();
+    try {
+      Main program = new Main();
+      program.init();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   private void init() throws IOException {
@@ -44,20 +49,37 @@ public class Main {
     // if the Diary is empty, prompt the user to ask if they want to add fabricated entries
     if (diary.getAllDiaryEntries().isEmpty()) {
       if (prompter.confirmAction(
-          "It seems your diary is empty. "
-          + "Do you want to generate sample data to test out the program?")) {
+          "Diary is empty. "
+          + "Generate sample data?")) {
         diary.addDiaryEntries(EntryFactory.fabricateEntries());
       }
     }
 
-    // create an Ui instance to handle the main program loop
+    // create an instance of Ui to handle the main program loop
     // with Prompter, Diary, EntryUi and Formatter as arguments
     EntryUi entryUi = new EntryUi(diary, prompter, formatter);
     Ui ui = new Ui(prompter, diary, entryUi, formatter);
 
-    // run the main program loop
-    ui.run();
+    // run the main program
+    run(diary, ui, storage);
+  }
 
+  /**
+   * Runs the program. This contains the program loop
+   *
+   * @param diary the diary to hold all {@code DiaryEntry} instances
+   * @param ui the Ui instance to interact with the user
+   * @param storage storage instance to pass on to {@code shutdown()}
+   * @throws IOException writing to disk may throw an exception
+   */
+  private void run(Diary diary, Ui ui, DiaryStorage storage) throws IOException {
+    // run the Ui program loop
+    ui.run();
+    // shutdown the program
+    shutdown(diary, storage);
+  }
+
+  private void shutdown(Diary diary, DiaryStorage storage) throws IOException {
     // store diary entries before exiting the program
     storage.writeToFile(diary.getAllDiaryEntries());
   }
