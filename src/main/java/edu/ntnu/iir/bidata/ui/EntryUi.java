@@ -187,7 +187,10 @@ public class EntryUi {
 
   private void editTitle(DiaryEntry entry) {
     prompter.println("Current title: " + entry.getTitle());
+    // remove the old mapping, update title then, add it back to ensure the Map key is correct
+    diary.deleteEntry(entry);
     entry.setTitle(setTitle());
+    diary.addDiaryEntry(entry);
     prompter.println("Title: " + entry.getTitle());
   }
 
