@@ -30,6 +30,7 @@ This project uses **Apache Maven v3.9.11** as the build tool. Maven manages:
     - **Gson v2.13.1** for JSON serialization/deserialization
 - **Running tests** (`mvn test`)<br>
 
+### Directory tree:
 ```text
 travleDiary/
 │
@@ -98,7 +99,7 @@ travleDiary/
 ## How to run the project
 
 The travel diary is a TUI (Text User Interface) application.
-To run this program, you must open your favorite terminal emulator, either in an IDE or otherwise.
+To run this program, you must use your favorite terminal emulator, either in an IDE or otherwise.
 
 ### Run:
 To run this application. You can either download the latest release, which is a .jar file, from GitHub.<br>
@@ -109,6 +110,7 @@ of the download .jar. Then, run the application by entering:
 ```shell
 java -jar TravelDiary-v<version>.jar
 ```
+Make sure to swap out <version> with the version you downloaded.<br>
 Example:
 ```shell
 java -jar TravelDiary-v1.0.1.jar
