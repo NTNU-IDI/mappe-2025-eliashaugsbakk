@@ -26,7 +26,7 @@ public class DiaryFilterTest {
 
 
     // Act: Filter the list
-    entries = DiaryFilter.filterBy(entries, entry -> entry.getAuthor().equals("author0"));
+    entries = DiaryFilter.filter(entries, entry -> entry.getAuthor().equals("author0"));
 
     // Assert: The remaining entries are the correct ones
     assertEquals(2, entries.size(), "Two entries should remain after filtering.");
@@ -49,7 +49,7 @@ public class DiaryFilterTest {
 
 
     // Act: Filter the list
-    entries = DiaryFilter.filterBy(entries, entry -> entry.getDestination().equals("dest0"));
+    entries = DiaryFilter.filter(entries, entry -> entry.getDestination().equals("dest0"));
 
     // Assert: The remaining entries are the correct ones
     assertEquals(2, entries.size(), "Two entries should remain after filtering.");
@@ -71,7 +71,7 @@ public class DiaryFilterTest {
 
 
     // Act: Filter the list
-    entries = DiaryFilter.filterBy(entries, entry -> entry.getActivity().equals("act0"));
+    entries = DiaryFilter.filter(entries, entry -> entry.getActivity().equals("act0"));
 
     // Assert: The remaining entries are the correct ones
     assertEquals(2, entries.size(), "Two entries should remain after filtering.");
@@ -109,7 +109,7 @@ public class DiaryFilterTest {
 
     // Act: Filter the list
     filteredListByTimeInterval =
-        DiaryFilter.filterBy(filteredListByTimeInterval, timeStart, timeStop);
+        DiaryFilter.filterByTimeInterval(filteredListByTimeInterval, timeStart, timeStop);
 
     // Assert: Check that only the 2 correct elements remain
     assertEquals(2, filteredListByTimeInterval.size(),
@@ -136,7 +136,7 @@ public class DiaryFilterTest {
     List<DiaryEntry> filterByContent = new ArrayList<>(List.of(entry0, entry1, entry2));
 
     // Act: filter the list by content
-    filterByContent = DiaryFilter.filterBy(filterByContent, "t e x t");
+    filterByContent = DiaryFilter.filterByContent(filterByContent, "t e x t");
 
     // Assert: Check to see that the entries are the expected once.
     assertEquals(2, filterByContent.size());

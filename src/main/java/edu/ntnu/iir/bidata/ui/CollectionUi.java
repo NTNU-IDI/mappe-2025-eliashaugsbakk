@@ -47,11 +47,11 @@ public class CollectionUi {
   private final Prompter prompter;
 
   /**
-   * Constructor to create instence of collectionUi.
+   * Constructor to create an instance of collectionUi.
    *
    * @param diary the diary containing all diary entries
    * @param entryUi entryUi to handle the user interaction with one diary entry
-   * @param prompter used to write and read from and to terminal
+   * @param prompter used to write and read from and to a terminal
    */
   public CollectionUi(Diary diary, EntryUi entryUi,
       Prompter prompter) {
@@ -127,21 +127,21 @@ public class CollectionUi {
         case FILTER_AUTHOR -> {
           String author = prompter.chooseFromList("Author to sort by",
               DiaryDistinct.getDistinct(entries, DiaryEntry::getAuthor));
-          entries = DiaryFilter.filterBy(
+          entries = DiaryFilter.filter(
               entries, entry -> entry.getAuthor().equals(author));
           prompter.printlnGreen("Filter applied successfully.");
         }
         case FILTER_ACTIVITY -> {
           String activity = prompter.chooseFromList("Activity to sort by",
               DiaryDistinct.getDistinct(entries, DiaryEntry::getActivity));
-          entries = DiaryFilter.filterBy(
+          entries = DiaryFilter.filter(
               entries, entry -> entry.getActivity().equals(activity));
           prompter.printlnGreen("Filter applied successfully.");
         }
         case FILTER_DESTINATION -> {
           String destination = prompter.chooseFromList("Destination to sort by",
               DiaryDistinct.getDistinct(entries, DiaryEntry::getDestination));
-          entries = DiaryFilter.filterBy(
+          entries = DiaryFilter.filter(
               entries, entry -> entry.getDestination().equals(destination));
           prompter.printlnGreen("Filter applied successfully.");
         }
@@ -152,13 +152,13 @@ public class CollectionUi {
             prompter.warning("Start date must come before stop date");
             break;
           }
-          entries = DiaryFilter.filterBy(entries, timeStart, timeStop);
+          entries = DiaryFilter.filterByTimeInterval(entries, timeStart, timeStop);
           prompter.printlnGreen("Filter applied successfully.");
         }
         case FILTER_TEXT_CONTAINS -> {
           String searchText = prompter.prompt("Enter the text you want to filter by."
               + " The search ignores whitespace and capitalization.");
-          entries = DiaryFilter.filterBy(entries, searchText);
+          entries = DiaryFilter.filterByContent(entries, searchText);
         }
         case EXIT_MENU -> {
           break filterLoop;
