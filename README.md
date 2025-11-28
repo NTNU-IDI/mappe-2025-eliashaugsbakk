@@ -17,7 +17,7 @@ The application is divided into four packages: **model, storage**, **utils** and
 - **model** holds the **DiaryEntry**-object class and the **Diary** class. **Diary** holds all the **DiaryEntries** in the program in memory while the application is running.
 - **storage** holds **DiaryStorage**.java and a **DTO** class. **DiaryStorage** is responsible for writing and reading entries to and from the disk. This stores the data in register/data.json.
 The **Data transfer object** is created as an intermediary to translate between a string representation of all object data.
-- **utils** holds the classes to do operaitons on a collection of diary entries. Mainly sorting and filtering of the entries.
+- **utils** holds the classes to do operations on a collection of diary entries. Mainly sorting and filtering of the entries.
 - **ui** holds the classes the user will interact with more directly. This includes **Formatter** and **Prompter** to format and print output, as well as take user input. The main program loop is also here, in **ui.UI**.
 **EntryUI** gives the methods to operate on one diary entry. Like reading, editing and deleting an entry. **CollectionUI** holds the methods to create a collection of entries for the user to interact with. This makes
 it easier for the user to find and compare entries.
@@ -30,8 +30,9 @@ This project uses **Apache Maven v3.9.11** as the build tool. Maven manages:
     - **Gson v2.13.1** for JSON serialization/deserialization
 - **Running tests** (`mvn test`)<br>
 
+### Directory tree:
 ```text
-travleDiary/
+travelDiary/
 │
 ├── diagrams
 │   ├── ClassDiagram.drawio
@@ -98,7 +99,7 @@ travleDiary/
 ## How to run the project
 
 The travel diary is a TUI (Text User Interface) application.
-To run this program, you must open your favorite terminal emulator, either in an IDE or otherwise.
+To run this program, you must use your favorite terminal emulator, either in an IDE or otherwise.
 
 ### Run:
 To run this application. You can either download the latest release, which is a .jar file, from GitHub.<br>
@@ -109,6 +110,7 @@ of the download .jar. Then, run the application by entering:
 ```shell
 java -jar TravelDiary-v<version>.jar
 ```
+Make sure to swap out `<version>` with the version you downloaded.<br>
 Example:
 ```shell
 java -jar TravelDiary-v1.0.1.jar
