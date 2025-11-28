@@ -100,9 +100,27 @@ travleDiary/
 The travel diary is a TUI (Text User Interface) application.
 To run this program, you must open your favorite terminal emulator, either in an IDE or otherwise.
 
-Make sure to have Maven installed on your system.
-This project was tested on **Maven version 3.9.11**, and **JDK-21**. If you encounter issues, please use the tested version.
-The easiest way to run would be to navigate to the project root: **mappe-2025-eliashaugsbakk/**, and run the command:
+### Run:
+To run this application. You can either download the latest release, which is a .jar file, from GitHub.<br>
+Make sure you have Java installed on your system. This program was built and tested with Java 21. <br>
+If you encounter issues, please use the tested version.
+After this is downloaded. Open your favorite terminal emulator and navigate to the location<br>
+of the download .jar. Then, run the application by entering:
+```shell
+java -jar TravelDiary-v<version>.jar
+```
+Example:
+```shell
+java -jar TravelDiary-v1.0.1.jar
+```
+
+### Build:
+You can also **clone** this repository and build the application yourself:<br>
+Make sure to have Maven installed on your system.<br>
+This project was tested on **Maven version 3.9.11**, and **JDK-21**. <br>
+If you encounter issues, please use the tested version.
+The easiest way to run the application would be to navigate to <br>
+the project root: **mappe-2025-eliashaugsbakk/**, and run the command:
 ```shell
 mvn exec:java -Dexec.mainClass="edu.ntnu.iir.bidata.Main"
 ```
@@ -110,7 +128,8 @@ Alternatively, you could run this project from an IDE with **Maven support**.
 
 ## How to run the tests
 Make sure to have Maven installed on your system.
-This project was tested on **Maven version 3.9.11**, and **JDK-21** If you encounter issues, please use the tested version.
+This project was tested on **Maven version 3.9.11**, and **JDK-21**<br>
+If you encounter issues, please use the tested version.
 Run the tests by navigating to the project root: **mappe-2025-eliashaugsbakk/**, and run:
 ```shell
 mvn test
