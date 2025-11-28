@@ -94,7 +94,7 @@ public class EntryUi {
     double rating;
     while (true) {
       try {
-        rating = prompter.promptDouble("Enter your rating (0 - 10) of the activity");
+        rating = prompter.promptDouble("Enter your rating (0.0 - 10.0) of the activity");
         if (rating < 0 || rating > 10) {
           prompter.warning("Rating must be between 0 and 10.");
         } else {

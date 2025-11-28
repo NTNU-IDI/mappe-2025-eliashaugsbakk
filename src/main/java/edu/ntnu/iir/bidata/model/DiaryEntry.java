@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  *
  * <p>Example usage:</p>
  * <pre>
- * DiaryEntry entry = new DiaryEntry(
+ * DiaryEntry entry = new DiaryEntry (
  *     "Alice",
  *     "Backpacking Europe",
  *     "Hiking",
@@ -37,7 +37,7 @@ public class DiaryEntry {
 
 
   /**
-   * General constructor for reconstructing a diary entry (e.g. from storage) where all
+   * General constructor for reconstructing a diary entry (e.g., from storage) where all
    * fields including timestamps are known. Or when fabricating entries from EntryFactory
    */
   public DiaryEntry(LocalDateTime timeWritten, LocalDateTime timeEdited, String author,

@@ -44,15 +44,6 @@ public class Prompter {
   }
 
   /**
-   * Prints the string in red color.
-   *
-   * @param string the string to print in red
-   */
-  public void printlnRed(String string) {
-    println(formatter.redString(string));
-  }
-
-  /**
    * Prints the string in green color then a new line.
    *
    * @param string the string to print in green
@@ -161,7 +152,7 @@ public class Prompter {
    * Usually deleting a Diary Entry or abandoning a collection of entries.
    *
    * @param message the message containing the user's option
-   * @return the users choise
+   * @return the users' choice
    */
   public boolean confirmAction(String message) {
     println("X=========================X");
@@ -247,7 +238,7 @@ public class Prompter {
    *
    * @param message the prompt the user gets when choosing a response
    * @param options the options the user can choose from (if they want to)
-   * @return the String the user has chocen
+   * @return the String the user has chosen
    */
   public String chooseFromListOrWriteNew(String message, List<String> options) {
     print("""
