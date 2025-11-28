@@ -4,9 +4,9 @@
          http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>edu.ntnu.iir.bidata</groupId>
-    <artifactId>reisedagbok</artifactId>
-    <version>v0.2.0</version>
-    <name>Reisedagbok</name>
+    <artifactId>TravelDiary</artifactId>
+    <version>v1.0.0</version>
+    <name>TravelDiary</name>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
@@ -15,7 +15,7 @@
 
     <dependencies>
         <dependency>
-            <!-- Junit for Unittesting -->
+            <!-- Junit for Unit testing -->
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>5.13.4</version>
@@ -31,6 +31,7 @@
     </dependencies>
     <build>
         <plugins>
+
             <!-- The Java compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -48,6 +49,30 @@
                 <configuration>
                     <useModulePath>false</useModulePath>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.7.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                            <archive>
+                                <manifestEntries>
+                                    <!-- The main class -->
+                                    <Main-Class>edu.ntnu.iir.bidata.Main</Main-Class>
+                                </manifestEntries>
+                            </archive>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

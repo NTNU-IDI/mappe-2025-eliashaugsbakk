@@ -21,7 +21,7 @@ import java.util.Map;
  */
 public class DiaryStorage {
   private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-  private static final String DEFAULT_FILE_PATH = "register/data.json";
+  private static final String DEFAULT_FILE_PATH = "TravelDiaryData/entries.json";
   private final String filepath;
 
   /**
