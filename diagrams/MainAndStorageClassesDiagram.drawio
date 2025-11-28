@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" version="29.1.1">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" version="29.2.1">
   <diagram name="Page-1" id="k6PugayV7_EU3rTu0l4t">
-    <mxGraphModel dx="2177" dy="1431" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="2002" dy="1002" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -39,17 +39,23 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="D_deWtq2c8hkHr2CxnAK-2" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="Main" vertex="1">
-          <mxGeometry height="86" width="160" x="720" y="20" as="geometry" />
+        <mxCell id="D_deWtq2c8hkHr2CxnAK-2" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#FFD5E2;" value="Main" vertex="1">
+          <mxGeometry height="138" width="180" x="720" y="20" as="geometry" />
         </mxCell>
         <mxCell id="D_deWtq2c8hkHr2CxnAK-3" parent="D_deWtq2c8hkHr2CxnAK-2" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
-          <mxGeometry height="8" width="160" y="26" as="geometry" />
+          <mxGeometry height="8" width="180" y="26" as="geometry" />
         </mxCell>
         <mxCell id="D_deWtq2c8hkHr2CxnAK-4" parent="D_deWtq2c8hkHr2CxnAK-2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ main(String[] args): void" vertex="1">
-          <mxGeometry height="26" width="160" y="34" as="geometry" />
+          <mxGeometry height="26" width="180" y="34" as="geometry" />
         </mxCell>
         <mxCell id="D_deWtq2c8hkHr2CxnAK-5" parent="D_deWtq2c8hkHr2CxnAK-2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- init(): void" vertex="1">
-          <mxGeometry height="26" width="160" y="60" as="geometry" />
+          <mxGeometry height="26" width="180" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="kXYEfXJ-Di5qyF0Kwaua-1" parent="D_deWtq2c8hkHr2CxnAK-2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- run(Diary, Ui, Storage): void" vertex="1">
+          <mxGeometry height="26" width="180" y="86" as="geometry" />
+        </mxCell>
+        <mxCell id="kXYEfXJ-Di5qyF0Kwaua-2" parent="D_deWtq2c8hkHr2CxnAK-2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- shutdown(Diary, Storage):&amp;nbsp;" vertex="1">
+          <mxGeometry height="26" width="180" y="112" as="geometry" />
         </mxCell>
         <mxCell id="D_deWtq2c8hkHr2CxnAK-88" edge="1" parent="1" source="D_deWtq2c8hkHr2CxnAK-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="D_deWtq2c8hkHr2CxnAK-20">
           <mxGeometry relative="1" as="geometry">
@@ -67,7 +73,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="D_deWtq2c8hkHr2CxnAK-6" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="DiaryStorage" vertex="1">
+        <mxCell id="D_deWtq2c8hkHr2CxnAK-6" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#E1D5E7;" value="DiaryStorage" vertex="1">
           <mxGeometry height="138" width="240" x="40" y="200" as="geometry" />
         </mxCell>
         <mxCell id="D_deWtq2c8hkHr2CxnAK-7" parent="D_deWtq2c8hkHr2CxnAK-6" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
@@ -85,7 +91,7 @@
         <mxCell id="D_deWtq2c8hkHr2CxnAK-11" parent="D_deWtq2c8hkHr2CxnAK-6" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- readFromFile(): arrayList&amp;lt;DiaryEntry&amp;gt;" vertex="1">
           <mxGeometry height="26" width="240" y="112" as="geometry" />
         </mxCell>
-        <mxCell id="D_deWtq2c8hkHr2CxnAK-12" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="Diary" vertex="1">
+        <mxCell id="D_deWtq2c8hkHr2CxnAK-12" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#FFE599;" value="Diary" vertex="1">
           <mxGeometry height="190" width="280" x="320" y="200" as="geometry" />
         </mxCell>
         <mxCell id="D_deWtq2c8hkHr2CxnAK-13" parent="D_deWtq2c8hkHr2CxnAK-12" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- diaryEnties: Map&amp;lt;String, DiaryEntry&amp;gt;" vertex="1">
@@ -109,7 +115,7 @@
         <mxCell id="D_deWtq2c8hkHr2CxnAK-19" parent="D_deWtq2c8hkHr2CxnAK-12" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ deleteAllEntries(): void" vertex="1">
           <mxGeometry height="26" width="280" y="164" as="geometry" />
         </mxCell>
-        <mxCell id="D_deWtq2c8hkHr2CxnAK-20" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="DiaryEntryStorageDto" vertex="1">
+        <mxCell id="D_deWtq2c8hkHr2CxnAK-20" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#E1D5E7;" value="DiaryEntryStorageDto" vertex="1">
           <mxGeometry height="438" width="200" x="40" y="640" as="geometry" />
         </mxCell>
         <mxCell id="D_deWtq2c8hkHr2CxnAK-21" parent="D_deWtq2c8hkHr2CxnAK-20" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- timeWritten: String" vertex="1">
@@ -160,7 +166,7 @@
         <mxCell id="D_deWtq2c8hkHr2CxnAK-36" parent="D_deWtq2c8hkHr2CxnAK-20" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="&lt;div&gt;+ getTimeWritten(): String&lt;/div&gt;" vertex="1">
           <mxGeometry height="28" width="200" y="410" as="geometry" />
         </mxCell>
-        <mxCell id="D_deWtq2c8hkHr2CxnAK-40" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="UI" vertex="1">
+        <mxCell id="D_deWtq2c8hkHr2CxnAK-40" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#A4A9FF;" value="UI" vertex="1">
           <mxGeometry height="164" width="240" x="1600" y="200" as="geometry" />
         </mxCell>
         <mxCell id="D_deWtq2c8hkHr2CxnAK-41" parent="D_deWtq2c8hkHr2CxnAK-40" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- prompter: Prompter" vertex="1">
@@ -181,7 +187,7 @@
         <mxCell id="D_deWtq2c8hkHr2CxnAK-46" parent="D_deWtq2c8hkHr2CxnAK-40" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ run(): void" vertex="1">
           <mxGeometry height="26" width="240" y="138" as="geometry" />
         </mxCell>
-        <mxCell id="D_deWtq2c8hkHr2CxnAK-47" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="Prompter" vertex="1">
+        <mxCell id="D_deWtq2c8hkHr2CxnAK-47" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#A4A9FF;" value="Prompter" vertex="1">
           <mxGeometry height="372" width="320" x="640" y="200" as="geometry" />
         </mxCell>
         <mxCell id="D_deWtq2c8hkHr2CxnAK-48" parent="D_deWtq2c8hkHr2CxnAK-47" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- sc: Scanner" vertex="1">
@@ -226,7 +232,7 @@
         <mxCell id="D_deWtq2c8hkHr2CxnAK-61" parent="D_deWtq2c8hkHr2CxnAK-47" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ chooseFromListOfEntries(List&amp;lt;DiaryEntry&amp;gt;): DiaryEntry" vertex="1">
           <mxGeometry height="26" width="320" y="346" as="geometry" />
         </mxCell>
-        <mxCell id="D_deWtq2c8hkHr2CxnAK-62" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="Formatter" vertex="1">
+        <mxCell id="D_deWtq2c8hkHr2CxnAK-62" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#A4A9FF;" value="Formatter" vertex="1">
           <mxGeometry height="242" width="320" x="1000" y="200" as="geometry" />
         </mxCell>
         <mxCell id="D_deWtq2c8hkHr2CxnAK-63" parent="D_deWtq2c8hkHr2CxnAK-62" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ COLOR_RED: String" vertex="1">
@@ -256,7 +262,7 @@
         <mxCell id="D_deWtq2c8hkHr2CxnAK-71" parent="D_deWtq2c8hkHr2CxnAK-62" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ formatDiaryEntryIndexedList(List&amp;lt;DiaryEntry&amp;gt;): String" vertex="1">
           <mxGeometry height="26" width="320" y="216" as="geometry" />
         </mxCell>
-        <mxCell id="D_deWtq2c8hkHr2CxnAK-72" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="EntryUI" vertex="1">
+        <mxCell id="D_deWtq2c8hkHr2CxnAK-72" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#A4A9FF;" value="EntryUI" vertex="1">
           <mxGeometry height="268" width="200" x="1360" y="200" as="geometry" />
         </mxCell>
         <mxCell id="D_deWtq2c8hkHr2CxnAK-73" parent="D_deWtq2c8hkHr2CxnAK-72" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- diary: Diary" vertex="1">
@@ -291,10 +297,13 @@
         </mxCell>
         <mxCell id="D_deWtq2c8hkHr2CxnAK-83" edge="1" parent="1" source="D_deWtq2c8hkHr2CxnAK-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="D_deWtq2c8hkHr2CxnAK-47">
           <mxGeometry relative="1" as="geometry">
-            <Array as="points" />
+            <Array as="points">
+              <mxPoint x="800" y="170" />
+              <mxPoint x="800" y="170" />
+            </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="D_deWtq2c8hkHr2CxnAK-89" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="DiaryEntry" vertex="1">
+        <mxCell id="D_deWtq2c8hkHr2CxnAK-89" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#FFE599;" value="DiaryEntry" vertex="1">
           <mxGeometry height="634" width="220" x="280" y="640" as="geometry" />
         </mxCell>
         <mxCell id="D_deWtq2c8hkHr2CxnAK-90" parent="D_deWtq2c8hkHr2CxnAK-89" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- timeWritten: LocalDateTime" vertex="1">
