@@ -6,7 +6,7 @@ import edu.ntnu.iir.bidata.utils.DiaryDistinct;
 
 
 /**
- * Class to handle all user actions related to handling one instance of a diary entry.
+ * Class to handle all user actions related to handling one instance of a {@link DiaryEntry}.
  * This includes:
  *  - Creating a new entry
  *  - Editing an existing entry

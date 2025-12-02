@@ -8,17 +8,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Method to return a sorted collection of DiaryEntries by an object variable.
+ * Provides functionality to sort a list of {@link DiaryEntry} objects
+ * based on a selected property, such as rating or time created.
  */
 public class DiarySort {
 
   /**
-   * Sorts a collection into a new list using the provided comparator.
+   * Sorts a collection of {@link DiaryEntry} objects into a new list using the provided comparator.
+   * This method can sort the entries based on any property defined by the comparator.
    *
-   * @param originalCollection the original collection of diary entries to sort
-   * @param comparator the object variable to sort by
-   * @return the sorted list
+   * @param originalCollection the collection of diary entries to sort
+   * @param comparator the comparator defining the sorting order
+   * @return a new list containing the sorted diary entries
    */
+
   public static List<DiaryEntry> sort(
       Collection<DiaryEntry> originalCollection, Comparator<DiaryEntry> comparator) {
     return originalCollection.stream()

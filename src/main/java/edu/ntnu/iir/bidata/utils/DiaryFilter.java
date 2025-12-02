@@ -8,9 +8,15 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
- * Methods to return a filtered list of DiaryEntries by a specific object variable
- * from a collection of DiaryEntries.
+ * Provides functionality to filter and a list of {@link DiaryEntry} objects.
+ * Filtering and sorting are done based on a selected property, such as:
+ * <pre>
+ *   - Author, Destination or Activity.
+ *   - Time created.
+ *   - Content of the main text in an entry.
+ * </pre>
  */
+
 public class DiaryFilter {
 
   /**

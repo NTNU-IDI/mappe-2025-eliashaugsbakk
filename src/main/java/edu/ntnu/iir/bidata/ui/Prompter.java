@@ -9,8 +9,11 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Helper for console interaction. Provides methods to show messages,
- * warnings, and prompts, and to read user input.
+ * Helper for console interaction. Provides methods to show messages and
+ * warnings.
+ * Also used to take user input using the prompt methods.
+ *
+ * <p><b>Everything</b> that gets written to or read from the terminal should go through this class.
  */
 public class Prompter {
   private final Scanner sc = new Scanner(System.in);

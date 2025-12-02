@@ -11,15 +11,19 @@ import edu.ntnu.iir.bidata.ui.Ui;
 import java.io.IOException;
 
 /**
- * Main serves as the entrypoint for the program. It contains the {@code main(String[] args)}
- * method.
+ * Serves as the entry point for the program. Contains the {@code main(String[] args)} method.
+ *
+ * <p>Provides an {@code init} method to start the program by invoking methods that load
+ *   previous entries and initialize necessary classes. Handles program execution via the
+ *   {@code run} method, and ensures entries are saved before exiting gracefully using
+ *   the {@code shutdown} method.
  */
 public class Main {
 
   /**
    * The main method serves as the entry point for the program execution. It initializes the
    * {@code DiaryStorage} and {@code Diary} to load and save diary entries, and to store
-   * diaryEntries in memory respectively.
+   * {@link edu.ntnu.iir.bidata.model.DiaryEntry} objects in memory respectively.
    *
    * @param args command-line arguments supplied to the program, not used in this implementation
    * @throws IOException loading and saving entries may cause an error

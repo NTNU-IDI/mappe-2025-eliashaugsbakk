@@ -18,6 +18,9 @@ import java.util.Map;
  *
  * <p>The rest of the application should work with {@code Diary} / {@code DiaryEntry}
  * and call this class when it needs to load or store entries.
+ *
+ * <p>Gson is used to serialize Java objects to JSON and deserialize from JSON
+ * to Java objects.
  */
 public class DiaryStorage {
   private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();

@@ -11,9 +11,13 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * Handles the creation and editing of a collection of {@link DiaryEntry} holding them in an
- * {@link ArrayList} to allow for sorting and for fast random accessibility.
- * Also provides the user with options to interact with one of the entries in their collection.
+ * Handles the creation and editing of a collection of {@link DiaryEntry} objects, storing them
+ * in an {@link ArrayList}.
+ *
+ * <p>{@link ArrayList} is used to allow sorting and fast random access.
+ * The class allows the user to handle ArrayList to compare entries. The user can sort and filter
+ * the list to compare diary entries. The user can also choose to do operations to one entry from
+ * the collection of entries they have created.
  */
 public class CollectionUi {
 

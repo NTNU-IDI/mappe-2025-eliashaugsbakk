@@ -4,13 +4,13 @@ import java.time.LocalDateTime;
 
 /**
  * Represents a single diary entry for a travel diary. Each entry contains information about the
- * author, the destination or general travel context, the activity performed, a rating from 0 to 10,
- * a title, and the main content of the entry. The entry also tracks timestamps for when it was
- * first written and last edited.
+ * author, the destination or general travel context, the activity performed, a rating from 0.0 to
+ * 10.0, a title, and the main content of the entry. The entry also tracks timestamps for when
+ * it was first written and last edited.
  *
- * <p>This class provides getters and setters for all fields, including
- * validation for the rating. The {@link #toString()} method returns a formatted string to be
- * displayed in the terminal.</p>
+ * <p>This class provides getters and setters for all fields, not including a setter for
+ * timeWritten. Validation for set rating.
+ * </p>
  *
  * <p>Example usage:</p>
  * <pre>
