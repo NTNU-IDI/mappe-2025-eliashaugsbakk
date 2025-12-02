@@ -5,7 +5,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
- * Used to format something ready for printing to the terminal. Usually a list.
+ * Used to format information to be ready for printing to the terminal.
+ *
+ * <p>This includes creating a readable list, with and without an index or adding color. Formatting.
  */
 public class Formatter {
   // Defining ANSI codes
@@ -92,7 +94,6 @@ public class Formatter {
         Rating: %.1f
         Title: %s
         
-        Main entry:
         %s
         """.formatted(formattedWritten, formattedEdited, entry.getAuthor(),
         entry.getDestination(), entry.getActivity(), entry.getRating(),

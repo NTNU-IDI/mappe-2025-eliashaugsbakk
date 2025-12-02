@@ -4,8 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * The Diary class represents a collection of diary entries. It provides functionality to manage and
- * retrieve these entries.
+ * The Diary class holds a collection of diary entries.
+ *
+ * <p>It provides functionality to add one or more new diary entries, retrieve entries, and
+ * delete one or all entries. The DiaryEntry-objects are stored in a hashmap, with the title of
+ * the entry as the HashMap-key. Order is not kept and all entries-titles are unique.
+ *
+ * <p>Using a HashMap allows for fast lookup of a specific entry, although this feature
+ * is not actively used in the current program.
  */
 public class Diary {
 

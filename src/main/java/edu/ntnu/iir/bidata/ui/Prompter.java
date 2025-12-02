@@ -9,8 +9,10 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Helper for console interaction. Provides methods to show messages,
- * warnings, and prompts, and to read user input.
+ * Helper for console interaction. Provides methods to show messages and
+ * warnings. Also used to take user input using the prompt methods.
+ *
+ * <p>Everything that gets written to or read from the terminal should go through this class.
  */
 public class Prompter {
   private final Scanner sc = new Scanner(System.in);
@@ -26,16 +28,16 @@ public class Prompter {
   }
 
   /**
-   * Prints string to terminal.
+   * Prints a string to the terminal.
    *
-   * @param string The string to println
+   * @param string The string to print
    */
   private void print(String string) {
     System.out.print(string);
   }
 
   /**
-   * Print string to terminal with newline after.
+   * Prints a string to the terminal with a newline after.
    *
    * @param string The string to print
    */
@@ -148,11 +150,10 @@ public class Prompter {
   }
 
   /**
-   * Method to take confirmation from the user when doing something potentially destructing.
-   * Usually deleting a Diary Entry or abandoning a collection of entries.
+   * Asks the user for confirmation before performing a potentially destructive action.
    *
-   * @param message the message containing the user's option
-   * @return the users' choice
+   * @param message the confirmation message to display to the user
+   * @return true if the user confirms, false otherwise
    */
   public boolean confirmAction(String message) {
     println("X=========================X");
@@ -166,10 +167,10 @@ public class Prompter {
   }
 
   /**
-   * Shows options and reads an integer choice, repeating until a valid integer is entered.
+   * Prompts the user to enter an integer.
    *
-   * @param options the text with options to display
-   * @return the integer the user entered
+   * @param options the prompt message to display to the user
+   * @return the integer entered by the user
    */
   public int promptInt(String options) {
     while (true) {
@@ -188,11 +189,12 @@ public class Prompter {
   }
 
   /**
-   * Lets the user choose an option from a list. Eather by writing
-   * the option or picking a number assigned to each option.
+   * Displays a list of options and prompts the user to select one by index or by typing the
+   * name of the option.
    *
+   * @param message a message to display before the list of options
    * @param options the list of options to choose from
-   * @return the option chosen
+   * @return the option chosen by the user
    */
   public String chooseFromList(String message, List<String> options) {
     while (true) {
@@ -229,16 +231,11 @@ public class Prompter {
   }
 
   /**
-   * Prints out an indexed list for the user to choose an option from. Eather by typing the index
-   * or by writing the option.
-   * The user can also create a new option, i.e., write something that is not an option. This
-   * will also return a valid result. This makes it easy for the user to choose diary entry fields
-   * and also use previous ones. This lets the user avoid unnecessary duplicates
-   * if they don't want the distinction. (i.e., Bathing and Swimming)
+   * Displays a list of options and prompts the user to either select one or write a new one.
    *
-   * @param message the prompt the user gets when choosing a response
-   * @param options the options the user can choose from (if they want to)
-   * @return the String the user has chosen
+   * @param message a message to display before the list of options
+   * @param options the list of options to choose from
+   * @return the option chosen by the user or the new option they wrote
    */
   public String chooseFromListOrWriteNew(String message, List<String> options) {
     print("""
@@ -269,10 +266,10 @@ public class Prompter {
   }
 
   /**
-   * Lets the user create a LocalDateTime object.
+   * Prompts the user to enter a date and time.
    *
    * @param prompt the prompt to give the user
-   * @return the time chosen by the user
+   * @return the LocalDateTime object created from the user's input
    */
   public LocalDateTime chooseTime(String prompt) {
     while (true) {
@@ -291,10 +288,9 @@ public class Prompter {
   }
 
   /**
-   * Pints out a list of diary entries. Makes it easy for the user to get an overview over
-   * all the diary entries in a list.
+   * Prints a formatted list of diary entries to terminal.
    *
-   * @param entries the entries to print
+   * @param entries the list of entries to print
    */
   public void printListOfEntries(List<DiaryEntry> entries) {
     println(formatter.formatDiaryEntryList(entries));
@@ -302,7 +298,7 @@ public class Prompter {
   }
 
   /**
-   * Lets the user choose one diary entry out of a list of entries.
+   * Displays a list of diary entries and prompts the user to select one by index or by title.
    *
    * @param entries the list of entries to choose from
    * @return the DiaryEntry the user has chosen

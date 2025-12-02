@@ -3,8 +3,15 @@ package edu.ntnu.iir.bidata.ui;
 import edu.ntnu.iir.bidata.model.Diary;
 
 /**
- * Handles the main menu loop of the program, presenting options to
- * write diary entries or work with collections of entries.
+ * Handles the main menu loop of the program, presenting options for the user to control the
+ * program. Options in this class only call on methods in different classes.
+ * <pre>
+ * User options are:
+ * - Write a new entry.
+ * - Create a collection of entries.
+ * - Delete all entries.
+ * - Save and exit
+ * </pre>
  */
 public class Ui {
   private static final int MAIN_SAVE_AND_EXIT = 0;
@@ -22,6 +29,8 @@ public class Ui {
    *
    * @param prompter the Prompter object used for console interaction
    * @param diary the Diary object to manage diary entries
+   * @param entryUi the EntryUi object to handle single entry operations
+   * @param collectionUi the CollectionUi object to handle collection operations
    */
   public Ui(Prompter prompter, Diary diary,
       EntryUi entryUi, CollectionUi collectionUi) {

@@ -11,9 +11,11 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * Handles the creation and editing of a collection of {@link DiaryEntry} holding them in an
- * {@link ArrayList} to allow for sorting and for fast random accessibility.
- * Also provides the user with options to interact with one of the entries in their collection.
+ * Handles the user interface for viewing, filtering, and sorting a collection of diary entries.
+ *
+ * <p>This class provides a menu-driven interface for the user to interact with a collection of
+ * {@link DiaryEntry} objects. The user can view the collection, apply filters, sort the collection,
+ * and select an entry to perform actions on (read, edit, or delete).
  */
 public class CollectionUi {
 
@@ -61,13 +63,12 @@ public class CollectionUi {
   }
 
   /**
-   * Creates a collection of all Diary Entries for the user to interact with.
-   * Provides a menu for the user to choose what to do. The options are to:
-   *  - View the current collection of entries.
-   *  - Apply a filter to the current list of entries.
-   *  - Sort the current list of entries.
-   *  - Choose an entry to choose an entry to: Read, Edit or Delete.
-   *  - Exit to the main menu.
+   * Starts the collection UI loop.
+   *
+   * <p>This method displays a menu of options for the user to interact with a collection of diary
+   * entries. The user can view the collection, apply filters, sort the collection, or select an
+   * entry to perform actions on. The loop continues until the user chooses to exit to the main
+   * menu.
    */
   public void collection() {
     // creates a list with all diary entries for the user to filter and sort
@@ -110,6 +111,16 @@ public class CollectionUi {
     }
   }
 
+  /**
+   * Applies one or more filters to the given list of diary entries.
+   *
+   * <p>This method displays a menu of filter options to the user. The user can choose to filter by
+   * author, activity, destination, creation time, or by text content. The method returns a new list
+   * containing only the entries that match the filter criteria.
+   *
+   * @param entries the list of diary entries to filter
+   * @return a new list of diary entries that match the filter criteria
+   */
   private List<DiaryEntry> applyFilter(List<DiaryEntry> entries) {
     filterLoop:
     while (true) {
@@ -169,6 +180,15 @@ public class CollectionUi {
     return entries;
   }
 
+  /**
+   * Sorts the given list of diary entries.
+   *
+   * <p>This method prompts the user to choose a sorting criterion (rating or time written) and
+   * returns a new list sorted according to the user's choice.
+   *
+   * @param entries the list of diary entries to sort
+   * @return a new sorted list of diary entries
+   */
   private List<DiaryEntry> sortCollection(List<DiaryEntry> entries) {
     int choice = prompter.promptInt("""
         Sort entries by:
@@ -188,7 +208,14 @@ public class CollectionUi {
     }
   }
 
-
+  /**
+   * Allows the user to choose a diary entry from a list and perform an action on it.
+   *
+   * <p>This method prompts the user to select an entry from the given list. Once an entry is
+   * selected, the user can choose to read, edit, or delete it.
+   *
+   * @param entries the list of diary entries to choose from
+   */
   private void chooseEntry(List<DiaryEntry> entries) {
     DiaryEntry chosenDiaryEntry = null;
     entryLoop:

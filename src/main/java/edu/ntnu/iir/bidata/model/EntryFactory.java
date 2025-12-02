@@ -8,8 +8,12 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * Class to create dummy diary entries. It uses its own main function
- * and is separate from the rest of the program.
+ * Class to create dummy diary entries.
+ *
+ * <p>Generates 64(4³) diary entries using some predetermened and some randomly generated data.
+ *   The names, activities and destinations are predetermined as well as the entry text.
+ *   The rating is generated as a random one decimal rating from 0.0 to 10.0.
+ *   Time created and edited are randomly assigned to a date from 2015 to 2025.
  */
 public class EntryFactory {
 
