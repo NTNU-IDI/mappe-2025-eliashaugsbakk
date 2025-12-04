@@ -82,7 +82,7 @@ public class CollectionUi {
       if (currentEntries == 0) {
         currentEntriesString = "no";
       } else if (currentEntries == diary.getAllDiaryEntries().size()) {
-        currentEntriesString = "all";
+        currentEntriesString = "all(%s)".formatted(diary.getAllDiaryEntries().size());
       }
       prompter.printlnGreen("Your current collection contains %s entries."
           .formatted(currentEntriesString));
