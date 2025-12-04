@@ -1,13 +1,9 @@
-# mappe-2025-eliashaugsbakk
+# TravelDiary Application - Portfolio project IDATT1003
 
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/NzRaDbQp)
-# Portfolio project IDATT1003
-
-STUDENT NAME = "Elias Haugsbakk"
-STUDENT ID = "137525"
+**STUDENT NAME:** Elias Haugsbakk<br>
+**STUDENT ID:** 137525
 
 ## Project description
-[//]: # (TODO: Write a short description of your project/product here.)
 
 This project is a travel diary. It aims to help you catalog your travel experiences and to keep track of all the activities you have done while traveling.
 Each diary entry has a Destination/Trip, activity and a rating associated with it. This lets the user view and compare earlier trips and activities.
@@ -138,3 +134,11 @@ mvn test
 ```
 You can also run the test from an IDE that supports **Maven**.
 
+## References
+- C. S. Horstman, Core Java, Voluem I: Fundamentals, 13th ed. Oracle Press, 2024 
+- “Coupling and Cohesion – Software Engeneering”, GeeksforGeeks, [Webpage]. Avalable at:
+https://www.geeksforgeeks.org/software-engineering/software-engineering-coupling-and-cohesion/ .
+[Visited 24. November 2025] 
+- “Single Responsability in SOLID Design Priniple”, GeeksforGeeks, [Webpage]. Avalable at: 
+https://www.geeksforgeeks.org/system-design/single-responsibility-in-solid-design-principle/ .
+[Visited 30. November 2025] 
