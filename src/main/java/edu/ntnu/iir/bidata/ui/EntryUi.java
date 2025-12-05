@@ -125,16 +125,9 @@ public class EntryUi {
     while (true) {
       String title = prompter.prompt("Write the title of your entry");
 
-      boolean duplicate = false;
-      for (DiaryEntry entry : diary.getAllDiaryEntries().values()) {
-        if (entry.getTitle().equals(title)) {
-          prompter.warning("Diary entry title has to be unique.");
-          duplicate = true;
-          break;
-        }
-      }
-
-      if (!duplicate) {
+      if (diary.getAllDiaryEntries().containsKey(title)) {
+        prompter.warning("Diary entry title has to be unique.");
+      } else {
         return title;
       }
     }
