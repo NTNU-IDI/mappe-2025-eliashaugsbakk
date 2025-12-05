@@ -58,7 +58,7 @@ public class Prompter {
    * @param string the string to print in green
    */
   public void printGreen(String string) {
-    println(formatter.greenString(string));
+    print(formatter.greenString(string));
   }
 
   /**
