@@ -6,4 +6,4 @@
 target/
 
 # user data
-/register/data.json
+**/register/data.json
