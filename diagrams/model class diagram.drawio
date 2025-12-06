@@ -1,0 +1,35 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" version="29.2.4">
+  <diagram id="50_dtTcNMotTjWfW9zfY" name="Page-1">
+    <mxGraphModel dx="762" dy="501" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="xZ2f56QDy-J07euBJ6qm-14" parent="1" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;DiaryEntry&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;" vertex="1">
+          <mxGeometry height="38" width="160" x="71.5" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xZ2f56QDy-J07euBJ6qm-15" parent="1" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;EntryFactory&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;" vertex="1">
+          <mxGeometry height="38" width="183" x="60" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="xZ2f56QDy-J07euBJ6qm-17" edge="1" parent="1" source="xZ2f56QDy-J07euBJ6qm-15" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=1;startArrow=none;endArrow=openThin;endSize=12;strokeColor=#595959;exitX=0.500;exitY=0.001;exitDx=0;exitDy=0;" target="xZ2f56QDy-J07euBJ6qm-14" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xZ2f56QDy-J07euBJ6qm-19" parent="1" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Diary&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;" vertex="1">
+          <mxGeometry height="38" width="111" x="270" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="xZ2f56QDy-J07euBJ6qm-22" edge="1" parent="1" source="xZ2f56QDy-J07euBJ6qm-19" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=0;startArrow=diamondThinstartSize=12;endArrow=diamondThin;endSize=12;strokeColor=#595959;exitX=0.500;exitY=0.001;exitDx=0;exitDy=0;endFill=0;" target="xZ2f56QDy-J07euBJ6qm-14" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="326" y="160" />
+              <mxPoint x="180" y="160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xZ2f56QDy-J07euBJ6qm-26" connectable="0" parent="1" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=top;strokeColor=default;" value="«create»" vertex="1">
+          <mxGeometry x="100" y="170" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

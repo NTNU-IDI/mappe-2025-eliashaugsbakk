@@ -7,12 +7,12 @@ import java.util.Map;
  * The Diary class holds a collection of diary entries.
  *
  * <p>It provides functionality to add one or more new diary entries, retrieve entries, and
- * delete one or all entries. The {@link DiaryEntry} objects are stored in a hashmap, with the title of
- * the entry as the HashMap-key. Order is not kept and all entries-titles are unique.
+ * delete one or all entries. The {@link DiaryEntry} objects are stored in a hashmap, with the title
+ * of the entry as the HashMap-key. Order is not kept and all entries-titles are unique.
  *
  * <p>Using a HashMap allows for fast lookup of a specific entry, although this feature
- * is not actively used in the current program. Entry titles are unique, which makes
- * comparing the entries with {@code .equals} and {@code .containsKey} simple.
+ * is not actively used in the current program. Entry titles are unique, which makes comparing the
+ * entries with {@code .equals} and {@code .containsKey} simple.
  */
 public class Diary {
 
@@ -23,10 +23,9 @@ public class Diary {
    * Adds a new diary entry to the diary.
    *
    * @param entry The diary entry to be added. This should be a valid instance of
-   *     {@code DiaryEntry}, containing details such as the author, destination, activity,
-   *     rating, title, and main content. The title must be unique. It is case-sensitive:
-   *     EntryTitle and entryTitle will be treated as two separate titles.
-   *
+   *              {@code DiaryEntry}, containing details such as the author, destination, activity,
+   *              rating, title, and main content. The title must be unique. It is case-sensitive:
+   *              EntryTitle and entryTitle will be treated as two separate titles.
    * @throws IllegalArgumentException if an entry with the same title already exists
    */
   public void addDiaryEntry(DiaryEntry entry) {

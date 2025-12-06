@@ -1,0 +1,34 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" version="29.2.4">
+  <diagram id="50_dtTcNMotTjWfW9zfY" name="Page-1">
+    <mxGraphModel dx="762" dy="501" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="mCshrg0uKrXwVg7cwD9q-1" parent="1" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Diary&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;" vertex="1">
+          <mxGeometry height="38" width="111" x="78" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="mCshrg0uKrXwVg7cwD9q-2" parent="1" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;DiaryEntry&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;" vertex="1">
+          <mxGeometry height="38" width="160" x="53.5" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="mCshrg0uKrXwVg7cwD9q-7" edge="1" parent="1" source="mCshrg0uKrXwVg7cwD9q-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endSize=12;endArrow=openThin;endFill=0;dashed=1;" target="mCshrg0uKrXwVg7cwD9q-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="mCshrg0uKrXwVg7cwD9q-3" parent="1" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;DiaryEntryStorageDto&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;" vertex="1">
+          <mxGeometry height="38" width="267" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="mCshrg0uKrXwVg7cwD9q-5" edge="1" parent="1" source="mCshrg0uKrXwVg7cwD9q-4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;curved=0;" target="mCshrg0uKrXwVg7cwD9q-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="mCshrg0uKrXwVg7cwD9q-6" edge="1" parent="1" source="mCshrg0uKrXwVg7cwD9q-4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endSize=12;endArrow=openThin;endFill=0;curved=0;" target="mCshrg0uKrXwVg7cwD9q-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="mCshrg0uKrXwVg7cwD9q-8" edge="1" parent="1" source="mCshrg0uKrXwVg7cwD9q-4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endArrow=openThin;endFill=0;endSize=12;dashed=1;curved=0;" target="mCshrg0uKrXwVg7cwD9q-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="mCshrg0uKrXwVg7cwD9q-4" parent="1" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;DiaryStorage&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;" vertex="1">
+          <mxGeometry height="38" width="185" x="200" y="170" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
