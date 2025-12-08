@@ -7,7 +7,8 @@ import java.util.List;
 /**
  * Used to format information to be ready for printing to the terminal.
  *
- * <p>This includes creating a readable list, with and without an index or adding color. Formatting.
+ * <p>This includes creating a readable list, with and without an index or adding color.
+ * Formatting.
  */
 public class Formatter {
   // Defining ANSI codes
@@ -55,7 +56,6 @@ public class Formatter {
     return "-".repeat(message.length()) + "\n";
   }
 
-
   /**
    * Creates an indexed list of strings.
    *
@@ -65,11 +65,7 @@ public class Formatter {
   public String formatStringList(List<String> list) {
     StringBuilder sb = new StringBuilder();
     for (int i = 0; i < list.size(); i++) {
-      sb
-          .append(greenString(String.valueOf(i + 1)))
-          .append(" : ")
-          .append(list.get(i))
-          .append("\n");
+      sb.append(greenString(String.valueOf(i + 1))).append(" : ").append(list.get(i)).append("\n");
     }
     return sb.toString();
   }
@@ -95,17 +91,16 @@ public class Formatter {
         Title: %s
         
         %s
-        """.formatted(formattedWritten, formattedEdited, entry.getAuthor(),
-        entry.getDestination(), entry.getActivity(), entry.getRating(),
-        entry.getTitle(), entry.getText());
+        """.formatted(formattedWritten, formattedEdited, entry.getAuthor(), entry.getDestination(),
+        entry.getActivity(), entry.getRating(), entry.getTitle(), entry.getText());
   }
 
   /**
-   * Helper to color the rating of a diary from green at 10, and red at 0. Yellow in between.
-   * This color is using RGB values.
+   * Helper to color the rating of a diary from green at 10, and red at 0. Yellow in between. This
+   * color is using RGB values.
    *
    * @param entry the diary entry to color the rating of
-   * @param text the text to color
+   * @param text  the text to color
    * @return the colored text
    */
   private String colorRating(DiaryEntry entry, String text) {
@@ -138,22 +133,14 @@ public class Formatter {
       // color the rating
       String coloredRating = colorRating(entry, formattedRating);
 
-      sb.append(String.format(
-          rowFormat,
-          coloredRating,
-          entry.getAuthor(),
-          entry.getTitle(),
-          entry.getDestination(),
-          entry.getActivity(),
-          entry.getTimeWritten().format(formatter)
-      ));
+      sb.append(String.format(rowFormat, coloredRating, entry.getAuthor(), entry.getTitle(),
+          entry.getDestination(), entry.getActivity(), entry.getTimeWritten().format(formatter)));
     }
     sb.append(line(105));
 
-    sb.append(greenString(String.format(
-        rowFormat,
-        "Rating", "Author", "Title", "Destination", "Activity", "Written"
-    )));
+    sb.append(greenString(
+        String.format(rowFormat, "Rating", "Author", "Title", "Destination", "Activity",
+            "Written")));
 
     return sb.toString();
   }
@@ -183,27 +170,18 @@ public class Formatter {
       String coloredIndex = redString(formattedIndex);
       String coloredRating = colorRating(entry, formattedRating);
 
-      sb.append(String.format(
-          rowFormat,
-          coloredIndex,
-          coloredRating,
-          entry.getAuthor(),
-          entry.getTitle(),
-          entry.getDestination(),
-          entry.getActivity(),
-          entry.getTimeWritten().format(formatter)
-      ));
+      sb.append(
+          String.format(rowFormat, coloredIndex, coloredRating, entry.getAuthor(), entry.getTitle(),
+              entry.getDestination(), entry.getActivity(),
+              entry.getTimeWritten().format(formatter)));
     }
     sb.append(line(105));
 
     // formatt the index
     String formattedIndex = redString(String.format("%-10s", "Index"));
 
-    sb.append(String.format(
-        rowFormat,
-        formattedIndex,
-        "Rating", "Author", "Title", "Destination", "Activity", "Written"
-    ));
+    sb.append(String.format(rowFormat, formattedIndex, "Rating", "Author", "Title", "Destination",
+        "Activity", "Written"));
     return sb.toString();
   }
 }

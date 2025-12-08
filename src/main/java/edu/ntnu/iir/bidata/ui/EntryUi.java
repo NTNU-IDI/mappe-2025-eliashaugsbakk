@@ -4,14 +4,10 @@ import edu.ntnu.iir.bidata.model.Diary;
 import edu.ntnu.iir.bidata.model.DiaryEntry;
 import edu.ntnu.iir.bidata.utils.DiaryDistinct;
 
-
 /**
- * Class to handle all user actions related to handling one instance of a {@link DiaryEntry}.
- * This includes:
- *  - Creating a new entry
- *  - Editing an existing entry
- *  - Reading an entry
- *  - Deleting an entry
+ * Class to handle all user actions related to handling one instance of a {@link DiaryEntry}. This
+ * includes: - Creating a new entry - Editing an existing entry - Reading an entry - Deleting an
+ * entry
  */
 public class EntryUi {
   private static final int EXIT_LOOP = 0;
@@ -29,8 +25,8 @@ public class EntryUi {
   /**
    * Constructor for the EntryUi class.
    *
-   * @param diary The diary to interact with.
-   * @param prompter The prompter to use for program output and user input.
+   * @param diary     The diary to interact with.
+   * @param prompter  The prompter to use for program output and user input.
    * @param formatter The formatter to use for formatting data.
    */
   public EntryUi(Diary diary, Prompter prompter, Formatter formatter) {
@@ -56,14 +52,13 @@ public class EntryUi {
     }
   }
 
-
   /**
-   * Prompts the user for the information needed to create a new diary entry
-   * and adds it to the diary.
+   * Prompts the user for the information needed to create a new diary entry and adds it to the
+   * diary.
    *
    * <p>The user is asked for author, destination, title, activity, a rating
-   * between 0 and 10, and the main text body (multiline). The method keeps
-   * prompting until a valid rating is entered.</p>
+   * between 0 and 10, and the main text body (multiline). The method keeps prompting until a valid
+   * rating is entered.</p>
    *
    * @throws IllegalArgumentException if an entry with the same title already exists
    */
@@ -72,8 +67,8 @@ public class EntryUi {
         DiaryDistinct.getDistinct(diary.getAllDiaryEntries().values(), DiaryEntry::getAuthor));
     prompter.println("Author: " + author);
 
-    String destination = prompter.chooseFromListOrWriteNew("Enter the destination of your "
-        + "travels or the general travel context.",
+    String destination = prompter.chooseFromListOrWriteNew(
+        "Enter the destination of your " + "travels or the general travel context.",
         DiaryDistinct.getDistinct(diary.getAllDiaryEntries().values(), DiaryEntry::getDestination));
     prompter.println("Destination: " + destination);
 
@@ -94,8 +89,8 @@ public class EntryUi {
   }
 
   /**
-   * Prompts the user to enter a rating for a diary entry.
-   * The method keeps prompting until a valid rating is entered.
+   * Prompts the user to enter a rating for a diary entry. The method keeps prompting until a valid
+   * rating is entered.
    *
    * @return the rating entered by the user
    */
@@ -116,8 +111,8 @@ public class EntryUi {
   }
 
   /**
-   * Prompts the user to enter a title for a diary entry.
-   * The method keeps prompting until a unique title is entered.
+   * Prompts the user to enter a title for a diary entry. The method keeps prompting until a unique
+   * title is entered.
    *
    * @return the title entered by the user
    */
@@ -186,7 +181,8 @@ public class EntryUi {
   private void editDestination(DiaryEntry entry) {
     prompter.println("Current destination: " + entry.getDestination());
     entry.setDestination(prompter.chooseFromListOrWriteNew("Enter new destination: ",
-        DiaryDistinct.getDistinct(diary.getAllDiaryEntries().values(), DiaryEntry::getDestination)));
+        DiaryDistinct.getDistinct(diary.getAllDiaryEntries().values(),
+            DiaryEntry::getDestination)));
     prompter.println("Destination: " + entry.getDestination());
   }
 
