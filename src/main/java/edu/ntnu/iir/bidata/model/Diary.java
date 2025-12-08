@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public class Diary {
 
-  // store the entries in a hash map to enforce no duplicates and for fast comparisons
+  // store the entries in a hash map to enforce no duplicate titles and for fast comparisons
   private final Map<String, DiaryEntry> diaryEntries = new HashMap<>();
 
   /**

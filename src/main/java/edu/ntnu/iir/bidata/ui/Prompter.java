@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Helper for console interaction. Provides methods to show messages,
- * warnings, and prompts, and to read user input.
+ * Helper for console interaction. Provides methods to show messages, warnings, and prompts, and to
+ * read user input.
  */
 public class Prompter {
   private final Scanner sc = new Scanner(System.in);
@@ -83,7 +83,8 @@ public class Prompter {
     println(formatter.redString("!=============================!"));
     println(message);
     println(formatter.redString("!=============================!"));
-    prompt("Hit ENTER to continue...");
+    print("Hit ENTER to continue...");
+    sc.nextLine();
   }
 
   /**
@@ -148,8 +149,8 @@ public class Prompter {
   }
 
   /**
-   * Method to take confirmation from the user when doing something potentially destructing.
-   * Usually deleting a Diary Entry or abandoning a collection of entries.
+   * Method to take confirmation from the user when doing something potentially destructing. Usually
+   * deleting a Diary Entry or abandoning a collection of entries.
    *
    * @param message the message containing the user's option
    * @return the users' choice
@@ -188,8 +189,8 @@ public class Prompter {
   }
 
   /**
-   * Lets the user choose an option from a list. Eather by writing
-   * the option or picking a number assigned to each option.
+   * Lets the user choose an option from a list. Eather by writing the option or picking a number
+   * assigned to each option.
    *
    * @param options the list of options to choose from
    * @return the option chosen
@@ -198,10 +199,10 @@ public class Prompter {
     while (true) {
 
       print("""
-        %s
-        Select an option by typing the index, or typing the name.
-        %s
-        >\s""".formatted(message, formatter.formatStringList(options)));
+          %s
+          Select an option by typing the index, or typing the name.
+          %s
+          >\s""".formatted(message, formatter.formatStringList(options)));
 
 
       int choiceInt;
@@ -229,11 +230,10 @@ public class Prompter {
   }
 
   /**
-   * Prints out an indexed list for the user to choose an option from. Eather by typing the index
-   * or by writing the option.
-   * The user can also create a new option, i.e., write something that is not an option. This
-   * will also return a valid result. This makes it easy for the user to choose diary entry fields
-   * and also use previous ones. This lets the user avoid unnecessary duplicates
+   * Prints out an indexed list for the user to choose an option from. Eather by typing the index or
+   * by writing the option. The user can also create a new option, i.e., write something that is not
+   * an option. This will also return a valid result. This makes it easy for the user to choose
+   * diary entry fields and also use previous ones. This lets the user avoid unnecessary duplicates
    * if they don't want the distinction. (i.e., Bathing and Swimming)
    *
    * @param message the prompt the user gets when choosing a response
@@ -242,11 +242,11 @@ public class Prompter {
    */
   public String chooseFromListOrWriteNew(String message, List<String> options) {
     print("""
-    %s
-    Select an option by typing the index, or typing the name.
-    Create a new one by typing a new name.
-    %s
-    >\s""".formatted(message, formatter.formatStringList(options)));
+        %s
+        Select an option by typing the index, or typing the name.
+        Create a new one by typing a new name.
+        %s
+        >\s""".formatted(message, formatter.formatStringList(options)));
 
     while (true) {
 
@@ -291,8 +291,8 @@ public class Prompter {
   }
 
   /**
-   * Pints out a list of diary entries. Makes it easy for the user to get an overview over
-   * all the diary entries in a list.
+   * Pints out a list of diary entries. Makes it easy for the user to get an overview over all the
+   * diary entries in a list.
    *
    * @param entries the entries to print
    */
